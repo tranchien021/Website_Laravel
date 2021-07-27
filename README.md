@@ -1,2 +1,5 @@
 # Website_Laravel
-Các 
+Các công đoạn hoàn thành:
++ Category(CRUD)
++ Account(CRUD)
++ Product(CRUD)
