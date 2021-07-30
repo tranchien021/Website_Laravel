@@ -1,248 +1,531 @@
-<!doctype html>
-<html lang="en">
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
 <head>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/png" href="{{url('assets')}}/img/favicon.ico">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-	<title>Light Bootstrap Dashboard by Creative Tim</title>
-
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
-
-
-    <!-- Bootstrap core CSS     -->
-    <!-- <link href="{{url('assets')}}/css/bootstrap.min.css" rel="stylesheet" /> -->
-
-    <!-- Animation library for notifications   -->
-    <link href="{{url('assets')}}/css/animate.min.css" rel="stylesheet"/>
-
-    <!--  Light Bootstrap Table core CSS    -->
-    <link href="{{url('assets')}}/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
-
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="{{url('assets')}}/css/demo.css" rel="stylesheet" />
-
-
-    <!--     Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-    <link href="{{url('assets')}}/css/pe-icon-7-stroke.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
-
-   
-   
-
-
-
+<title>Visitors an Admin Panel Category Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- bootstrap-css -->
+<link rel="stylesheet" href="{{url('admin')}}/css/bootstrap.min.css" >
+<!-- //bootstrap-css -->
+<!-- Custom CSS -->
+<link href="{{url('admin')}}/css/style.css" rel='stylesheet' type='text/css' />
+<link href="{{url('admin')}}/css/style-responsive.css" rel="stylesheet"/>
+<!-- font CSS -->
+<link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<!-- font-awesome icons -->
+<link rel="stylesheet" href="{{url('admin')}}/css/font.css" type="text/css"/>
+<link href="{{url('admin')}}/css/font-awesome.css" rel="stylesheet"> 
+<link rel="stylesheet" href="{{url('admin')}}/css/morris.css" type="text/css"/>
+<!-- calendar -->
+<link rel="stylesheet" href="{{url('admin')}}/css/monthly.css">
+<!-- //calendar -->
+<!-- //font-awesome icons -->
+<script src="{{url('admin')}}/js/jquery2.0.3.min.js"></script>
+<script src="{{url('admin')}}/js/raphael-min.js"></script>
+<script src="{{url('admin')}}/js/morris.js"></script>
+@yield('js')
 </head>
 <body>
-
-<div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
-
-    <!--
-
-        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-        Tip 2: you can also add an image using data-image tag
-
-    -->
-
-    	<div class="sidebar-wrapper" >
-            <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
-                </a>
-            </div>
-
-            <ul class="nav">
-                <li class="active">
-                    <a href="{{url('admin/dashboard')}}">
-                        <i class="pe-7s-graph"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{url('admin/account')}}">
-                        <i class="pe-7s-user"></i>
-                        <p>User Profile</p>
-                    </a>
-                    
-                </li>
-                <li>
-                    <a href="{{url('admin/product')}}">
-                        <i class="pe-7s-note2"></i>
-                        <p>Product List</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{url('admin/category')}}">
-                        <i class="pe-7s-news-paper"></i>
-                        <p>Category</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons.html">
-                        <i class="pe-7s-science"></i>
-                        <p>Icons A lot of</p>
-                    </a>
-                </li>
-               
-                <li>
-                    <a href="notifications.html">
-                        <i class="pe-7s-bell"></i>
-                        <p>Notifications</p>
-                    </a>
-                </li>
-                 <li>
-                    <a href="maps.html">
-                        <i class="pe-7s-map-marker"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
-				<li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="pe-7s-rocket"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li>
-            </ul>
-    	</div>
-    </div>
-
-    <div class="main-panel">
-        <nav class="navbar navbar-default navbar-fixed">
-            <h1>minhchien</h1>
-
-                
-					
-              
-        </nav>
-        
-        @if(Session::has('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>Lỗi !</strong> 
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        {{Session::get('error')}}
-        </div>
-    @endif
-    @if(Session::has('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong>Thành Công !</strong> 
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-           <span aria-hidden="true">&times;</span>
-        </button>
-         {{Session::get('success')}}
-        </div>
-    @endif
-     @if(Session::has('successs'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong>Thành Công !</strong> 
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-           <span aria-hidden="true">&times;</span>
-        </button>
-         {{Session::get('successs')}}
-        </div>
-    @endif
-    @if(Session::has('errorr'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>Lỗi !</strong> 
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        {{Session::get('errorr')}}
-        </div>
-    @endif
-
-
-
-
-       @yield('content')
-
-
-        <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Company
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Portfolio
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                               Blog
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                </p>
-            </div>
-        </footer>
-
+<section id="container">
+<!--header start-->
+<header class="header fixed-top clearfix">
+<!--logo start-->
+<div class="brand">
+    <a href="index.html" class="logo">
+        VISITORS
+    </a>
+    <div class="sidebar-toggle-box">
+        <div class="fa fa-bars"></div>
     </div>
 </div>
+<!--logo end-->
+<div class="nav notify-row" id="top_menu">
+    <!--  notification start -->
+    <ul class="nav top-menu">
+        <!-- settings start -->
+        <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="fa fa-tasks"></i>
+                <span class="badge bg-success">8</span>
+            </a>
+            <ul class="dropdown-menu extended tasks-bar">
+                <li>
+                    <p class="">You have 8 pending tasks</p>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="task-info clearfix">
+                            <div class="desc pull-left">
+                                <h5>Target Sell</h5>
+                                <p>25% , Deadline  12 June’13</p>
+                            </div>
+                                    <span class="notification-pie-chart pull-right" data-percent="45">
+                            <span class="percent"></span>
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="task-info clearfix">
+                            <div class="desc pull-left">
+                                <h5>Product Delivery</h5>
+                                <p>45% , Deadline  12 June’13</p>
+                            </div>
+                                    <span class="notification-pie-chart pull-right" data-percent="78">
+                            <span class="percent"></span>
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="task-info clearfix">
+                            <div class="desc pull-left">
+                                <h5>Payment collection</h5>
+                                <p>87% , Deadline  12 June’13</p>
+                            </div>
+                                    <span class="notification-pie-chart pull-right" data-percent="60">
+                            <span class="percent"></span>
+                            </span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="task-info clearfix">
+                            <div class="desc pull-left">
+                                <h5>Target Sell</h5>
+                                <p>33% , Deadline  12 June’13</p>
+                            </div>
+                                    <span class="notification-pie-chart pull-right" data-percent="90">
+                            <span class="percent"></span>
+                            </span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="external">
+                    <a href="#">See All Tasks</a>
+                </li>
+            </ul>
+        </li>
+        <!-- settings end -->
+        <!-- inbox dropdown start-->
+        <li id="header_inbox_bar" class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="fa fa-envelope-o"></i>
+                <span class="badge bg-important">4</span>
+            </a>
+            <ul class="dropdown-menu extended inbox">
+                <li>
+                    <p class="red">You have 4 Mails</p>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="photo"><img alt="avatar" src="{{url('admin')}}/images/3.png"></span>
+                                <span class="subject">
+                                <span class="from">Jonathan Smith</span>
+                                <span class="time">Just now</span>
+                                </span>
+                                <span class="message">
+                                    Hello, this is an example msg.
+                                </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="photo"><img alt="avatar" src="{{url('admin')}}/images/1.png"></span>
+                                <span class="subject">
+                                <span class="from">Jane Doe</span>
+                                <span class="time">2 min ago</span>
+                                </span>
+                                <span class="message">
+                                    Nice admin template
+                                </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="photo"><img alt="avatar" src="{{url('admin')}}/images/3.png"></span>
+                                <span class="subject">
+                                <span class="from">Tasi sam</span>
+                                <span class="time">2 days ago</span>
+                                </span>
+                                <span class="message">
+                                    This is an example msg.
+                                </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="photo"><img alt="avatar" src="{{url('admin')}}/images/2.png"></span>
+                                <span class="subject">
+                                <span class="from">Mr. Perfect</span>
+                                <span class="time">2 hour ago</span>
+                                </span>
+                                <span class="message">
+                                    Hi there, its a test
+                                </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">See all messages</a>
+                </li>
+            </ul>
+        </li>
+        <!-- inbox dropdown end -->
+        <!-- notification dropdown start-->
+        <li id="header_notification_bar" class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                <i class="fa fa-bell-o"></i>
+                <span class="badge bg-warning">3</span>
+            </a>
+            <ul class="dropdown-menu extended notification">
+                <li>
+                    <p>Notifications</p>
+                </li>
+                <li>
+                    <div class="alert alert-info clearfix">
+                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
+                        <div class="noti-info">
+                            <a href="#"> Server #1 overloaded.</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="alert alert-danger clearfix">
+                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
+                        <div class="noti-info">
+                            <a href="#"> Server #2 overloaded.</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="alert alert-success clearfix">
+                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
+                        <div class="noti-info">
+                            <a href="#"> Server #3 overloaded.</a>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </li>
+        <!-- notification dropdown end -->
+    </ul>
+    <!--  notification end -->
+</div>
+<div class="top-nav clearfix">
+    <!--search & user info start-->
+    <ul class="nav pull-right top-menu">
+        <li>
+            <input type="text" class="form-control search" placeholder=" Search">
+        </li>
+        <!-- user login dropdown start-->
+        <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <img alt="" src="{{url('admin')}}/images/2.png">
+                <span class="username">John Doe</span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu extended logout">
+                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
+            </ul>
+        </li>
+        <!-- user login dropdown end -->
+       
+    </ul>
+    <!--search & user info end-->
+</div>
+</header>
+<!--header end-->
+<!--sidebar start-->
+<aside>
+    <div id="sidebar" class="nav-collapse">
+        <!-- sidebar menu start-->
+        <div class="leftside-navigation">
+            <ul class="sidebar-menu" id="nav-accordion">
+                <li>
+                    <a class="active" href="index.html">
+                        <i class="fa fa-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>UI Elements</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="typography.html">Typography</a></li>
+						<li><a href="glyphicon.html">glyphicon</a></li>
+                        <li><a href="grids.html">Grids</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="fontawesome.html">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Font awesome </span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-th"></i>
+                        <span>Data Tables</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="{{url('admin/account')}}">User Table</a></li>
+                        <li><a href="{{url('admin/product')}}">Product Table</a></li>
+                        <li><a href="{{url('admin/category')}}">Category Table</a></li>
+                        <li><a href="responsive_table.html">Responsive Table</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-tasks"></i>
+                        <span>Form Components</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="form_component.html">Form Elements</a></li>
+                        <li><a href="form_validation.html">Form Validation</a></li>
+						<li><a href="dropzone.html">Dropzone</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-envelope"></i>
+                        <span>Mail </span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="mail.html">Inbox</a></li>
+                        <li><a href="mail_compose.html">Compose Mail</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class=" fa fa-bar-chart-o"></i>
+                        <span>Charts</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="chartjs.html">Chart js</a></li>
+                        <li><a href="flot_chart.html">Flot Charts</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class=" fa fa-bar-chart-o"></i>
+                        <span>Maps</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="google_map.html">Google Map</a></li>
+                        <li><a href="vector_map.html">Vector Map</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-glass"></i>
+                        <span>Extra</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="gallery.html">Gallery</a></li>
+						<li><a href="404.html">404 Error</a></li>
+                        <li><a href="registration.html">Registration</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="login.html">
+                        <i class="fa fa-user"></i>
+                        <span>Login Page</span>
+                    </a>
+                </li>
+            </ul>            </div>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+
+<section id="main-content">
+    <section class="wrapper">
+
+              
+                    <!-- //market-->
+                    <div class="main-panel">
+                    @if(Session::has('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Lỗi !</strong> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{Session::get('error')}}
+                    </div>
+                @endif
+                @if(Session::has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Thành Công !</strong> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{Session::get('success')}}
+                    </div>
+                @endif
+                @if(Session::has('successs'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Thành Công !</strong> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{Session::get('successs')}}
+                    </div>
+                @endif
+                @if(Session::has('errorr'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Lỗi !</strong> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{Session::get('errorr')}}
+                    </div>
+                @endif
+                @yield('content')
+            
+            </div>
+    </section>
 
 
-</body>
+ <!-- footer -->
+		  <div class="footer">
+			<div class="wthree-copyright">
+			  <p>© 2017 Visitors. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+			</div>
+		  </div>
+  <!-- / footer -->
+</section>
+<!--sidebar end-->
+<!--main content start-->
 
-    <!--   Core JS Files   -->
-    <script src="{{url('assets')}}/js/jquery.3.2.1.min.js" type="text/javascript"></script>
-	<script src="{{url('assets')}}/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--  Charts Plugin -->
-	<script src="{{url('assets')}}/js/chartist.min.js"></script>
-
-    <!--  Notifications Plugin    -->
-    <script src="{{url('assets')}}/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="{{url('assets')}}/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
-
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="{{url('assets')}}/js/demo.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-	<script>
-      $('#summernote').summernote({
-        placeholder: 'Hello stand alone ui',
-        tabsize: 2,
-        height: 120,
-        toolbar: [
-          ['style', ['style']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['color', ['color']],
-          ['para', ['ul', 'ol', 'paragraph']],
-          ['table', ['table']],
-          ['insert', ['link', 'picture', 'video']],
-          ['view', ['fullscreen', 'codeview', 'help']]
-        ]
-      });
+ <!-- footer -->
+		  
+<!--main content end-->
+</section>
+<script src="{{url('admin')}}/js/bootstrap.js"></script>
+<script src="{{url('admin')}}/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="{{url('admin')}}/js/scripts.js"></script>
+<script src="{{url('admin')}}/js/jquery.slimscroll.js"></script>
+<script src="{{url('admin')}}/js/jquery.nicescroll.js"></script>
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
+<script src="{{url('admin')}}/js/jquery.scrollTo.js"></script>
+<!-- morris JavaScript -->	
+<script>
+	$(document).ready(function() {
+		//BOX BUTTON SHOW AND CLOSE
+	   jQuery('.small-graph-box').hover(function() {
+		  jQuery(this).find('.box-button').fadeIn('fast');
+	   }, function() {
+		  jQuery(this).find('.box-button').fadeOut('fast');
+	   });
+	   jQuery('.small-graph-box .box-close').click(function() {
+		  jQuery(this).closest('.small-graph-box').fadeOut(200);
+		  return false;
+	   });
+	   
+	    //CHARTS
+	    function gd(year, day, month) {
+			return new Date(year, month - 1, day).getTime();
+		}
+		
+		graphArea2 = Morris.Area({
+			element: 'hero-area',
+			padding: 10,
+        behaveLikeLine: true,
+        gridEnabled: false,
+        gridLineColor: '#dddddd',
+        axes: true,
+        resize: true,
+        smooth:true,
+        pointSize: 0,
+        lineWidth: 0,
+        fillOpacity:0.85,
+			data: [
+				{period: '2015 Q1', iphone: 2668, ipad: null, itouch: 2649},
+				{period: '2015 Q2', iphone: 15780, ipad: 13799, itouch: 12051},
+				{period: '2015 Q3', iphone: 12920, ipad: 10975, itouch: 9910},
+				{period: '2015 Q4', iphone: 8770, ipad: 6600, itouch: 6695},
+				{period: '2016 Q1', iphone: 10820, ipad: 10924, itouch: 12300},
+				{period: '2016 Q2', iphone: 9680, ipad: 9010, itouch: 7891},
+				{period: '2016 Q3', iphone: 4830, ipad: 3805, itouch: 1598},
+				{period: '2016 Q4', iphone: 15083, ipad: 8977, itouch: 5185},
+				{period: '2017 Q1', iphone: 10697, ipad: 4470, itouch: 2038},
+			
+			],
+			lineColors:['#eb6f6f','#926383','#eb6f6f'],
+			xkey: 'period',
+            redraw: true,
+            ykeys: ['iphone', 'ipad', 'itouch'],
+            labels: ['All Visitors', 'Returning Visitors', 'Unique Visitors'],
+			pointSize: 2,
+			hideHover: 'auto',
+			resize: true
+		});
+		
+	   
+	});
+	</script>
+<!-- calendar -->
+	<script type="text/javascript" src="{{url('admin')}}/js/monthly.js"></script>
+	<script type="text/javascript">
+		$(window).load( function() {
+
+			$('#mycalendar').monthly({
+				mode: 'event',
+				
+			});
+
+			$('#mycalendar2').monthly({
+				mode: 'picker',
+				target: '#mytarget',
+				setWidth: '250px',
+				startHidden: true,
+				showTrigger: '#mytarget',
+				stylePast: true,
+				disablePast: true
+			});
+
+		switch(window.location.protocol) {
+		case 'http:':
+		case 'https:':
+		// running on a server, should be good.
+		break;
+		case 'file:':
+		alert('Just a heads-up, events will not work when run locally.');
+		}
+
+		});
+	</script>
+    <script type="text/javascript">
+        $('.btndelete').click(function(ev){
+            ev.preventDefault();
+            var _href =$(this).attr('href');
+            $('form#form-delete').attr('action',_href);
+
+            if(confirm('Bạn có chắc không ? ')){
+                $('form#form-delete').submit();
+            }
+
+        })
     </script>
-   
-    @yield('js')
-
-
+	<!-- //calendar -->
+</body>
 </html>

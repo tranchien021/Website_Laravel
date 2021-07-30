@@ -1,22 +1,39 @@
 @extends('admin.main')
 @section('content')
-    <button class="btn btn-success"><a href="{{route('category.create')}}">Thêm sản phẩm</a> </button>
-        <table class="table table-hover">
-             <thead>
-                 <tr>
-                     <th>Id </th>
+
+<button class="btn btn-success"><a href="{{route('account.create')}}">Thêm sản phẩm</a> </button>
+		<div class="table-agile-info">
+ <div class="panel panel-default">
+    <div class="panel-heading">
+     Basic table
+    </div>
+    <div>
+      <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+        <thead>
+          <tr>
+                    <th>Id </th>
                      <th>Name </th>
                      <th>Category</th>
                      <th>Tổng sản phẩm</th>
                      
                      <th>Function</th>
                      
-                 </tr>
-             </thead>
-             <tbody>
-                @foreach($data as $data)
-                 <tr>
-                     <td>{{$data->id}}</td>
+          </tr>
+        </thead>
+        <tbody>
+        @foreach($data as $data)
+          <tr data-expanded="true">
+                    <td>{{$data->id}}</td>
+          
                      <td>{{$data->Tên}}</td>
                      <td>{{$data->theloai}}</td>
                      <td>{{$data->products ? $data->products->count() : 0 }}</td>
@@ -25,15 +42,17 @@
                          <a href="{{route('category.edit',$data->id)}}" class="btn btn-success"><i class='fa fa-edit'></i></a>
                          <a href="{{route('category.destroy',$data->id)}}" class="btn btn-warning btndelete"><i class='fa fa-trash'></i></a>
                      </td>
+          </tr>
+          @endforeach
+         
+        </tbody>
+      </table>
 
-                     
-                 </tr>
-                 @endforeach
-             </tbody>
-         </table> 
          <form action="" method='POST' id="form-delete">
             @csrf @method('DELETE')
          </form>
+
+   
 
 
       

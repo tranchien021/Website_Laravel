@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home.index');
-Route::get('login', 'HomeController@login')->name('home.login');
+// Route::get('login', 'HomeController@login')->name('home.login');
 
 Route::group(['prefix'=>'admin'],function(){
-	Route::get('/','AdminController@dashboard')->name('admin.dashboard');
+	Route::get('/index','AdminController@dashboard')->name('admin.dashboard');
+	Route::get('/file','AdminController@file');
 	
 	Route::resources([
 		'category'=>'CategoryController',
@@ -31,67 +32,9 @@ Route::group(['prefix'=>'admin'],function(){
 });
 
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
-
-
-
-Route::get('login',function(){
-	
-});
-
-Route::get("getForm",function(){
-	return view('about');
-});
-
-Route::get('KhoaHoc/{name}',function($name){
-	echo "hello: ".$name;
-});
-
-Route::get('router1',['keys'=>'game',function(){
-	echo "Tran Minh Chien";
-}]);
-Route::get('router2',function(){
-	echo "day la minhchien";
-})->name('year');
-Route::get('call',function(){
-	return redirect()->route('year');
-});
-
-Route::group(['prefix'=>'Mygroup'],function(){
-	Route::get('User1',function(){
-		echo "User1";
-	});
-	Route::get('User2',function(){
-		echo "User2";
-	});
-	Route::get('User3',function(){
-		echo "User3";
-	});
-});
-Route::get('MyRequest',[MyController::class,'getURL']);
-
-Route::get('getdata',function(){
-	return view('about');
-});	
-
-Route::post('about',['as'=>'about','uses'=>"MyController@index"]);
-Route::get('setCookie','MyController@setCookie');
-Route::get('getCookie','MyController@getcookie');
-Route::get('index','MyController@index');
-Route::get('getfile','MyController@getfile');
-Route::get('showdata','MyController@show');
-Route::get('chekout/{id}','MyController@check');
-Route::get('login','MyController@login');
-
-Route::group(['prefix'=>'admin'],function(){
-	Route::get('/',function(){
-		return view('admin.main');
-	});
-	Route::get('/dashboard',function(){
-		return view('admin.dashboard');
-	});
-	Route::get('/user',function(){
-		return view('admin.user');
-	});
-
-});
+Route::get('/about','HomeController@about');
+Route::get('/quanli','HomeController@admin');

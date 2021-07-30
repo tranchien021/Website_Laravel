@@ -1,526 +1,444 @@
-
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
-<!--<![endif]-->
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Home page | LookCare</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+    <title>Home | E-Shopper</title>
+    <link href="{{url('home')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{url('home')}}/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{url('home')}}/css/prettyPhoto.css" rel="stylesheet">
+    <link href="{{url('home')}}/css/price-range.css" rel="stylesheet">
+    <link href="{{url('home')}}/css/animate.css" rel="stylesheet">
+	<link href="{{url('home')}}/css/main.css" rel="stylesheet">
+	<link href="{{url('home')}}/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="{{url('home')}}/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{url('home')}}/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{url('home')}}/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{url('home')}}/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="{{url('home')}}/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
 
-    <!-- Fav icon -->
-    <link rel="shortcut icon" href="{{url('site')}}/img/favicon.ico">
-
-    <!-- Font -->
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,900,700,700italic,300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700%7CDancing+Script%7CMontserrat:400,700%7CMerriweather:400,300italic%7CLato:400,700,900' rel='stylesheet' type='text/css' />
-    <link href='http://fonts.googleapis.com/css?family=Cantata+One' rel='stylesheet' type='text/css' />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700,600' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700' rel='stylesheet' type='text/css'>
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-    <link rel="stylesheet" href="{{url('site')}}/css/bootstrap.min.css">
-
-    <!-- Magnific Popup -->
-    <link href="{{url('site')}}/css/magnific-popup.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{url('site')}}/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{url('site')}}/css/normalize.css">
-    <link rel="stylesheet" href="{{url('site')}}/css/skin-lblue.css">
-
-    <link rel="stylesheet" href="{{url('site')}}/css/ecommerce.css">
-
-    <link rel="stylesheet" href="{{url('site')}}/layerslider/css/layerslider.css" type="text/css"><!-- Layer Slider -->
-
-    <!-- Owl carousel -->
-    <link href="{{url('site')}}/css/owl.carousel.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{url('site')}}/css/main.css">
-    <link rel="stylesheet" href="{{url('site')}}/css/style.css">
-    <link rel="stylesheet" type="text/css" href="{{url('site')}}/css/revolutionslider_settings.css" media="screen" />
-    <link rel="stylesheet" href="{{url('site')}}/css/responsive.css">
-    <script src="{{url('site')}}/js/vendor/modernizr-2.6.2.min.js"></script>
-</head>
-    <style>
-        .lookcare-slider-bottom-wrapper .look-offer {
-            position: relative;
-            background: url("{{url('site')}}/img/footer-product-image.jpg") center center no-repeat;
-            background-size: cover;
-            height: 220px;
-        }
-
-    </style>
-
-<body class="style-14 index-3">
-<!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
-
-
-<!-- Start Loading -->
-
-<!-- End Loading  -->
-
-<!-- start header -->
-<header>
-
-    <!-- Top bar starts -->
-    <div class="top-bar">
-        <div class="container">
-
-            <!-- Contact starts -->
-            <div class="tb-contact pull-left">
-                <!-- Email -->
-                <i class="fa fa-envelope color"></i> &nbsp; <a href="mailto:contact@domain.com">contact@domain.com</a>
-                &nbsp;&nbsp;
-                <!-- Phone -->
-                <i class="fa fa-phone color"></i> &nbsp; +1 (342)-(323)-4923
-            </div>
-            <!-- Contact ends -->
-
-            <!-- Shopping kart starts -->
-            <div class="tb-shopping-cart pull-right">
-                <!-- Link with badge -->
-                <a href="#" class="btn btn-white btn-xs b-dropdown"><i class="fa fa-shopping-cart"></i> <i class="fa fa-angle-down color"></i> <span class="badge badge-color">2</span></a>
-                <!-- Dropdown content with item details -->
-                <div class="b-dropdown-block">
-                    <!-- Heading -->
-                    <h4><i class="fa fa-shopping-cart color"></i> Your Items</h4>
-                    <ul class="list-unstyled">
-                        <!-- Item 1 -->
-                        <li>
-                            <!-- Item image -->
-                            <div class="cart-img">
-                                <a href="#"><img src="{{url('site')}}/img/ecommerce/view-cart/1.png" alt="" class="img-responsive" /></a>
-                            </div>
-                            <!-- Item heading and price -->
-                            <div class="cart-title">
-                                <h5><a href="#">Premium Quality Shirt</a></h5>
-                                <!-- Item price -->
-                                <span class="label label-color label-sm">$1,90</span>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                        <!-- Item 2 -->
-                        <li>
-                            <div class="cart-img">
-                                <a href="#"><img src="{{url('site')}}/img/ecommerce/view-cart/2.png" alt="" class="img-responsive" /></a>
-                            </div>
-                            <div class="cart-title">
-                                <h5><a href="#">Premium Quality Shirt</a></h5>
-                                <span class="label label-color label-sm">$1,20</span>
-                            </div>
-                            <div class="clearfix"></div>
-                        </li>
-                    </ul>
-                    <a href="#" class="btn btn-white btn-sm">View Cart</a> &nbsp; <a href="#" class="btn btn-color btn-sm">Checkout</a>
-                </div>
-            </div>
-            <!-- Shopping kart ends -->
-
-            <!-- Langauge starts -->
-            <div class="tb-language dropdown pull-right">
-                <a href="#" data-target="#" data-toggle="dropdown"><i class="fa fa-globe"></i> English <i class="fa fa-angle-down color"></i></a>
-                <!-- Dropdown menu with languages -->
-                <ul class="dropdown-menu dropdown-mini" role="menu">
-                    <li><a href="#">Germany</a></li>
-                    <li><a href="#">France</a></li>
-                    <li><a href="#">Brazil</a></li>
-                </ul>
-            </div>
-            <!-- Language ends -->
-
-            <!-- Search section for responsive design -->
-            <div class="tb-search pull-left">
-                <a href="#" class="b-dropdown"><i class="fa fa-search square-2 rounded-1 bg-color white"></i></a>
-                <div class="b-dropdown-block">
-                    <form>
-                        <!-- Input Group -->
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Type Something">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-color" type="button">Search</button>
-                                    </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- Search section ends -->
-
-            <!-- Social media starts -->
-            <div class="tb-social pull-right">
-                <div class="brand-bg text-right">
-                    <!-- Brand Icons -->
-                    <a href="#" class="facebook"><i class="fa fa-facebook square-2 rounded-1"></i></a>
-                    <a href="#" class="twitter"><i class="fa fa-twitter square-2 rounded-1"></i></a>
-                    <a href="#" class="google-plus"><i class="fa fa-google-plus square-2 rounded-1"></i></a>
-                </div>
-            </div>
-            <!-- Social media ends -->
-
-            <div class="clearfix"></div>
-        </div>
-    </div>
-
-    <!-- Top bar ends -->
-
-    <!-- Header One Starts -->
-    <div class="header-1">
-
-        <!-- Container -->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-4">
-                    <!-- Logo section -->
-                    <div class="logo">
-                        <h1><a href="{{route('home.index')}}"><i class="fa fa-bookmark-o"></i> LookCare</a></h1>
-                    </div>
-                </div>
-                <div class="col-md-6 col-md-offset-2 col-sm-5 col-sm-offset-3 hidden-xs">
-                    <!-- Search Form -->
-                    <div class="header-search">
-                        <form>
-                            <!-- Input Group -->
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Type Something">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-color" type="button">Search</button>
-                                        </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Navigation starts -->
-
-        <div class="navi">
-            <div class="container">
-                <div class="navy">
-                    <ul>
-                        <!-- Main menu -->
-                        <li><a href="#">Home</a>
-                            <!-- Submenu -->
-                            <ul>
-
-                                <li><a href="index.html">Home 1</a></li>
-                                <li><a href="index-2.html"><span>Home 2</span></a></li>
-                                <li><a href="index-3.html"><span>Home 3</span></a></li>
-
-                            </ul>
-                        </li>
-
-                        <li><a href="#">Features</a>
-                            <ul>
-                                <li><a href="#">Footer</a>
-                                    <ul>
-                                        <li><a href="footer-one.html">Footer1</a></li>
-                                        <li><a href="footer-two.html">Footer2</a></li>
-                                        <li><a href="footer-three.html">Footer3</a></li>
+<body>
+	<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="index.html"><img src="{{url('home')}}/images/home/logo.png" alt="" /></a>
+						</div>
+						<div class="btn-group pull-right">
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+									USA
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a href="#">Canada</a></li>
+									<li><a href="#">UK</a></li>
+								</ul>
+							</div>
+							
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+									DOLLAR
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a href="#">Canadian Dollar</a></li>
+									<li><a href="#">Pound</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
+								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-middle-->
+	
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu pull-left">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<li><a href="index.html" class="active">Home</a></li>
+								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="shop.html">Products</a></li>
+										<li><a href="product-details.html">Product Details</a></li> 
+										<li><a href="checkout.html">Checkout</a></li> 
+										<li><a href="cart.html">Cart</a></li> 
+										<li><a href="login.html">Login</a></li> 
                                     </ul>
-                                </li>
-                                <li><a href="#">Price Table</a>
-                                    <ul>
-                                        <li><a href="price-table-one.html">Price Table1</a></li>
-                                        <li><a href="price-table-two.html">Price Table2</a></li>
-
+                                </li> 
+								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="blog.html">Blog List</a></li>
+										<li><a href="blog-single.html">Blog Single</a></li>
                                     </ul>
-                                </li>
+                                </li> 
+								<li><a href="404.html">404</a></li>
+								<li><a href="contact-us.html">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="search_box pull-right">
+							<input type="text" placeholder="Search"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header-bottom-->
+	</header><!--/header-->
+	
+	<section id="slider"><!--slider-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+							<li data-target="#slider-carousel" data-slide-to="1"></li>
+							<li data-target="#slider-carousel" data-slide-to="2"></li>
+						</ol>
+						
+						<div class="carousel-inner">
+							<div class="item active">
+								<div class="col-sm-6">
+									<h1><span>E</span>-SHOPPER</h1>
+									<h2>Free E-Commerce Template</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<button type="button" class="btn btn-default get">Get it now</button>
+								</div>
+								<div class="col-sm-6">
+									<img src="{{url('home')}}/images/home/girl1.jpg" class="girl img-responsive" alt="" />
+									<img src="{{url('home')}}/images/home/pricing.png"  class="pricing" alt="" />
+								</div>
+							</div>
+							<div class="item">
+								<div class="col-sm-6">
+									<h1><span>E</span>-SHOPPER</h1>
+									<h2>100% Responsive Design</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<button type="button" class="btn btn-default get">Get it now</button>
+								</div>
+								<div class="col-sm-6">
+									<img src="{{url('home')}}/images/home/girl2.jpg" class="girl img-responsive" alt="" />
+									<img src="{{url('home')}}/images/home/pricing.png"  class="pricing" alt="" />
+								</div>
+							</div>
+							
+							<div class="item">
+								<div class="col-sm-6">
+									<h1><span>E</span>-SHOPPER</h1>
+									<h2>Free Ecommerce Template</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<button type="button" class="btn btn-default get">Get it now</button>
+								</div>
+								<div class="col-sm-6">
+									<img src="{{url('home')}}/images/home/girl3.jpg" class="girl img-responsive" alt="" />
+									<img src="{{url('home')}}/images/home/pricing.png" class="pricing" alt="" />
+								</div>
+							</div>
+							
+						</div>
+						
+						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section><!--/slider-->
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Category</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                        @foreach($category as $category)
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+											<span class="badge pull-right"><i class="">({{$category->products->count()}})</i></span>
+											{{$category->Tên}}
+										</a>
+									</h4>
+								</div>
+								
+							</div>
+                            @endforeach
+						
+							
+						
+						
+							
+							
+							
+							
+							
+						</div><!--/category-products-->
+					
+						<div class="brands_products"><!--brands_products-->
+							<h2>Brands</h2>
+							<div class="brands-name">
+								<ul class="nav nav-pills nav-stacked">
+									<li><a href="#"> <span class="pull-right">(50)</span>Acne</a></li>
+									<li><a href="#"> <span class="pull-right">(56)</span>Grüne Erde</a></li>
+									<li><a href="#"> <span class="pull-right">(27)</span>Albiro</a></li>
+									<li><a href="#"> <span class="pull-right">(32)</span>Ronhill</a></li>
+									<li><a href="#"> <span class="pull-right">(5)</span>Oddmolly</a></li>
+									<li><a href="#"> <span class="pull-right">(9)</span>Boudestijn</a></li>
+									<li><a href="#"> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
+								</ul>
+							</div>
+						</div><!--/brands_products-->
+						
+						<div class="price-range"><!--price-range-->
+							<h2>Price Range</h2>
+							<div class="well text-center">
+								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
+								 <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
+							</div>
+						</div><!--/price-range-->
+						
+						<div class="shipping text-center"><!--shipping-->
+							<img src="{{url('home')}}/images/home/shipping.jpg" alt="" />
+						</div><!--/shipping-->
+					
+					</div>
+				</div>
+				
+			@yield('main')
+			</div>
+		</div>
+	</section>
+	
+	<footer id="footer"><!--Footer-->
+		<div class="footer-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="companyinfo">
+							<h2><span>e</span>-shopper</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+						</div>
+					</div>
+					<div class="col-sm-7">
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="{{url('home')}}/images/home/iframe1.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Circle of Hands</p>
+								<h2>24 DEC 2014</h2>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="{{url('home')}}/images/home/iframe2.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Circle of Hands</p>
+								<h2>24 DEC 2014</h2>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="{{url('home')}}/images/home/iframe3.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Circle of Hands</p>
+								<h2>24 DEC 2014</h2>
+							</div>
+						</div>
+						
+						<div class="col-sm-3">
+							<div class="video-gallery text-center">
+								<a href="#">
+									<div class="iframe-img">
+										<img src="{{url('home')}}/images/home/iframe4.png" alt="" />
+									</div>
+									<div class="overlay-icon">
+										<i class="fa fa-play-circle-o"></i>
+									</div>
+								</a>
+								<p>Circle of Hands</p>
+								<h2>24 DEC 2014</h2>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="address">
+							<img src="{{url('home')}}/images/home/map.png" alt="" />
+							<p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Service</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">Online Help</a></li>
+								<li><a href="#">Contact Us</a></li>
+								<li><a href="#">Order Status</a></li>
+								<li><a href="#">Change Location</a></li>
+								<li><a href="#">FAQ’s</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Quock Shop</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">T-Shirt</a></li>
+								<li><a href="#">Mens</a></li>
+								<li><a href="#">Womens</a></li>
+								<li><a href="#">Gift Cards</a></li>
+								<li><a href="#">Shoes</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Policies</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">Terms of Use</a></li>
+								<li><a href="#">Privecy Policy</a></li>
+								<li><a href="#">Refund Policy</a></li>
+								<li><a href="#">Billing System</a></li>
+								<li><a href="#">Ticket System</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>About Shopper</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">Company Information</a></li>
+								<li><a href="#">Careers</a></li>
+								<li><a href="#">Store Location</a></li>
+								<li><a href="#">Affillate Program</a></li>
+								<li><a href="#">Copyright</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3 col-sm-offset-1">
+						<div class="single-widget">
+							<h2>About Shopper</h2>
+							<form action="#" class="searchform">
+								<input type="text" placeholder="Your email address" />
+								<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+								<p>Get the most recent updates from <br />our site and be updated your self...</p>
+							</form>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+					<p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+				</div>
+			</div>
+		</div>
+		
+	</footer><!--/Footer-->
+	
 
-                            </ul>
-                        </li>
-
-                        <li><a href="#">Category</a>
-                            <ul>
-                                <li><a href="#">Laptop</a>
-                                    <ul>
-                                        <li><a href="#">Vaio</a></li>
-                                        <li><a href="#">Samsung</a></li>
-                                        <li><a href="#">Toshiba</a></li>
-                                        <li><a href="#">HP</a></li>
-
-                                    </ul>
-                                </li>
-                                <li><a href="#">Smartphone</a>
-                                    <ul>
-                                        <li><a href="#">Iphone</a></li>
-                                        <li><a href="#">Oppo</a></li>
-                                        <li><a href="#">Nokia</a></li>
-                                        <li><a href="#">Sony</a></li>
-                                        <li><a href="#">Samsung</a></li>
-
-                                    </ul>
-                                </li>
-                                <li><a href="#">Accessories</a>
-                                    <ul>
-                                        <li><a href="#">Headphone</a></li>
-                                        <li><a href="#">Adapter</a></li>
-                                        <li><a href="#">Bag</a></li>
-                                        <li><a href="#">Baby doll</a></li>
-
-                                    </ul>
-                                </li>
-                                <!-- Multi level menu -->
-                                <li><a href="#">Multi Level Menu</a>
-                                    <ul>
-                                        <!-- Sub menu -->
-                                        <li><a href="#">Menu #1</a></li>
-                                        <li><a href="#">Menu #1</a></li>
-                                        <li><a href="#">Menu #1</a>
-                                            <ul>
-                                                <!-- Sub menu -->
-                                                <li><a href="#">Menu #2</a></li>
-                                                <li><a href="#">Menu #2</a></li>
-                                                <li><a href="#">Menu #2</a>
-                                                    <ul>
-                                                        <!-- Sub menu -->
-                                                        <li><a href="#">Menu #3</a></li>
-                                                        <li><a href="#">Menu #3</a></li>
-                                                        <li><a href="#">Menu #3</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li><a href="#">Blog</a>
-                            <ul>
-                                <li><a href="blog.html"><span>Blog Default</span></a></li>
-                                <li><a href="blog-masonry.html"><span>Blog Masonry</span></a></li>
-                                <li><a href="blog-full-width.html"><span>Blog Full Width</span></a></li>
-                                <li><a href="single-post.html"><span>Single Page 1</span></a></li>
-                                <li><a href="single-post-v2.html"><span>Single Page 2</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li><a href="#">Pages</a>
-                            <ul>
-                                <li><a href="shop.html"><span>Shop</span></a></li>
-                                <li><a href="single-product.html"><span>Single product</span></a></li>
-                                <li><a href="shopping-cart.html"><span>Cart</span></a></li>
-                                <li><a href="checkout.html"><span>Checkout</span></a></li>
-                                <li><a href="wishlist.html"><span>Wishlist</span></a></li>
-                                <li><a href="signin.html"><span>Sign In</span></a></li>
-                                <li><a href="signup.html"><span>Sign Up</span></a></li>
-                                <li><a href="404.html"><span>404 Page</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Navigation ends -->
-
-    </div>
-
-    <!-- Header one ends -->
-
-</header>
-<!-- end header -->
-
-<!-- start main content -->
-@yield('main')
-<!-- end main content -->
-
-
-
-
-
-
-<!-- start footer area -->
-<footer class="footer-area-content">
-
-    <div class="container">
-        <div class="footer-wrapper style-3">
-            <div class="type-1">
-                <div class="footer-columns-entry">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img alt="" src="{{url('site')}}/img/footer-logo.png" class="footer-logo">
-                            <div class="footer-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</div>
-                            <div class="footer-address">30 South Avenue San Francisco<br> Phone: +78 123 456 123<br> Email: <a href="mailto:Support@demo.com">Support@demo.com</a><br>
-                                <a target="_blank" href="http://iglyphic.com/"><b>www.lookcare.com</b></a>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="index-three-footer-widget how-to-buy">
-                                <h3 class="heading2">How to Buy</h3>
-                                <ul>
-                                    <li><a href="#" title="">Become an Amazon Vendor</a></li>
-                                    <li><a href="#" title="">Advertise Your Products</a></li>
-                                    <li><a href="#" title="">Sell on Amazon Business</a></li>
-                                    <li><a href="#" title="">Subscribe to receive inspiration</a></li>
-                                </ul>
-                            </div><!-- Widget -->
-                        </div>
-                        <div class="col-md-3">
-                            <div class="index-three-footer-widget customer-services">
-                                <h3 class="heading2">Customer Service</h3>
-                                <ul>
-                                    <li><a href="#" title="">Refund Policy</a></li>
-                                    <li><a href="#" title="">How to Shop on Flaiva</a></li>
-                                    <li><a href="#" title="">Track Your Order</a></li>
-                                    <li><a href="#" title="">Shipping Policy</a></li>
-                                </ul>
-                            </div><!-- Widget -->
-                        </div>
-                        <div class="col-md-3">
-                            <div class="index-three-footer-widget news-letter">
-                                <h3 class="heading2">NewsLetter Signup</h3>
-                                <p>Subscribe to receive inspiration, ideas, and news in your inbox.</p>
-                                <form>
-                                    <input type="text" placeholder="Enter your Email" />
-                                    <button type="submit"><i class="fa fa-search"></i></button>
-                                </form>
-                                <ul class="social-buttons">
-                                    <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#" title=""><i class="fa fa-rss"></i></a></li>
-                                    <li><a href="#" title=""><i class="fa fa-tumblr"></i></a></li>
-                                </ul>
-                            </div><!-- Widget -->
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-    <div class="footer-bottom footer-wrapper style-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="footer-bottom-navigation">
-                        <div class="cell-view">
-                            <div class="footer-links">
-                                <a href="#">Site Map</a>
-                                <a href="#">Search</a>
-                                <a href="#">Terms</a>
-                                <a href="#">Advanced Search</a>
-                                <a href="#">Orders and Returns</a>
-                                <a href="#">Contact Us</a>
-                            </div>
-                            <div class="copyright">Created with by <a target="_blank" href="http://iglyphic.com/">iGlyphic</a> . All right reserved</div>
-                        </div>
-                        <div class="cell-view">
-                            <div class="payment-methods">
-                                <a href="#"><img alt="" src="{{url('site')}}/img/payment-method-1.png"></a>
-                                <a href="#"><img alt="" src="{{url('site')}}/img/payment-method-2.png"></a>
-                                <a href="#"><img alt="" src="{{url('site')}}/img/payment-method-3.png"></a>
-                                <a href="#"><img alt="" src="{{url('site')}}/img/payment-method-4.png"></a>
-                                <a href="#"><img alt="" src="{{url('site')}}/img/payment-method-5.png"></a>
-                                <a href="#"><img alt="" src="{{url('site')}}/img/payment-method-6.png"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-
-</footer>
-
-<!-- footer area end -->
-
-
-<!-- All script -->
-<script src="{{url('site')}}/js/vendor/jquery-1.10.2.min.js"></script>
-<script src="{{url('site')}}/js/bootstrap.min.js"></script>
-<script src="{{url('site')}}/js/smoothscroll.js"></script>
-<!-- Scroll up js
-============================================ -->
-<script src="{{url('site')}}/js/jquery.scrollUp.js"></script>
-<script src="{{url('site')}}/js/menu.js"></script>
-
-
-<script src="{{url('site')}}/js/pluginse209.js?v=1.0.0"></script>
-
-<!-- Magnific Popup -->
-<script src="{{url('site')}}/js/jquery.magnific-popup.min.js"></script>
-
-<script src="{{url('site')}}/js/jquery.countdown.min.js"></script>
-
-
-<script src="{{url('site')}}/js/jquery.scrolly.js"></script>
-
-
-<!-- External libraries: jQuery & GreenSock -->
-<script src="{{url('site')}}/layerslider/js/greensock.js" type="text/javascript"></script>
-<!-- LayerSlider script files -->
-<script src="{{url('site')}}/layerslider/js/layerslider.transitions.js" type="text/javascript"></script>
-<script src="{{url('site')}}/layerslider/js/layerslider.kreaturamedia.jquery.js" type="text/javascript"></script>
-
-
-<!-- Owl carousel -->
-<script src="{{url('site')}}/js/owl.carousel.min.js"></script>
-<script src="{{url('site')}}/js/main.js"></script>
-
-
-
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        "use strict";
-
-        //** Slider  **//
-        jQuery("#layerslider").layerSlider({
-            responsive: true,
-            responsiveUnder: 1170,
-            layersContainer: 1170,
-            skin: 'v5',
-            hoverPrevNext: true,
-            navPrevNext: true,
-            navStartStop: false,
-            navButtons: false,
-            skinsPath: 'layerslider/skins/'
-        });
-
-
-        /*=================== Parallax ===================*/
-        $('.parallax').scrolly({bgParallax: true});
-
-
-        /* Owl carousel */
-        $(".owl-carousel").owlCarousel({
-            slideSpeed : 500,
-            rewindSpeed : 1000,
-            mouseDrag : true,
-            stopOnHover : true
-        });
-        /* Own navigation */
-        $(".owl-nav-prev").click(function(){
-            $(this).parent().next(".owl-carousel").trigger('owl.prev');
-        });
-        $(".owl-nav-next").click(function(){
-            $(this).parent().next(".owl-carousel").trigger('owl.next');
-        });
-
-
-    });
-</script>
-
-
+  
+    <script src="{{url('home')}}/js/jquery.js"></script>
+	<script src="{{url('home')}}/js/bootstrap.min.js"></script>
+	<script src="{{url('home')}}/js/jquery.scrollUp.min.js"></script>
+	<script src="{{url('home')}}/js/price-range.js"></script>
+    <script src="{{url('home')}}/js/jquery.prettyPhoto.js"></script>
+    <script src="{{url('home')}}/js/main.js"></script>
 </body>
-
-
 </html>

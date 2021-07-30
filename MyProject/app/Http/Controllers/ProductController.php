@@ -104,7 +104,7 @@ class ProductController extends Controller
         if($request->has('file_img')){
             $file=$request->file_img;
             $ext=$request->file_img->extension();
-            $file_name=time()."-product".".".$ext;
+            $file_name=time()."-Product".".".$ext;
            
             $file->move(public_path('uploads'),$file_name);
            

@@ -2,26 +2,38 @@
 @section('content')
 	
 
-<button class="btn btn-success"><a href="{{route('account.create')}}">Thêm sản phẩm</a> </button>
-        <table class="table table-hover">
-             <thead>
-                 <tr>
-                     <th>Id</th>   
-                     <th>Name </th>
-                     <th>email </th>
-                     <th>password </th>
-                     <th>Tình Trạng</th>
-                     <th>Function</th>
-                    
-                     
-                 </tr>
-             </thead>
-             
-     
-             <tbody>
-                @foreach($data as $data)
-                 <tr>
-                     <td>{{$data->id}}</td>
+    <button class="btn btn-success"><a href="{{route('account.create')}}">Thêm sản phẩm</a> </button>
+		<div class="table-agile-info">
+ <div class="panel panel-default">
+    <div class="panel-heading">
+     Basic table
+    </div>
+    <div>
+      <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+        <thead>
+          <tr>
+            <th data-breakpoints="xs">ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th data-breakpoints="xs">password</th>
+           
+            <th data-breakpoints="xs sm md" data-title="DOB">Tình Trạng</th>
+            <th data-breakpoints="xs">Function</th>
+          </tr>
+        </thead>
+        <tbody>
+        @foreach($data as $data)
+          <tr data-expanded="true">
+                    <td>{{$data->id}}</td>
                      <td>{{$data->name}}</td>
                      <td>{{$data->email}}</td>
                      <td>{{$data->password}}</td>
@@ -38,15 +50,20 @@
                          <a href="{{route('account.edit',$data->id)}}" class="btn btn-success"><i class='fa fa-edit'></i></a>
                          <a href="{{route('account.destroy',$data->id)}}" class="btn btn-warning btndelete"><i class='fa fa-trash'></i></a>
                      </td>
-
-                     
-                 </tr>
-                 @endforeach
-             </tbody>
-         </table> 
-         <form action="" method='POST' id="form-delete">
+          </tr>
+          @endforeach
+         
+        </tbody>
+      </table>
+      
+      <form action="" method='POST' id="form-delete">
             @csrf @method('DELETE')
          </form>
+
+    </div>
+  </div>
+</div>
+
 
 
 @stop
