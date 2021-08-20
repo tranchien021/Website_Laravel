@@ -235,13 +235,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <img alt="" src="{{url('admin')}}/images/2.png">
-                <span class="username">John Doe</span>
+                <span class="username">
+                <?php 
+                        $name=Session::get('Account_Name');
+                        if($name){
+                            echo $name;
+                            
+                        }
+                       
+                    
+	            ?>
+                </span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
                 <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
+                <li><a href="{{url('/admin/logout')}}"><i class="fa fa-key"></i>Đăng Xuất </a></li>
             </ul>
         </li>
         <!-- user login dropdown end -->
@@ -284,12 +294,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-th"></i>
-                        <span>Data Tables</span>
+                        <span>Bảng dữ liệu</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="{{url('admin/account')}}">User Table</a></li>
-                        <li><a href="{{url('admin/product')}}">Product Table</a></li>
-                        <li><a href="{{url('admin/category')}}">Category Table</a></li>
+                        <li><a href="{{url('admin/account')}}">Bảng tài khoản</a></li>
+                        <li><a href="{{url('admin/product')}}">Bảng sản phẩm</a></li>
+                        <li><a href="{{url('admin/category')}}">Bảng thể loại</a></li>
                         <li><a href="responsive_table.html">Responsive Table</a></li>
                     </ul>
                 </li>

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Customer;
+
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -14,8 +18,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $data=DB::table('order')
+        ->join('customer','order.customer_id','=','customer.customer_id')
+        ->select('order.*','customer.customer_name')
+        ->orderBy('order.order_id','DESC')->get();
+      
+        return view('admin.manage_order',compact('data'));
     }
+   
 
     /**
      * Show the form for creating a new resource.

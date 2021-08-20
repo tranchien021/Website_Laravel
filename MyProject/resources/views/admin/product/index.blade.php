@@ -1,6 +1,6 @@
 @extends('admin.main')
 @section('content')
-<button class="btn btn-success"><a href="{{route('account.create')}}">Thêm sản phẩm</a> </button>
+<a class="btn btn-primary" href="{{route('product.create')}}">Thêm sản phẩm</a> 
 		<div class="table-agile-info">
  <div class="panel panel-default">
     <div class="panel-heading">

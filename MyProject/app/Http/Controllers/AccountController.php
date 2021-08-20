@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
-use App\Models\User;
+use App\Models\Users;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -15,7 +15,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $data=User::all();
+        $data=Users::all();
+        
         return view('admin.user.index',compact('data'));
     }
 
@@ -37,18 +38,24 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $request->validate([
-            'name'=>'required',
-            'email'=>'required',
-            'password'=>'required',
-            'level'=>'required',
-        ]);
-        if(User::create($request->all())){
-            return redirect()->route('account.index')->with('success','Thêm thành công ');
-        }else{
-             return redirect()->route('account.index')->with('error','Không thành công ');
+        try{
+            $request->validate([
+                'name'=>'required',
+                'email'=>'required',
+                'password'=>'required',
+                'level'=>'required',
+            ]);
+            if(Users::create($request->all())){
+                return redirect()->route('account.index')->with('success','Thêm thành công ');
+            }else{
+                 return redirect()->route('account.index')->with('error','Không thành công ');
+            }
+        }catch(Throwable $e){
+            report($e);
+
+            return false;
         }
+        
     }
 
     /**
@@ -68,7 +75,7 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function edit(Account $account)
+    public function edit(Users $account)
     {
         return view('admin.user.edit',compact('account'));
     }
@@ -80,7 +87,7 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $account)
+    public function update(Request $request, Users $account)
     {
         if($account->update($request->all())){
             return redirect()->route('account.index')->with('success','Cập nhật thành công');
@@ -95,7 +102,7 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $account)
+    public function destroy(Users $account)
     {
         if($account->level == 1){
             return redirect()->route('account.index')->with('error','Không xoá tài khoản Admin ');

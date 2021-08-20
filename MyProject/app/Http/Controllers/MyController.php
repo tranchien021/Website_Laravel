@@ -48,7 +48,8 @@ class MyController extends Controller
     public function login(){
         return view('login');
     }
-   
-    
+    public function shop(){
+        return view('livewire.shop-component');
+    }
 
 }

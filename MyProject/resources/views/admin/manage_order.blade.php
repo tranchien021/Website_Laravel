@@ -7,7 +7,7 @@
 		<div class="table-agile-info">
  <div class="panel panel-default">
     <div class="panel-heading">
-     Basic table
+    Quản lí đơn hàng
     </div>
     <div>
       <table class="table" ui-jq="footable" ui-options='{
@@ -22,11 +22,8 @@
         }}'>
         <thead>
           <tr>
-            <th data-breakpoints="xs">ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th data-breakpoints="xs">password</th>
-           
+            <th data-breakpoints="xs">Tên người đặt</th>
+            <th>Tổng giá tiền</th>
             <th data-breakpoints="xs sm md" data-title="DOB">Tình Trạng</th>
             <th data-breakpoints="xs">Function</th>
           </tr>
@@ -34,22 +31,12 @@
         <tbody>
         @foreach($data as $data)
           <tr data-expanded="true">
-                    <td>{{$data->id}}</td>
-                     <td>{{$data->name}}</td>
-                     <td>{{$data->email}}</td>
-                     <td>{{$data->password}}</td>
-                    
-                     @if($data->level == 1)
-                     <td><span class="badge badge-success">Admin </span></td>
-                 
-                    @else
-                    <td><span class="badge badge-warning"> Khách Hàng </span></td>
-             
-                      @endif
-                     
+                     <td>{{$data->customer_name}}</td>
+                     <td>{{$data->order_total}}</td>
+                     <td>{{$data->order_status}}</td>
                      <td>
-                         <a href="{{route('account.edit',$data->id)}}" class="btn btn-success"><i class='fa fa-edit'></i></a>
-                         <a href="{{route('account.destroy',$data->id)}}" class="btn btn-warning btndelete"><i class='fa fa-trash'></i></a>
+                         <a href="" class="btn btn-success"><i class='fa fa-edit'></i></a>
+                         <a href="" class="btn btn-warning btndelete"><i class='fa fa-trash'></i></a>
                      </td>
           </tr>
           @endforeach
