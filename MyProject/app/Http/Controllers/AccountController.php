@@ -90,9 +90,9 @@ class AccountController extends Controller
     public function update(Request $request, Users $account)
     {
         if($account->update($request->all())){
-            return redirect()->route('account.index')->with('success','Cập nhật thành công');
+            return redirect()->route('account.index');
         }else{
-            return redirect()->route('account.index')->with('error','Cập nhật thất bại');
+            return redirect()->route('account.index');
         }
     }
 
@@ -105,13 +105,14 @@ class AccountController extends Controller
     public function destroy(Users $account)
     {
         if($account->level == 1){
-            return redirect()->route('account.index')->with('error','Không xoá tài khoản Admin ');
+            return redirect()->route('account.index');
 
         }else{
             $account->delete();
-            return redirect()->route('account.index')->with('success', 'Xoá thành công ');
+            return redirect()->route('account.index');
         }
 
     }
+   
     
 }

@@ -29,5 +29,16 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'facebook' => [
+        'client_id' => "1224905547977530",
+        'client_secret' => 'afafe833580f5b7649a065bb85566a40',
+        'redirect' => "http://localhost:8080/LEARN_PHP/Laravel/MyProject/public/admin/callback",
+    ],
+    'google' => [
+        'client_id' => '612977505354-no7jis85aihpv6b34sm5u0bsqccbq06b.apps.googleusercontent.com',
+        'client_secret' => 'fwxTSn9HJ9olh5vxbpROebq4',
+        'redirect' => 'http://localhost:8080/LEARN_PHP/Laravel/MyProject/public/admin/callback_google',
+    ],
+
 
 ];

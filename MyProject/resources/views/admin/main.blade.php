@@ -39,7 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
-    <a href="index.html" class="logo">
+    <a href="{{url('/admin/index')}}" class="logo">
         VISITORS
     </a>
     <div class="sidebar-toggle-box">
@@ -277,10 +277,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
-                        <span>UI Elements</span>
+                        <span>Đơn hàng</span>
                     </a>
                     <ul class="sub">
-						<li><a href="typography.html">Typography</a></li>
+						<li><a href="{{url('/admin/order')}}">Quản lí đơn hàng</a></li>
 						<li><a href="glyphicon.html">glyphicon</a></li>
                         <li><a href="grids.html">Grids</a></li>
                     </ul>
@@ -369,45 +369,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <section id="main-content">
     <section class="wrapper">
 
-              
-                    <!-- //market-->
-                    <div class="main-panel">
-                    @if(Session::has('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Lỗi !</strong> 
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    {{Session::get('error')}}
-                    </div>
-                @endif
-                @if(Session::has('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Thành Công !</strong> 
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                    {{Session::get('success')}}
-                    </div>
-                @endif
-                @if(Session::has('successs'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Thành Công !</strong> 
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                    {{Session::get('successs')}}
-                    </div>
-                @endif
-                @if(Session::has('errorr'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Lỗi !</strong> 
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    {{Session::get('errorr')}}
-                    </div>
-                @endif
                 @yield('content')
             
             </div>

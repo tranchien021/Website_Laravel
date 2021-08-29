@@ -37,13 +37,16 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'meta_keywords'=>'required',
+            'meta_desc'=>'required',
             'Tên'=>'required',
             'theloai'=>'required',
+           
         ]);
         if(Category::create($request->all())){
-            return redirect()->route('category.index')->with('success','Thêm thành công ');
+            return redirect()->route('category.index');
         }else{
-             return redirect()->route('category.index')->with('error','Không thành công ');
+             return redirect()->route('category.create');
         }
     }
 
@@ -79,9 +82,9 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         if($category->update($request->all())){
-           return redirect()->route('category.index')->with('success','Cập nhật thành công');
+           return redirect()->route('category.index');
        }else{
-           return redirect()->route('category.index')->with('error','Cập nhật thất bại');
+           return redirect()->route('category.edit');
        }
        
 
@@ -96,11 +99,11 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         if($category->products->count() == 2){
-            return redirect()->route('category.index')->with('error','Không thể xoá danh mục này ');
+            return redirect()->route('category.index');
 
         }else{
             $category->delete();
-            return redirect()->route('category.index')->with('success', 'Xoá thành công ');
+            return redirect()->route('category.index');
         }
     }
 }

@@ -22,8 +22,23 @@ class OrderController extends Controller
         ->join('customer','order.customer_id','=','customer.customer_id')
         ->select('order.*','customer.customer_name')
         ->orderBy('order.order_id','DESC')->get();
+   
       
-        return view('admin.manage_order',compact('data'));
+        return view('admin.order.manage_order',compact('data'));
+    }
+
+    public function view_order($id){
+
+        $data=DB::table('order')
+        ->join('customer','order.customer_id','=','customer.customer_id')
+        ->join('shipping','order.shipping_id','=','shipping.shipping_id')
+        ->join('order_detail','order.order_id','=','order_detail.order_detail_id')
+        ->select('order.*','customer.*','shipping.*','order_detail.*')->first();
+       
+      
+        
+      
+        return view('admin.order.view_order',compact('data'));
     }
    
 

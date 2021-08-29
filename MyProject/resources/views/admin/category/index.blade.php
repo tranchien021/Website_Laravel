@@ -1,7 +1,7 @@
 @extends('admin.main')
 @section('content')
 
-<button class="btn btn-success"><a href="{{route('account.create')}}">Thêm sản phẩm</a> </button>
+<button style="margin:5px;" class="btn btn-success"><a style="color:#fff;" href="{{route('category.create')}}">Thêm sản phẩm</a> </button>
 		<div class="table-agile-info">
  <div class="panel panel-default">
     <div class="panel-heading">
@@ -23,6 +23,8 @@
                     <th>Id </th>
                      <th>Name </th>
                      <th>Category</th>
+                     <th>Miêu tả</th>
+                     <th>Từ Khoá</th>
                      <th>Tổng sản phẩm</th>
                      
                      <th>Function</th>
@@ -36,6 +38,8 @@
           
                      <td>{{$data->Tên}}</td>
                      <td>{{$data->theloai}}</td>
+                     <td>{{$data->meta_desc}}</td>
+                     <td>{{$data->meta_keywords}}</td>
                      <td>{{$data->products ? $data->products->count() : 0 }}</td>
                      
                      <td>

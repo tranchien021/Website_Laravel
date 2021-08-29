@@ -3,9 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="description" content="{{$meta_desc}}">
+	<meta name="keywords" content="{{$meta_keywords}}">
+	<link rel="canonical" href="{{$url_canonical}}">
+	<meta name="robots" content="INDEX,FOLLOW">
     <meta name="author" content="">
-    <title>Home | E-Shopper</title>
+    <title>{{$meta_title}}</title>
+
+	<meta property="og:site_name"     content="minhchien.com" />
+	<meta property="og:url"           content="{{$url_canonical}}" />
+	<meta property="og:type"          content="website" />
+	<meta property="og:title"         content="{{$meta_title}}" />
+	<meta property="og:description"   content="{{$meta_desc}}" />
+	
+
     <link href="{{url('home')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{url('home')}}/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{url('home')}}/css/prettyPhoto.css" rel="stylesheet">
@@ -13,6 +24,9 @@
     <link href="{{url('home')}}/css/animate.css" rel="stylesheet">
 	<link href="{{url('home')}}/css/main.css" rel="stylesheet">
 	<link href="{{url('home')}}/css/responsive.css" rel="stylesheet">
+
+
+	
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -239,7 +253,7 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+										<a href="{{url('/show_category/'.$category->theloai)}}">
 											<span class="badge pull-right"><i class="">({{$category->products->count()}})</i></span>
 											{{$category->Tên}}
 										</a>
@@ -450,5 +464,9 @@
 	<script src="{{url('home')}}/js/price-range.js"></script>
     <script src="{{url('home')}}/js/jquery.prettyPhoto.js"></script>
     <script src="{{url('home')}}/js/main.js"></script>
+	<div id="fb-root"></div>
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" nonce="b2fbiCpE"></script>
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>  
+	
 </body>
 </html>

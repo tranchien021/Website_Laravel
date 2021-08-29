@@ -14,6 +14,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- bootstrap-css -->
 <link rel="stylesheet" href="{{url('admin')}}/css/bootstrap.min.css" >
+
 <!-- //bootstrap-css -->
 <!-- Custom CSS -->
 <link href="{{url('admin')}}/css/style.css" rel='stylesheet' type='text/css' />
@@ -47,6 +48,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<input type="submit" value="Sign In" name="login">
 		</form>
 		<p>Không có tài khoản ?<a href="{{url('admin/register')}}"> Đăng Ký </a></p>
+		<a class="btn btn-primary btn-social btn-facebook" href="{{url('/admin/login_facebook')}}">
+    	<i class="fa fa-facebook fa-fw"></i> Bằng Facebook
+    	</a>
+		<a class="btn btn-danger btn-social btn-google" href="{{url('/admin/login_google')}}">
+    	<i class="fa fa-google"></i> Bằng Google
+    	</a>
+		
 </div>
 </div>
 <script src="{{url('admin')}}/js/bootstrap.js"></script>

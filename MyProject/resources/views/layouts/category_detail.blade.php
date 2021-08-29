@@ -2,8 +2,11 @@
 <!-- noi dung ben trong  -->
 @section('main')
 <div class="col-sm-9 padding-right">
+					
+					<div class="fb-like" data-href="{{$url_canonical}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="false"></div>
+					<div class="fb-share-button" data-href="http://localhost:8080/LEARN_PHP/Laravel/MyProject/public/" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$url_canonical}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Features Items</h2>
+						<h2 class="title text-center">Sản phẩm thể loại</h2>
 					@foreach($product as $product)
 					
 						<div class="col-sm-4">
@@ -41,13 +44,12 @@
 						</div>
 					@endforeach				
 						
-						<ul class="pagination">
-							<li class="active"><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">&raquo;</a></li>
-						</ul>
-					</div><!--features_items-->
-				</div>
+						
+					</div>
+					<div class="fb-comments" data-href="{{$url_canonical}}" data-width="" data-numposts="20"></div>
+					
+</div>
+
+
 				
 @stop()

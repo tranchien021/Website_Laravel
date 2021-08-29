@@ -12,24 +12,40 @@ use App\Models\Payment;
 use App\Models\Order;
 use App\Models\OrderDetail;
 
+use App\Rules\Captcha; 
+
 use Cart;
 use Session;
 
 class CheckoutController extends Controller
 {
-    public function login_checkout(){
+    public function login_checkout(Request $request){
+        $meta_desc="Đăng nhập và đăng ký để giao dịch";
+        $meta_keywords="Đăng Nhập, đăng ký";
+        $meta_title="Đăng nhập và Đăng Ký ";
+        $url_canonical=$request->url();
         $category=Category::all();
-        return view('layouts.login_checkout',compact('category'));
+        return view('layouts.login_checkout',compact('category','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
     public function add_customer(Request $request){
-        $data=array();
-        $data['customer_name']=$request->customer_name;
-        $data['customer_email']=$request->customer_email;
-        $data['customer_password']=md5($request->customer_password);
-        $data['customer_phone']=$request->customer_phone;
+        $data = $request->validate([
+            'customer_name' => 'required',
+            'customer_email' => 'required',
+            'customer_password' => 'required',
+            'customer_phone' => 'required',
+            'g-recaptcha-response' => new Captcha(), 	
+        ]);
+
+        $customer = new Customer();
+        $customer->customer_name = $data['customer_name'];
+        $customer->customer_email = $data['customer_email'];
+        $customer->customer_phone = $data['customer_phone'];
+        $customer->customer_password = md5($data['customer_password']);
         
-        $customer_id=Customer::insertGetId($data);
-        Session::put('customer_id',$customer_id);
+        $customer->save();
+        
+
+        Session::put('customer_id',$customer->customer_id);
         Session::put('customer_name',$request->customer_name);
         return redirect('/checkout');
     }
@@ -55,7 +71,8 @@ class CheckoutController extends Controller
         return redirect('/login_checkout');
     }
     public function login_customer(Request $request){
-        
+       
+
         $email=$request->email_account;
         $password=md5($request->password_account);
         $result=Customer::all()->where('customer_email',$email)->where('customer_password',$password)->first();
@@ -115,5 +132,6 @@ class CheckoutController extends Controller
     }
     public function manage_order(){
         return view('admin.manage_order');
-     }
+    }
+
 }

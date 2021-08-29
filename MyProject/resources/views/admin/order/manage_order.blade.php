@@ -2,7 +2,6 @@
 @section('content')
 	
 
-    <button class="btn btn-success" style="margin:10px;"><a style="color:#ffff;" href="{{route('account.create')}}">Thêm sản phẩm</a> </button>
     <p></p>
 		<div class="table-agile-info">
  <div class="panel panel-default">
@@ -35,7 +34,7 @@
                      <td>{{$data->order_total}}</td>
                      <td>{{$data->order_status}}</td>
                      <td>
-                         <a href="" class="btn btn-success"><i class='fa fa-edit'></i></a>
+                         <a href="{{url('/admin/view_order/'.$data->order_id)}}" class="btn btn-success"><i class='fa fa-edit'></i></a>
                          <a href="" class="btn btn-warning btndelete"><i class='fa fa-trash'></i></a>
                      </td>
           </tr>

@@ -115,9 +115,9 @@ class ProductController extends Controller
         
     
         if($product->update($request->all())){
-           return redirect()->route('product.index')->with('success','Cập nhật thành công');
+           return redirect()->route('product.index');
        }else{
-           return redirect()->route('product.index')->with('error','Cập nhật thất bại');
+           return redirect()->route('product.index');
        }
     }
 
@@ -130,6 +130,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
          $product->delete();
-            return redirect()->route('product.index')->with('success', 'Xoá thành công ');
+            return redirect()->route('product.index');
     }
 }
