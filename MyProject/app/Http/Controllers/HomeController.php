@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Mymodel;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Slider;
 use Cart;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +20,10 @@ class HomeController extends Controller
 
     	$product_nb=Product::all()->where('theloai','NB');
         $category=Category::all();
-    	return view('layouts.home',compact('product_nb','category','meta_desc','meta_keywords','meta_title','url_canonical'));
+        
+        $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
+       
+    	return view('layouts.home',compact('slider','product_nb','category','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
     public function login(){
         
@@ -31,6 +35,7 @@ class HomeController extends Controller
         $meta_title="Trang miêu tả, web bán hàng ";
         $url_canonical=$request->url();
         $category=Category::all();
+       
         return view('about',compact('category','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
     public function admin(){
@@ -42,19 +47,18 @@ class HomeController extends Controller
         return redirect()->route('home.cart');
     }
     public function shop(Request $request){
+        $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
         $meta_desc="Cửa hàng, nơi chứa thông tin toàn bộ sản phẩm";
         $meta_keywords="Cửa hàng lựa chọn mua bán các mặt hàng";
         $meta_title="Trang cửa hàng, web bán hàng ";
         $url_canonical=$request->url();
         $product=Product::all();
         $category=Category::all();
-        return view('livewire.shop-component',compact('category','product','meta_desc','meta_keywords','meta_title','url_canonical'));
+        return view('livewire.shop-component',compact('slider','category','product','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
-    public function cart(){
-        $category=Category::all();
-        return view('livewire.cart-component',compact('category'));
-    }
+   
     public function product_detail(Request $request,$id){
+        $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
         $meta_desc="Chi tiết sản phẩm trong cửa hàng";
         $meta_keywords="Chi tiết sản phẩm ";
         $meta_title="Trang chi tiết, web bán hàng ";
@@ -69,21 +73,28 @@ class HomeController extends Controller
         $item_recom =Product::all()->where('masp',$category_id)->whereNotIn('masp',$id);
       
 
-        return view('layouts.product_detail',compact('category','product_detail','item_recom','meta_desc','meta_keywords','meta_title','url_canonical'));
+        return view('layouts.product_detail',compact('slider','category','product_detail','item_recom','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
     public function search(Request $request){
+        $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
         $keywords=$request->keywords_submit;
         $category=Category::all();
-        //Loi 
-        $product_search=Product::all()->where('name','like','%'.$keywords.'%');
+
+        $meta_desc="Tìm kiếm các sản phẩm trong cửa hàng";
+        $meta_keywords="Liệt kê sản phẩm cần tìm";
+        $meta_title="Trang tìm kiếm, web bán hàng ";
+        $url_canonical=$request->url();
+        $product_search=DB::table('sanpham')->where('name','like','%'.$keywords.'%')->get();
         
 
        
-        return view('layouts.search',compact('category','product_search'));
+        return view('layouts.search',compact('slider','category','product_search','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
     public function show_category($find,Request $request){
-       
+        $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
+        $keywords=$request->keywords_submit;
         $category=Category::all();
+        
         $product=DB::table('sanpham')
         ->join('theloai','sanpham.masp','=','theloai.theloai')
         ->where('theloai.theloai','=',$find)->get();
@@ -96,7 +107,7 @@ class HomeController extends Controller
             $url_canonical=$request->url();
         }
         
-        return view('layouts.category_detail',compact('product','category','meta_desc','meta_keywords','meta_title','url_canonical'));
+        return view('layouts.category_detail',compact('slider','product','category','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
     
 }

@@ -6,6 +6,11 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
+use App\Imports\ExcelImports;
+use App\Exports\ExcelExports;
+use Excel;
+
+
 class ProductController extends Controller
 {
     /**
@@ -18,6 +23,17 @@ class ProductController extends Controller
         $data=Product::all();
         return view('admin.product.index',compact('data'));
     }
+    public function export_csv (){
+        return Excel::download(new ExcelExports , 'product.xlsx');
+    }
+    public function import_csv (Request $request){
+        $path = $request->file('file')->getRealPath();
+        Excel::import(new ExcelImports, $path);
+        return back();
+
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -59,7 +75,8 @@ class ProductController extends Controller
             'content'=>'required',
             'address'=>'required',
             'date'=>'required',
-            'tinhtrang'=>'required'
+            'tinhtrang'=>'required',
+            'quantity'=>'required'
         ]);
         if(Product::create($request->all())){
             return redirect()->route('product.index')->with('success','Thêm thành công ');
@@ -106,7 +123,7 @@ class ProductController extends Controller
             $ext=$request->file_img->extension();
             $file_name=time()."-Product".".".$ext;
            
-            $file->move(public_path('uploads'),$file_name);
+            $file->move(public_path('uploads/home'),$file_name);
            
            
 
@@ -132,4 +149,5 @@ class ProductController extends Controller
          $product->delete();
             return redirect()->route('product.index');
     }
+
 }

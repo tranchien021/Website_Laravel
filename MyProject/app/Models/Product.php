@@ -9,6 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     public $table="sanpham";
+	public $primaryKey='id';
     public $timestamps=false;
     protected $fillable=[
     	'content',
@@ -19,7 +20,10 @@ class Product extends Model
     	'name',
     	'img',
     	'masp',
-    	'tinhtrang'
+    	'tinhtrang',
+		'quantity',
+		'product_id',
+	
 
     ];
     public function cat(){

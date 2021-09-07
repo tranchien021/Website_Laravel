@@ -6,11 +6,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
 <head>
-<title>Visitors an Admin Panel Category Bootstrap Responsive Website Template | Login :: w3layouts</title>
+<title>Trang Đăng Ký, Admin </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<meta name="keywords" content="Đăng ký khi chưa có tài khoản" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- bootstrap-css -->
 <link rel="stylesheet" href="{{url('admin')}}/css/bootstrap.min.css" >
@@ -38,12 +37,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			
 			<input type="password" class="ggg" name="password" placeholder="PASSWORD" required="">
 			<input type="text" class="ggg" name="level" placeholder="LEVEL" required="">
-			<h4><input type="checkbox" />I agree to the Terms of Service and Privacy Policy</h4>
+			<h4><input type="checkbox" />Tôi đồng ý với các điều khoản</h4>
 			
 				<div class="clearfix"></div>
 				<input type="submit" value="submit" name="register">
 		</form>
-		<p>Already Registered.<a href="{{url('admin/login')}}">Login</a></p>
+		<p> Nếu có tài khoản .<a href="{{url('admin/login')}}"> Đăng Nhập</a></p>
 </div>
 </div>
 <script src="{{url('admin')}}/js/bootstrap.js"></script>

@@ -6,11 +6,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
 <head>
-<title>Visitors an Admin Panel Category Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<title>Trang Admin </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<meta name="keywords" content="Trang quản lí tất cả các thông tin" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- bootstrap-css -->
 <link rel="stylesheet" href="{{url('admin')}}/css/bootstrap.min.css" >
@@ -40,7 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--logo start-->
 <div class="brand">
     <a href="{{url('/admin/index')}}" class="logo">
-        VISITORS
+        Admin
     </a>
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>
@@ -234,7 +233,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="{{url('admin')}}/images/2.png">
+                <img alt="" src="{{url('admin')}}/images/minhchien.jpg">
                 <span class="username">
                 <?php 
                         $name=Session::get('Account_Name');
@@ -249,8 +248,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a href="#"><i class=" fa fa-suitcase"></i>Tài khoản</a></li>
+                <li><a href="#"><i class="fa fa-cog"></i> Cài đặt</a></li>
                 <li><a href="{{url('/admin/logout')}}"><i class="fa fa-key"></i>Đăng Xuất </a></li>
             </ul>
         </li>
@@ -280,17 +279,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Đơn hàng</span>
                     </a>
                     <ul class="sub">
-						<li><a href="{{url('/admin/order')}}">Quản lí đơn hàng</a></li>
-						<li><a href="glyphicon.html">glyphicon</a></li>
+						<li><a href="{{url('/admin/manage_order')}}">Quản lí đơn hàng</a></li>
+						<li><a href="glyphicon.html">Đơn hàng </a></li>
                         <li><a href="grids.html">Grids</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="fontawesome.html">
-                        <i class="fa fa-bullhorn"></i>
-                        <span>Font awesome </span>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-gift"></i>
+                        <span>Mã giảm giá </span>
                     </a>
+                    <ul class="sub">
+						<li><a href="{{url('/admin/list_coupon')}}">Danh sách mã </a></li>
+						<li><a href="{{url('/admin/insert_coupon')}}">Thêm mã giảm giá</a></li>
+                        <li><a href="grids.html">Grids</a></li>
+                    </ul>
                 </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-gift"></i>
+                        <span>Phí vận chuyển </span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{url('/admin/delivery')}}">Quản lí vận chuyển</a></li>
+                    </ul>
+                </li>
+                
+                
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-th"></i>
@@ -306,12 +322,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-tasks"></i>
-                        <span>Form Components</span>
+                        <span>Quản lí Slider </span>
                     </a>
                     <ul class="sub">
-                        <li><a href="form_component.html">Form Elements</a></li>
-                        <li><a href="form_validation.html">Form Validation</a></li>
-						<li><a href="dropzone.html">Dropzone</a></li>
+                        <li><a href="{{url('/admin/manage_slider')}}">Danh sách slider</a></li>
+                        <li><a href="{{url('/admin/add_slider')}}">Thêm slider </a></li>
+						
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -391,6 +407,151 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		  
 <!--main content end-->
 </section>
+<script>
+    $('.update_quantity_order').click(function(){
+      
+       var order_product_id=$(this).data('product_id');
+       var order_qty=$('.order_qty_'+order_product_id).val();
+       var order_code=$('.order_code').val();
+       var _token=$('input[name="_token"]').val();
+
+       $.ajax({
+            url:'{{url('/admin/update_quantity')}}',
+            method:'POST',
+            data:{_token:_token,order_product_id:order_product_id,order_qty:order_qty,order_code:order_code},
+            success:function(data){
+               alert('Thay đổi tình trạng thành công ');
+               location.reload();
+            }
+        });
+      
+    });
+</script>
+<script>
+    $('.order_details').change(function(){
+        var order_status=$(this).val();
+        var order_id=$(this).children(":selected").attr('id');
+        var _token=$('input[name="_token"]').val();
+
+        quantity=[];
+        $("input[name='product_sale_quantity']").each(function(){
+            quantity.push($(this).val());
+
+        });
+
+       
+        order_product_id=[];
+        $("input[name='order_product_id']").each(function(){
+            order_product_id.push($(this).val());
+
+        });
+        j=0;
+        for(i=0;i<order_product_id.length;i++){
+           var order_qty=$('.order_qty_'+order_product_id[i]).val();
+           var order_qty_storage=$('.order_qty_storage_'+order_product_id[i]).val();
+           if(parseInt(order_qty)>parseInt(order_qty_storage)){
+               j=j+1;
+                if(j==1){
+                    alert('Số lượng trong kho hàng không đủ');
+                }
+               $('.color_qty_'+order_product_id[i]).css('background','#000');
+            
+           }
+        }
+        if(j==0){
+           
+            $.ajax({
+                url:'{{url('/admin/update_order_quantity')}}',
+                method:'POST',
+                data:{_token:_token,order_status:order_status,order_id:order_id,quantity:quantity,order_product_id:order_product_id},
+                success:function(data){
+                alert('Cập nhật số lượng thành công ');
+                location.reload();
+                }
+            });
+
+        }
+       
+
+     
+
+    })
+</script>
+<script>
+        $(document).ready(function(){
+
+            fetch_delivery();
+
+            function fetch_delivery(){
+                var _token=$('input[name="_token"]').val();
+                $.ajax({
+                    url:'{{url('/admin/money_delivery')}}',
+                    method:'POST',
+                    data:{_token:_token},
+                    success:function(data){
+                        $('#load_delivery').html(data);
+                    }
+                });
+            }
+            $(document).on('blur','.mship_edit',function(){
+               
+                var mship_id=$(this).data('mship_id');
+                var mship_value=$(this).text();
+                var _token=$('input[name="_token"]').val();
+               
+               
+                $.ajax({
+                    url:'{{url('/admin/update_delivery')}}',
+                    method:'POST',
+                    data:{mship_id:mship_id,mship_value:mship_value,_token:_token},
+                    success:function(data){
+                        fetch_delivery();
+                    }
+                });
+            })
+            $('.add_delivery').click(function(){
+                var city=$('.city').val();
+                var province=$('.province').val();
+                var wards=$('.wards').val();
+                var money_ship=$('.money_ship').val();
+                var _token=$('input[name="_token"]').val();
+              
+                $.ajax({
+                    url:'{{url('/admin/insert_delivery')}}',
+                    method:'POST',
+                    data:{city:city,province:province,_token:_token,wards:wards,money_ship:money_ship},
+                    success:function(data){
+                        fetch_delivery();
+                    }
+                });
+               
+            });
+            $('.choose').on('change',function(){
+              
+                var action=$(this).attr('id');
+                var ma_id=$(this).val();
+                var _token=$('input[name="_token"]').val();
+                var result="";
+               
+                
+                if(action=='city'){
+                    result='province';
+                    
+                }else{
+                    result='wards';
+                }
+                $.ajax({
+                    url:'{{url('/admin/select_delivery')}}',
+                    method:'POST',
+                    data:{action:action,ma_id:ma_id,_token:_token},
+                    success:function(data){
+                        $('#'+result).html(data);
+                    }
+                });
+            });
+        })
+</script>
+
 <script src="{{url('admin')}}/js/bootstrap.js"></script>
 <script src="{{url('admin')}}/js/jquery.dcjqaccordion.2.7.js"></script>
 <script src="{{url('admin')}}/js/scripts.js"></script>
@@ -497,6 +658,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         })
     </script>
+   
 	<!-- //calendar -->
 </body>
 </html>

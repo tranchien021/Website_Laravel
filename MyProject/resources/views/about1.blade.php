@@ -69,10 +69,15 @@
 								
 								<?php 
 								$customer_id=Session::get('customer_id');
-									if($customer_id!=NULL){
+								$shipping_id=Session::get('shipping_id');
+								if($customer_id!=NULL && $shipping_id == NULL){
 								?>
 									<li><a href="{{url('/checkout')}}"><i class="fa fa-crosshairs"></i> Thanh Toán </a></li>
-								
+								<?php
+										
+									}elseif($customer_id!=NULL &&  $shipping_id!=NULL){
+								?>
+									<li><a href="{{url('/payment')}}"><i class="fa fa-crosshairs"></i> Thanh Toán </a></li>
 								<?php
 										
 									}else{
@@ -82,7 +87,7 @@
 									}
 								?>
 								
-								<li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i> Giỏ Hàng</a></li>
+								<li><a href="{{url('/giohang')}}"><i class="fa fa-shopping-cart"></i> Giỏ Hàng</a></li>
 								
 								<?php 
 								$customer_id=Session::get('customer_id');
@@ -148,7 +153,7 @@
 							@csrf
 							<div class="search_box pull-right">
 								<input type="text" name="keywords_submit" placeholder="Search"/>
-								<button class="btn btn-warning" type="submit" name="search_items">Tìm Kiếm </button>
+								<button class="btn" style="background:#FE980F; color:#fff;" type="submit" name="search_items">Tìm Kiếm </button>
 							</div>
 						</form>
 						
@@ -156,7 +161,7 @@
 				</div>
 			</div>
 		</div><!--/header-bottom-->
-	</header><!--/header-->
+</header><!--/header-->
 	
 	
 	
@@ -333,5 +338,151 @@
 	<script src="{{url('home')}}/js/price-range.js"></script>
     <script src="{{url('home')}}/js/jquery.prettyPhoto.js"></script>
     <script src="{{url('home')}}/js/main.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<div id="fb-root"></div>
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" nonce="b2fbiCpE"></script>
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>  
+	<script>
+			$(document).ready(function(){
+			$('.send_order').click(function(){
+				
+				swal({
+					title: "Xác nhận đơn hàng ?",
+					text: "Đơn hàng sẽ không hoàn trả khi đặt, xác nhận đơn hàng ? ",
+					icon: "warning",
+					buttons: true,
+					dangerMode: true,
+					})
+					.then((willDelete) => {
+					if (willDelete) {
+						
+
+						var shipping_email=$('.shipping_email').val()
+						var shipping_name=$('.shipping_name').val();
+						var shipping_address=$('.shipping_address').val();
+						var shipping_phone=$('.shipping_phone').val();
+						var shipping_notes=$('.shipping_notes').val();
+						var shipping_method=$('.select_payment').val();
+						var order_money=$('.order_money').val();
+						var order_coupon=$('.order_coupon').val();
+						var _token=$('input[name="_token"]').val();
+					
+						
+						$.ajax({
+							url: "{{url('/confirm_order')}}",
+							method: 'POST',
+							data:{shipping_email:shipping_email,shipping_name:shipping_name,shipping_address:shipping_address,shipping_method:shipping_method,
+								shipping_phone:shipping_phone,shipping_notes:shipping_notes,order_money:order_money,order_coupon:order_coupon,_token:_token},
+
+							success:function(data){
+								swal({
+									title: "Thành Công !",
+									text: "Đơn hàng đã được gửi !",
+									icon: "success",
+									button: "Thoát ",
+								});
+							}
+
+						});
+					window.setTimeout(function(){
+						location.reload();
+					}, 3000);
+
+					} else {
+						swal("Tiếp tục mua hàng !");
+					}
+				});
+
+			
+			});
+		});
+
+	</script>
+	
+	<script>
+		$(document).ready(function(){
+			$('.calculate_delivery').click(function(){
+				var matp=$('.city').val();
+				var maqh=$('.province').val();
+				var xaid=$('.wards').val();
+				var _token=$('input[name="_token"]').val();
+				
+				if(maqh =='' || xaid ==''){
+					alert('Làm ơn chọn để tính phí vận chuyển ');
+				}
+				else{
+					
+					$.ajax({
+						url:'{{url('/calculate_money')}}',
+						method:'POST',
+						data:{matp:matp,maqh:maqh,xaid:xaid,_token:_token},
+						success:function(){
+							location.reload();
+						}
+			  		});
+				}
+				
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function(){
+			$('.add-to-cart').click(function(){
+				var id=$(this).data('id_product');
+				var cart_product_id=$('.cart_product_id_'+id).val()
+				var cart_product_name=$('.cart_product_name_'+id).val();
+				var cart_product_img=$('.cart_product_img_'+id).val();
+				var cart_product_price=$('.cart_product_price_'+id).val();
+				var cart_product_qty=$('.cart_product_qty_'+id).val();
+				var _token=$('input[name="_token"]').val();
+				
+				$.ajax({
+					url: "{{url('/add-cart-ajax')}}",
+                    method: 'POST',
+                    data:{cart_product_id:cart_product_id,cart_product_name:cart_product_name,cart_product_img:cart_product_img,cart_product_price:cart_product_price,cart_product_qty:cart_product_qty,_token:_token},
+
+					success:function(data){
+						swal({
+							title: "Thành Công!",
+							text: "Click vào button để tiếp tục!",
+							icon: "success",
+							button: "Tiếp tục!",
+
+						});
+						
+					}
+
+				});
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function(){
+			$('.choose').on('change',function(){
+              
+			  var action=$(this).attr('id');
+			  var ma_id=$(this).val();
+			  var _token=$('input[name="_token"]').val();
+			  var result="";
+			 
+			  
+			  if(action=='city'){
+				  result='province';
+				  
+			  }else{
+				  result='wards';
+			  }
+			  $.ajax({
+				  url:'{{url('/delivery_home')}}',
+				  method:'POST',
+				  data:{action:action,ma_id:ma_id,_token:_token},
+				  success:function(data){
+					  $('#'+result).html(data);
+				  }
+			  });
+		  });
+		});
+	</script>
+	
 </body>
 </html>

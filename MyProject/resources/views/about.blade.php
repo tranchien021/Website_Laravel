@@ -39,7 +39,7 @@
 </head><!--/head-->
 
 <body>
-	<header id="header"><!--header-->
+<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
 				<div class="row">
@@ -83,15 +83,11 @@
 								
 								<?php 
 								$customer_id=Session::get('customer_id');
-								$shipping_id=Session::get('shipping_id');
-								if($customer_id!=NULL && $shipping_id == NULL){
+								// $shipping_id=Session::get('shipping_id')
+								if($customer_id!=NULL){
 								?>
 									<li><a href="{{url('/checkout')}}"><i class="fa fa-crosshairs"></i> Thanh Toán </a></li>
-								<?php
-										
-									}elseif($customer_id!=NULL &&  $shipping_id!=NULL){
-								?>
-									<li><a href="{{url('/payment')}}"><i class="fa fa-crosshairs"></i> Thanh Toán </a></li>
+								
 								<?php
 										
 									}else{
@@ -101,7 +97,7 @@
 									}
 								?>
 								
-								<li><a href="{{url('/cart')}}"><i class="fa fa-shopping-cart"></i> Giỏ Hàng</a></li>
+								<li><a href="{{url('/giohang')}}"><i class="fa fa-shopping-cart"></i> Giỏ Hàng</a></li>
 								
 								<?php 
 								$customer_id=Session::get('customer_id');
@@ -166,16 +162,16 @@
 						<form action="{{url('/search')}}" method="POST">
 							@csrf
 							<div class="search_box pull-right">
-								<input type="text" name="keywords_submit" placeholder="Search"/>
-								<button class="btn btn-warning" type="submit" name="search_items">Tìm Kiếm </button>
+								<input type="text" name="keywords_submit" placeholder="Tìm kiếm"/>
+								<button class="btn" style="background:#FE980F; color:#fff;" type="submit" name="search_items">Tìm Kiếm </button>
 							</div>
 						</form>
 						
 					</div>
 				</div>
 			</div>
-		</div><!--/header-bottom-->
-	</header><!--/header-->
+		</div>
+</header>
 	
 	<section id="slider"><!--slider-->
 		<div class="container">
@@ -189,43 +185,24 @@
 						</ol>
 						
 						<div class="carousel-inner">
-							<div class="item active">
-								<div class="col-sm-6">
-									<h1><span>E</span>-SHOPPER</h1>
-									<h2>Free E-Commerce Template</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-									<button type="button" class="btn btn-default get">Get it now</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="{{url('home')}}/images/home/girl1.jpg" class="girl img-responsive" alt="" />
-									<img src="{{url('home')}}/images/home/pricing.png"  class="pricing" alt="" />
-								</div>
-							</div>
-							<div class="item">
-								<div class="col-sm-6">
-									<h1><span>E</span>-SHOPPER</h1>
-									<h2>100% Responsive Design</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-									<button type="button" class="btn btn-default get">Get it now</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="{{url('home')}}/images/home/girl2.jpg" class="girl img-responsive" alt="" />
-									<img src="{{url('home')}}/images/home/pricing.png"  class="pricing" alt="" />
+							<?php
+								$i=0;
+							?>
+							@foreach($slider as $slider)
+							<?php
+								$i++;
+							?>
+							<div class="item {{$i==1 ? 'active':''}}">
+								
+								<div class="col-sm-12">
+									<img height="200" width="100%" src="{{url('uploads')}}/slider/{{$slider->slider_image}}" class="girl img-responsive" alt="{{$slider->slider_desc}}" />
+									
 								</div>
 							</div>
+							@endforeach
 							
-							<div class="item">
-								<div class="col-sm-6">
-									<h1><span>E</span>-SHOPPER</h1>
-									<h2>Free Ecommerce Template</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-									<button type="button" class="btn btn-default get">Get it now</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="{{url('home')}}/images/home/girl3.jpg" class="girl img-responsive" alt="" />
-									<img src="{{url('home')}}/images/home/pricing.png" class="pricing" alt="" />
-								</div>
-							</div>
+							
+						
 							
 						</div>
 						
@@ -298,7 +275,7 @@
 		</div>
 	</section>
 	
-	<footer id="footer"><!--Footer-->
+<footer id="footer"><!--Footer-->
 		<div class="footer-top">
 			<div class="container">
 				<div class="row">
@@ -464,9 +441,42 @@
 	<script src="{{url('home')}}/js/price-range.js"></script>
     <script src="{{url('home')}}/js/jquery.prettyPhoto.js"></script>
     <script src="{{url('home')}}/js/main.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<div id="fb-root"></div>
 	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" nonce="b2fbiCpE"></script>
 	<script src="https://www.google.com/recaptcha/api.js" async defer></script>  
+	<script>
+		$(document).ready(function(){
+			$('.add-to-cart').click(function(){
+				var id=$(this).data('id_product');
+				var cart_product_id=$('.cart_product_id_'+id).val()
+				var cart_product_name=$('.cart_product_name_'+id).val();
+				var cart_product_img=$('.cart_product_img_'+id).val();
+				var cart_product_price=$('.cart_product_price_'+id).val();
+				var cart_product_qty=$('.cart_product_qty_'+id).val();
+				var _token=$('input[name="_token"]').val();
+				
+				
+				$.ajax({
+					url: "{{url('/add-cart-ajax')}}",
+                    method: 'POST',
+                    data:{cart_product_id:cart_product_id,cart_product_name:cart_product_name,cart_product_img:cart_product_img,cart_product_price:cart_product_price,cart_product_qty:cart_product_qty,_token:_token},
+
+					success:function(data){
+						swal({
+							title: "Thành Công!",
+							text: "Click vào button để tiếp tục!",
+							icon: "success",
+							button: "Tiếp tục!",
+
+						});
+						
+					}
+
+				});
+			});
+		});
+	</script>
 	
 </body>
 </html>

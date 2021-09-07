@@ -20,9 +20,12 @@ class CartController extends Controller
     $data['price']=$product->price;
     $data['qty']=$quantity;
     $data['weight']='21';
+    $data['tax']=30000;
     $data['options']['img']=$product->img;
     Cart::add($data);
+    
     return redirect('/cart');
+    // Cart::destroy();
    
   }
   public function index(){
@@ -39,4 +42,90 @@ class CartController extends Controller
     return redirect('/cart');
   
   }
+  public function AddCart_Ajax(Request $request){
+    $data = $request->all();
+    $session_id = substr(md5(microtime()),rand(0,26),5);
+    $cart = Session::get('cart');
+    if($cart==true){
+        $is_avaiable = 0;
+        foreach($cart as $key => $val){
+            if($val['product_id']==$data['cart_product_id']){
+                $is_avaiable++;
+            }
+        }
+        if($is_avaiable == 0){
+            $cart[] = array(
+            'session_id' => $session_id,
+            'product_name' => $data['cart_product_name'],
+            'product_id' => $data['cart_product_id'],
+            'product_img' => $data['cart_product_img'],
+            'product_qty' => $data['cart_product_qty'],
+            'product_price' => $data['cart_product_price'],
+            );
+            Session::put('cart',$cart);
+        }
+    }else{
+        $cart[] = array(
+            'session_id' => $session_id,
+            'product_name' => $data['cart_product_name'],
+            'product_id' => $data['cart_product_id'],
+            'product_img' => $data['cart_product_img'],
+            'product_qty' => $data['cart_product_qty'],
+            'product_price' => $data['cart_product_price'],
+
+        );
+        Session::put('cart',$cart);
+    }
+   
+    Session::save();
+  }
+
+  public function giohang(){
+    return view('livewire.cart_ajax');
+  }
+  public function delete_cart_ajax($session_id){
+    $cart=Session::get('cart');
+    if($cart==true){
+      foreach($cart as $key => $value){
+        if($value['session_id']==$session_id){
+          unset($cart[$key]);
+        }
+      }
+      Session::put('cart',$cart);
+      return redirect()->back()->with('message','Xoá thành công');
+    }
+    else{
+      return redirect()-back()->with('message','Xoá thất bại');
+    }
+    
+  }
+  public function update_cart_ajax(Request $request){
+    $data=$request->all();
+    $cart=Session::get('cart');
+    if($cart==true){
+      foreach($data['cart_qty'] as $key => $qty){
+        foreach($cart as $session=>$val){
+          if($val['session_id']==$key){
+            $cart[$session]['product_qty']=$qty;
+          }
+        }
+      }
+      Session::put('cart',$cart);
+      return redirect()->back()->with('message','Cập nhật thành công');
+    }else{
+      return redirect()->back()->with('message','Cập nhật thất bại');
+    }
+    
+  }
+  public function delete_all_cart(){
+    $cart=Session::get('cart');
+    if($cart==true){
+      // Session::destroy();
+      Session::forget('cart');
+      Session::forget('coupon');
+      return redirect()->back()->with('message','Xoá tất cả thành công');
+    }
+  }
+  
+
 }

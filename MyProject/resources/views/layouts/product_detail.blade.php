@@ -2,12 +2,14 @@
 <!-- noi dung ben trong  -->
 @section('main')
 
+
+
 <div class="col-sm-9 padding-right">
 	@foreach($product_detail as $product_detail)
 					<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-								<img src="{{url('home')}}/images/product-details/1.jpg" alt="" />
+								<img src="{{url('uploads')}}/home/{{$product_detail->img}}" alt="" />
 								<h3>ZOOM</h3>
 							</div>
 							<div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -47,14 +49,21 @@
 								<img src="{{url('home')}}/images/product-details/new.jpg" class="newarrival" alt="" />
 								<h2>{{$product_detail->name}}</h2>
 								<p>Web ID: {{$product_detail->masp}}</p>
-								<form action="{{url('/save-cart')}}" method="POST">
-									{{ csrf_field() }}
+								<form>
+									@csrf
 									<span>
 										<span>{{number_format( $product_detail->price)}}</span>
 										<label>Số lượng :</label>
-										<input name="qty" type="text" value="3" />
-										<input name="product_hidden" type="hidden" value="{{$product_detail->id}}" />
-										<button type="submit" class="btn btn-fefault cart">
+
+										<input type="hidden"  value="{{$product_detail->id}}" class="cart_product_id_{{$product_detail->id}}">
+										<input type="hidden"  value="{{$product_detail->name}}" class="cart_product_name_{{$product_detail->id}}">
+										<input type="hidden"  value="{{$product_detail->img}}" class="cart_product_img_{{$product_detail->id}}">
+										<input type="hidden"  value="{{$product_detail->price}}" class="cart_product_price_{{$product_detail->id}}">
+										
+
+										<input  type="text" value="3" class="cart_product_qty_{{$product_detail->id}}" />
+										
+										<button type="button" class="btn btn-fefault add-to-cart" data-id_product="{{$product_detail->id}}">
 											<i class="fa fa-shopping-cart"></i>
 											Thêm giỏ hàng 
 										</button>
@@ -166,7 +175,7 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="{{url('home')}}/images/home/recommend1.jpg" alt="" />
+													<img src="{{url('home')}}/images/home/{{$item->img}}" alt="" />
 													<h2>{{number_format($item->price)}}</h2>
 													<p>{{$item->name}}</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>

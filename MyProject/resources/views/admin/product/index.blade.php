@@ -20,13 +20,14 @@
         <thead>
           <tr>
                     <th>Id </th>   
-                     <th>Name </th>
-                     <th>img </th>
-                     <th>masp </th>
-                     <th>theloai</th>
-                     <th>price</th>
-                     <th>content</th>
-                     <th>address</th>
+                     <th>Tên  </th>
+                     <th>Hình ảnh  </th>
+                     <th>Mã sản phẩm </th>
+                     <th>Số lượng</th>
+                     <th>Thể loại</th>
+                     <th>Giá sản phẩm</th>
+                     <th>Nội dung </th>
+                     <th>Địa chỉ</th>
                      <th>Tình Trạng</th>
                      <th>Function</th>
                      
@@ -38,9 +39,10 @@
           <td>{{$data->id}}</td>
                      <td>{{$data->name}}</td>
                      <td>
-                         <img width="80" src="{{url('/uploads')}}/{{$data->img}}" alt="Chưa có ảnh ">
+                         <img width="80" src="{{url('/uploads/home')}}/{{$data->img}}" alt="Chưa có ảnh ">
                      </td>
                      <td>{{$data->masp}}</td>
+                     <td>{{$data->quantity}}</td>
                      <td>{{$data->theloai}}</td>
                      <td>{{$data->price}}</td>
                      <td>{!!$data->content!!}</td>
@@ -67,6 +69,17 @@
          <form action="" method='POST' id="form-delete">
             @csrf @method('DELETE')
          </form>
+
+        <!-- import data -->
+      <form action="{{url('admin/import-csv')}}" method="POST" enctype="multipart/form-data">
+          @csrf
+        <input type="file" name="file" accept=".xlsx"><br>
+        <input type="submit" value="Import file Excel" name="import_csv" class="btn btn-warning">
+      </form>
+      <form action="{{url('admin/export-csv')}}" method="POST">
+          @csrf
+          <input type="submit" value="Export file Excel" name="export_csv" class="btn btn-success">
+      </form>
 
 
       

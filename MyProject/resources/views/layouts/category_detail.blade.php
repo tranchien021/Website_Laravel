@@ -7,42 +7,40 @@
 					<div class="fb-share-button" data-href="http://localhost:8080/LEARN_PHP/Laravel/MyProject/public/" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$url_canonical}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Sản phẩm thể loại</h2>
-					@foreach($product as $product)
-					
+						@foreach($product as $product)
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
+
 								<div class="single-products">
 									<div class="productinfo text-center">
-										<img src="{{url('home')}}/images//shop/product12.jpg" alt="" />
-										<h2>{{number_format($product->price)}}</h2>
-										<p>{{$product->name}}</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-									</div>
-									<div class="product-overlay">
-									<form action="/save-cart" method="POST">
-									@csrf
-										<div class="overlay-content">
-											<input name="qty" type="hidden" value="1" />
-											<input name="product_hidden" type="hidden" value="{{$product->id}}" />
+										<form>
+										@csrf
+										<input type="hidden"  value="{{$product->id}}" class="cart_product_id_{{$product->id}}">
+										<input type="hidden"  value="{{$product->name}}" class="cart_product_name_{{$product->id}}">
+										<input type="hidden"  value="{{$product->img}}" class="cart_product_img_{{$product->id}}">
+										<input type="hidden"  value="{{$product->price}}" class="cart_product_price_{{$product->id}}">
+										<input type="hidden"  value="1" class="cart_product_qty_{{$product->id}}">
+										<a href="{{url('/product_detail/'.$product->id)}}">
+											<img src="{{url('uploads')}}/home/{{$product->img}}" alt="" />
 											<h2>{{number_format($product->price)}}</h2>
-											<a class="btn btn-default" href="{{url('/product_detail/'.$product->id)}}">Chi tiết sản phẩm</a>
 											<p>{{$product->name}}</p>
-											<button type="submit"  class="btn btn-default add-to-cart">Add to cart</button>
+										</a>
+										<button type="button" data-id_product="{{$product->id}}"  class="btn btn-default add-to-cart">Thêm vào giỏ hàng</button>
+										</form>
 										
-										</div>
-									</form>
 										
 									</div>
+									
 								</div>
 								<div class="choose">
 									<ul class="nav nav-pills nav-justified">
-										<li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-										<li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
+										<li><a href=""><i class="fa fa-plus-square"></i>Yêu thích</a></li>
+										<li><a href=""><i class="fa fa-plus-square"></i>So sánh</a></li>
 									</ul>
 								</div>
 							</div>
 						</div>
-					@endforeach				
+						@endforeach
 						
 						
 					</div>

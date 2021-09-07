@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
+use App\Imports\CategoryImport;
+use App\Exports\CategoryExport;
+use Excel;
+
 class CategoryController extends Controller
 {
     /**
@@ -16,6 +20,15 @@ class CategoryController extends Controller
     {
         $data=Category::all();
         return view('admin.category.index',compact('data'));
+    }
+    public function export_csv (){
+        return Excel::download(new CategoryExport , 'category.xlsx');
+    }
+    public function import_csv (Request $request){
+        $path = $request->file('file')->getRealPath();
+        Excel::import(new CategoryImport, $path);
+        return back();
+
     }
 
     /**

@@ -6,11 +6,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
 <head>
-<title>Visitors an Admin Panel Category Bootstrap Responsive Website Template | Login :: w3layouts</title>
+<title>Trang Đăng nhập, Admin</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<meta name="keywords" content="Đăng nhập vào trang admin " />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- bootstrap-css -->
 <link rel="stylesheet" href="{{url('admin')}}/css/bootstrap.min.css" >
@@ -30,7 +29,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <div class="log-w3">
 <div class="w3layouts-main">
-	<h2>Đăng NhậP </h2>
+	<h2>Đăng Nhập </h2>
     <?php 
 		$message=Session::get('message');
 		if($message){
@@ -42,7 +41,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             {{ csrf_field() }}
 			<input type="text" class="ggg" name="email" placeholder="E-MAIL" required="">
 			<input type="password" class="ggg" name="password" placeholder="PASSWORD" required="">
-			<span><input type="checkbox" />Remember Me</span>
+			<span><input type="checkbox" />Ghi nhớ</span>
 			<h6><a href="#">Quên mật khẩu ?</a></h6>
 				<div class="clearfix"></div>
 				<input type="submit" value="Sign In" name="login">

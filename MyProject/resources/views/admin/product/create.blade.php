@@ -48,6 +48,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group ">
+                                        <label for="curl" class="control-label col-lg-3"> Số lượng </label>
+                                        <div class="col-lg-6">
+                                           <input  class="form-control" type="text" name="quantity" placeholder="Số lượng">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
                                         <label for="curl" class="control-label col-lg-3">Giá sản phẩm </label>
                                         <div class="col-lg-6">
                                           <input  class="form-control" type="number" name="price" placeholder="Price ">

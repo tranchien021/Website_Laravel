@@ -17,6 +17,8 @@
           <option value="{{$cat->theloai}}">{{$cat->Tên}}</option>
           @endforeach
         </select>
+        <label for="">Số lượng</label>
+        <input type="text" name="quantity" placeholder="Số lượng" value="{{$product->quantity}}"><br>
         <label for="">Price</label>
         <input type="number" name="price" placeholder="The Loai" value="{{$product->price}}"><br>
         <label for="">Content</label>

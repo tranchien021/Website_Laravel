@@ -56,6 +56,17 @@
             @csrf @method('DELETE')
          </form>
 
+             <!-- import data -->
+      <form action="{{url('admin/import_csv_category')}}" method="POST" enctype="multipart/form-data">
+          @csrf
+        <input type="file" name="file" accept=".xlsx"><br>
+        <input type="submit" value="Import file Excel" name="import_csv" class="btn btn-warning">
+      </form>
+      <form action="{{url('admin/export_csv_category')}}" method="POST">
+          @csrf
+          <input type="submit" value="Export file Excel" name="export_csv" class="btn btn-success">
+      </form>
+
    
 
 
