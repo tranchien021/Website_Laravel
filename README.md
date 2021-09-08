@@ -9,8 +9,12 @@ Các công đoạn hoàn thành:
 + Cart (CRUD)
 + Thiết kế Layout 
 + Thiết kế trang Admin (Dashboard)
-+ Search(50%)
++ Search
 + Meta SEO
 + Like , Share ,Comment Facebook (Trên serve)
 + Login with Google , Facebook 
 + Order Shipping
++ Coupon 
++ MoneyShip
++ Order_detail update
++ Banner (show,hide,add,edit,delete)
