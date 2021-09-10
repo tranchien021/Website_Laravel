@@ -18,3 +18,7 @@ Các công đoạn hoàn thành:
 + MoneyShip
 + Order_detail update
 + Banner (show,hide,add,edit,delete)
++  Export, Import data ra excel 
++  Xuất Đơn hàng bằng pdf
++  Đâng Nhập bằng authentication 
++  Phẩn quyền roles
