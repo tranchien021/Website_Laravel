@@ -10,9 +10,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Trang quản lí tất cả các thông tin" />
+<meta name="csrf-token" content="{{csrf_token()}}">
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- bootstrap-css -->
+
 <link rel="stylesheet" href="{{url('admin')}}/css/bootstrap.min.css" >
+<link rel="stylesheet" href="{{url('admin')}}/css/bootstrap-tagsinput.css" >
 <!-- //bootstrap-css -->
 <!-- Custom CSS -->
 <link href="{{url('admin')}}/css/style.css" rel='stylesheet' type='text/css' />
@@ -25,11 +28,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link rel="stylesheet" href="{{url('admin')}}/css/morris.css" type="text/css"/>
 <!-- calendar -->
 <link rel="stylesheet" href="{{url('admin')}}/css/monthly.css">
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css">
+
 <!-- //calendar -->
 <!-- //font-awesome icons -->
 <script src="{{url('admin')}}/js/jquery2.0.3.min.js"></script>
 <script src="{{url('admin')}}/js/raphael-min.js"></script>
 <script src="{{url('admin')}}/js/morris.js"></script>
+
+<script src="//cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
+
+<script src="{{url('admin')}}/js/bootstrap-tagsinput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+
 @yield('js')
 </head>
 <body>
@@ -46,184 +59,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </div>
 </div>
 <!--logo end-->
-<div class="nav notify-row" id="top_menu">
-    <!--  notification start -->
-    <ul class="nav top-menu">
-        <!-- settings start -->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-tasks"></i>
-                <span class="badge bg-success">8</span>
-            </a>
-            <ul class="dropdown-menu extended tasks-bar">
-                <li>
-                    <p class="">You have 8 pending tasks</p>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Target Sell</h5>
-                                <p>25% , Deadline  12 June’13</p>
-                            </div>
-                                    <span class="notification-pie-chart pull-right" data-percent="45">
-                            <span class="percent"></span>
-                            </span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Product Delivery</h5>
-                                <p>45% , Deadline  12 June’13</p>
-                            </div>
-                                    <span class="notification-pie-chart pull-right" data-percent="78">
-                            <span class="percent"></span>
-                            </span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Payment collection</h5>
-                                <p>87% , Deadline  12 June’13</p>
-                            </div>
-                                    <span class="notification-pie-chart pull-right" data-percent="60">
-                            <span class="percent"></span>
-                            </span>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="task-info clearfix">
-                            <div class="desc pull-left">
-                                <h5>Target Sell</h5>
-                                <p>33% , Deadline  12 June’13</p>
-                            </div>
-                                    <span class="notification-pie-chart pull-right" data-percent="90">
-                            <span class="percent"></span>
-                            </span>
-                        </div>
-                    </a>
-                </li>
 
-                <li class="external">
-                    <a href="#">See All Tasks</a>
-                </li>
-            </ul>
-        </li>
-        <!-- settings end -->
-        <!-- inbox dropdown start-->
-        <li id="header_inbox_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="fa fa-envelope-o"></i>
-                <span class="badge bg-important">4</span>
-            </a>
-            <ul class="dropdown-menu extended inbox">
-                <li>
-                    <p class="red">You have 4 Mails</p>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="{{url('admin')}}/images/3.png"></span>
-                                <span class="subject">
-                                <span class="from">Jonathan Smith</span>
-                                <span class="time">Just now</span>
-                                </span>
-                                <span class="message">
-                                    Hello, this is an example msg.
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="{{url('admin')}}/images/1.png"></span>
-                                <span class="subject">
-                                <span class="from">Jane Doe</span>
-                                <span class="time">2 min ago</span>
-                                </span>
-                                <span class="message">
-                                    Nice admin template
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="{{url('admin')}}/images/3.png"></span>
-                                <span class="subject">
-                                <span class="from">Tasi sam</span>
-                                <span class="time">2 days ago</span>
-                                </span>
-                                <span class="message">
-                                    This is an example msg.
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="photo"><img alt="avatar" src="{{url('admin')}}/images/2.png"></span>
-                                <span class="subject">
-                                <span class="from">Mr. Perfect</span>
-                                <span class="time">2 hour ago</span>
-                                </span>
-                                <span class="message">
-                                    Hi there, its a test
-                                </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">See all messages</a>
-                </li>
-            </ul>
-        </li>
-        <!-- inbox dropdown end -->
-        <!-- notification dropdown start-->
-        <li id="header_notification_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-
-                <i class="fa fa-bell-o"></i>
-                <span class="badge bg-warning">3</span>
-            </a>
-            <ul class="dropdown-menu extended notification">
-                <li>
-                    <p>Notifications</p>
-                </li>
-                <li>
-                    <div class="alert alert-info clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #1 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-danger clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #2 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="alert alert-success clearfix">
-                        <span class="alert-icon"><i class="fa fa-bolt"></i></span>
-                        <div class="noti-info">
-                            <a href="#"> Server #3 overloaded.</a>
-                        </div>
-                    </div>
-                </li>
-
-            </ul>
-        </li>
-        <!-- notification dropdown end -->
-    </ul>
-    <!--  notification end -->
-</div>
 <div class="top-nav clearfix">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
@@ -236,7 +72,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <img alt="" src="{{url('admin')}}/images/minhchien.jpg">
                 <span class="username">
                 <?php 
-                        $name=Session::get('Account_Name');
+                        $name=Auth::user()->name;
                         if($name){
                             echo $name;
                             
@@ -250,7 +86,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <ul class="dropdown-menu extended logout">
                 <li><a href="#"><i class=" fa fa-suitcase"></i>Tài khoản</a></li>
                 <li><a href="#"><i class="fa fa-cog"></i> Cài đặt</a></li>
-                <li><a href="{{url('/admin/logout')}}"><i class="fa fa-key"></i>Đăng Xuất </a></li>
+                <li><a href="{{url('/admin/logout_auth')}}"><i class="fa fa-key"></i>Đăng Xuất </a></li>
+                @impersonate
+                <li><a href="{{url('/admin/change_login_destroy')}}"><i class="fa fa-stop-circle"></i>Dừng chuyển quyền </a></li>
+                @endimpersonate
             </ul>
         </li>
         <!-- user login dropdown end -->
@@ -313,11 +152,45 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <span>Bảng dữ liệu</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="{{url('admin/account')}}">Bảng tài khoản</a></li>
-                        <li><a href="{{url('admin/product')}}">Bảng sản phẩm</a></li>
-                        <li><a href="{{url('admin/category')}}">Bảng thể loại</a></li>
+                        <li><a href="{{url('admin/list_customer')}}">Bảng khách hàng</a></li>
+                        <li >
+                            <a href="{{url('admin/list_product')}}"> Bảng sản phẩm </a>
+                           
+                           
+                        </li>
+                        <li><a href="{{url('admin/list_category')}}">Bảng thể loại</a></li>
+                        <li><a href="{{url('admin/list_brand')}}">Bảng danh mục </a></li>
+                        <li><a href="{{url('admin/list_blog')}}">Bảng bài viết </a></li>
                         <li><a href="responsive_table.html">Responsive Table</a></li>
                     </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-tasks"></i>
+                        <span>Bình luận  </span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="{{url('/admin/comment')}}">Liệt kê bình luận </a></li>
+                        
+						
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-tasks"></i>
+                        <span>Quản lí bài viết  </span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="{{url('/admin/list_category_blog')}}">Thể loại bài viết </a></li>
+                        <li><a href="{{url('/admin/list_blog')}}">Danh sách bài viết  </a></li>
+						
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="{{url('/admin/information')}}">
+                        <i class="fa fa-tasks"></i>
+                        <span>Thông tin website  </span>
+                    </a>
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
@@ -332,14 +205,44 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
-                        <i class="fa fa-envelope"></i>
-                        <span>Mail </span>
+                        <i class="fa fa-tasks"></i>
+                        <span>Quản lí Video </span>
                     </a>
                     <ul class="sub">
-                        <li><a href="mail.html">Inbox</a></li>
-                        <li><a href="mail_compose.html">Compose Mail</a></li>
+                        <li><a href="{{url('/admin/video')}}">Danh sách Video</a></li>
+                        <li><a href="">Thêm slider </a></li>
+						
                     </ul>
                 </li>
+                
+                @hasrole(['admin','author'])
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-envelope"></i>
+                        <span>Phân quyền  </span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="{{url('/admin/user_auth')}}"> Danh sách tài khoản admin </a></li>
+                        <li><a href="{{url('/admin/create_user_auth')}}"> Tạo tài khoản admin </a></li>
+                       
+                    </ul>
+                    
+                </li>
+                @endhasrole
+
+                @impersonate
+               
+               
+                <li class="sub-menu">
+                    <a href="{{url('/admin/change_login_destroy')}}">
+                        <i class="fa fa-stop-circle"></i>
+                        <span> Dừng chuyển quyền</span>
+                    </a>
+                   
+                   
+                </li>
+                @endimpersonate
+
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class=" fa fa-bar-chart-o"></i>
@@ -394,7 +297,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
  <!-- footer -->
 		  <div class="footer">
 			<div class="wthree-copyright">
-			  <p>© 2017 Visitors. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+			  <p>© Thiết kế bởi  <a href="">Minh Chiến </a></p>
 			</div>
 		  </div>
   <!-- / footer -->
@@ -407,6 +310,120 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		  
 <!--main content end-->
 </section>
+<script>
+    $(document).ready(function(){
+        $('#brand_order').sortable({
+            placeholder:'ui-state-highlight',
+            update:function(event,ui){
+                var page_id_array=new Array();
+               
+                $('#brand_order tr').each(function(){
+                    page_id_array.push($(this).attr('id'));
+                });
+                $.ajax({
+                    url:'{{url('/arrange_brand')}}',
+                    method:'POST',
+                    headers:{
+                    'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{page_id_array:page_id_array},
+                    success:function(data){
+                        alert(data);
+                    }
+                })
+
+            }
+        });
+    });
+</script>
+
+<script>
+   $('.comment_access_btn').click(function(){
+        var comment_status=$(this).data('comment_status');
+        var comment_id=$(this).data('comment_id');
+        var comment_product_id=$(this).attr('id');
+        if(comment_status==0){
+            var alert='Duyệt thành công';
+        }else{
+            var alert='Bỏ duyệt bình luận';
+        }
+        $.ajax({
+            url:'{{url('/admin/allow_comment')}}',
+            method:'POST',
+            headers:{
+                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            },
+            data:{comment_status:comment_status,comment_id:comment_id,comment_product_id:comment_product_id},
+            success:function(data){
+                location.reload();
+              $('#notify_comment').html('<span class="text text-alert">'+alert+'</span>');
+             
+            }
+        });
+        
+
+   });
+   $('.btn-reply-comment').click(function(){
+        var comment_id=$(this).data('comment_id');
+
+        var comment=$('.reply_comment_'+comment_id).val();
+        
+        var comment_product_id=$(this).data('product_id');
+      
+        
+        $.ajax({
+            url:'{{url('/admin/reply_comment')}}',
+            method:'POST',
+            headers:{
+                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            },
+            data:{comment:comment,comment_id:comment_id,comment_product_id:comment_product_id},
+            success:function(data){
+                location.reload();
+              $('.reply_comment_'+comment_id).val('');
+              $('#notify_comment').html('<span class="text text-alert">Trả lời bình luận thành công </span>');
+              
+             
+            }
+        });
+        
+
+   });
+</script>
+
+<script>
+       function ChangeToSlug()
+        {
+            var slug;
+         
+            //Lấy text từ thẻ input title 
+            slug = document.getElementById("slug").value;
+            slug = slug.toLowerCase();
+            //Đổi ký tự có dấu thành không dấu
+                slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+                slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+                slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+                slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+                slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+                slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+                slug = slug.replace(/đ/gi, 'd');
+                //Xóa các ký tự đặt biệt
+                slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+                //Đổi khoảng trắng thành ký tự gạch ngang
+                slug = slug.replace(/ /gi, "-");
+                //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+                //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+                slug = slug.replace(/\-\-\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-\-/gi, '-');
+                slug = slug.replace(/\-\-/gi, '-');
+                //Xóa các ký tự gạch ngang ở đầu và cuối
+                slug = '@' + slug + '@';
+                slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+                //In slug ra textbox có id “slug”
+            document.getElementById('convert_slug').value = slug;
+        }
+</script>
 <script>
     $('.update_quantity_order').click(function(){
       
@@ -559,6 +576,265 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="{{url('admin')}}/js/jquery.nicescroll.js"></script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <script src="{{url('admin')}}/js/jquery.scrollTo.js"></script>
+<script src="{{url('ckeditor')}}/ckeditor.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+</script>
+
+<script>
+    $(document).ready(function(){
+        load_video();
+        function load_video(){
+            $.ajax({
+            url:'{{url('/admin/select_video')}}',
+            method:"POST",
+            headers:{
+                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            },
+            success:function(data){
+              
+                    $('#video_load').html(data);
+                }       
+            });
+        }
+        $(document).on('click','.btn_add_video',function(){
+            var video_title=$('.video_title').val();
+            var video_slug=$('.video_slug').val();
+            var video_desc=$('.video_desc').val();
+            var video_link=$('.video_link').val();
+        
+
+            var form_data=new FormData();
+
+            form_data.append("file",document.getElementById('file_img_video').files[0]);
+            form_data.append("video_title",video_title);
+            form_data.append("video_slug",video_slug);
+            form_data.append("video_desc",video_desc);
+            form_data.append("video_link",video_link);
+         
+          
+                $.ajax({
+                    url:'{{url('/admin/create_video')}}',
+                    method:"POST",
+                    headers:{
+                        'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:form_data,
+                    contentType:false,
+                    cache:false,
+                    processData:false,
+                    success:function(data){
+                        load_video();
+                        $('#notify').html('<span class="text text-success">Thêm video thành công</span>');
+                    }
+                });
+        });
+        $(document).on('blur','.video_edit',function(){
+            var video_type=$(this).data('video_type');
+            var video_id=$(this).data('video_id');
+          
+          
+            if(video_type=='video_title'){
+                var video_edit=$('#'+video_type+'_'+video_id).text();
+            
+                var video_check=video_type;
+               
+            }else if(video_type=='video_desc'){
+                var video_edit=$('#'+video_type+'_'+video_id).text();
+             
+                var video_check=video_type;
+            }else if(video_type=='video_link'){
+                var video_edit=$('#'+video_type+'_'+video_id).text();
+             
+                var video_check=video_type;
+            }else{
+                var video_edit=$('#'+video_type+'_'+video_id).text();
+             
+                var video_check=video_type;
+            }
+            
+            $.ajax({
+                url:'{{url('/admin/update_video')}}',
+                method:"POST",
+                headers:{
+                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            },
+                data:{video_check:video_check,video_id:video_id,video_edit:video_edit},
+                success:function(data){
+                    load_video();
+                   alert('Cập nhật thành công ');
+                }
+            });
+         
+        });
+        $(document).on('change','.file_img_video',function(){
+           var video_id=$(this).data('video_id');
+           var image=document.getElementById('file-video-'+video_id).files[0];
+           
+           var form_data=new FormData();
+           form_data.append("file",document.getElementById('file-video-'+video_id).files[0]);
+           form_data.append("video_id",video_id);
+
+            $.ajax({
+                url:'{{url('/admin/update_video_image')}}',
+                method:"POST",
+                headers:{
+                    'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+                },
+                data:form_data,
+                contentType:false,
+                cache:false,
+                processData:false,
+                success:function(data){
+                    load_video();
+                    $('#notify').html('<span class="text-danger">Cập nhật ảnh thành công</span>');
+                }
+            });
+              
+        });
+        $(document).on('click','.btn_delete_video',function(){
+        var video_id=$(this).data('video_id');
+        if(confirm('Bạn có muốn xoá video không ?')){
+            $.ajax({
+                url:'{{url('/admin/delete_video')}}',
+                method:"POST",
+                headers:{
+                    'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+                },
+                data:{video_id:video_id},
+                success:function(data){
+                    load_video();
+                   $('#notify').html('<span class="text-success">Xoá video thành công</span>');
+                }
+            });
+        }
+       
+    });
+
+
+
+    });
+  
+    
+         
+   
+
+</script>
+<script>
+    $(document).ready(function(){
+        load_gallery();
+        function load_gallery(){
+            var pro_id=$('.pro_id').val();
+            var _token=$('input[name="_token"]').val();
+            
+            $.ajax({
+                url:'{{url('/admin/select_gallery')}}',
+                method:"POST",
+                data:{pro_id:pro_id,_token:_token},
+                success:function(data){
+                   $('#gallery_load').html(data);
+                }
+            });
+        }
+
+        $("#file").change(function(){
+            var erorr='';
+            var files=$('#file')[0].files;
+            if(files.length>5){
+                erorr+='<p>Chọn tối đa 5 ảnh </p>';
+            }else if(files.length==''){
+                erorr+='<p>Không được bỏ trống file ảnh </p>';
+            }else if(files.size>2000000){
+                erorr+='<p>File ảnh không được lớn hơn 2MB</p>';
+            }
+            if(erorr==''){
+                
+            }else{
+                $('#file').val('');
+                $('#error_gallery').html('<span class="text-danger">'+erorr+'</span>');
+                return false;
+            }
+
+        });
+        $(document).on('blur','.edit_gallery_name',function(){
+           var gal_id=$(this).data('gal_id');
+           var gal_text=$(this).text();
+           var _token=$('input[name="_token"]').val();
+        
+              
+           $.ajax({
+                url:'{{url('/admin/update_gallery')}}',
+                method:"POST",
+                data:{gal_id:gal_id,_token:_token,gal_text:gal_text},
+                success:function(data){
+                    load_gallery();
+                    $('#error_gallery').html('<span class="text-danger">Cập nhật tên thành công</span>');
+                }
+            });
+        });
+        $(document).on('click','.delete_gallery',function(){
+           var gal_id=$(this).data('gal_id');
+           var _token=$('input[name="_token"]').val();
+         
+           if(confirm('Bạn có muốn xoá không ? ')){
+                $.ajax({
+                    url:'{{url('/admin/delete_gallery')}}',
+                    method:"POST",
+                    data:{gal_id:gal_id,_token:_token},
+                    success:function(data){
+                        load_gallery();
+                        $('#error_gallery').html('<span class="text-danger">Xoá thành công</span>');
+                    }
+                });
+           }    
+             
+              
+          
+        });
+
+        $(document).on('change','.file_image',function(){
+           var gal_id=$(this).data('gal_id');
+           var image=document.getElementById('file-'+gal_id).files[0];
+           
+           var form_data=new FormData();
+           form_data.append("file",document.getElementById('file-'+gal_id).files[0]);
+           form_data.append("gal_id",gal_id);
+
+                $.ajax({
+                    url:'{{url('/admin/update_gallery_image')}}',
+                    method:"POST",
+                    headers:{
+                        'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:form_data,
+                    contentType:false,
+                    cache:false,
+                    processData:false,
+                    success:function(data){
+                        load_gallery();
+                        $('#error_gallery').html('<span class="text-danger">Cập nhật ảnh thành công</span>');
+                    }
+                });
+              
+             
+        });
+    });
+</script>
+
+<script>
+    // Chỉ dùng cho textarea ko dùng cho input 
+    CKEDITOR.replace('ckeditor_blog_content');
+    CKEDITOR.replace('edit_blog_content');
+    CKEDITOR.replace('ckeditor_product_content');
+    CKEDITOR.replace('ckeditor_edit_product_content');
+    CKEDITOR.replace('ckeditor_video_content');
+    CKEDITOR.replace('ckeditor_infor_content');
+    
+ 
+
+</script>
 <!-- morris JavaScript -->	
 <script>
 	$(document).ready(function() {

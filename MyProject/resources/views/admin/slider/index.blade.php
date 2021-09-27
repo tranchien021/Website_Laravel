@@ -19,7 +19,7 @@
      Danh sách slide
     </div>
     <div>
-      <table class="table" ui-jq="footable" ui-options='{
+      <table  id="myTable" class="table" ui-jq="footable" ui-options='{
         "paging": {
           "enabled": true
         },

@@ -7,6 +7,11 @@ use App\Models\Mymodel;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Slider;
+use App\Models\Brand;
+use App\Models\CategoryBlog;
+use App\Models\Gallery;
+use App\Models\Rating;
+
 use Cart;
 use Illuminate\Support\Facades\DB;
 
@@ -17,13 +22,16 @@ class HomeController extends Controller
         $meta_keywords="Trang web bán hàng, web bán hàng";
         $meta_title="Trang chủ, web bán hàng ";
         $url_canonical=$request->url();
-
-    	$product_nb=Product::all()->where('theloai','NB');
+        
+    	$product_nb=Product::orderBy('price','DESC')->take(6)->get();
         $category=Category::all();
+        $brand=Brand::where('brand_status',1)->orderBy('brand_parent','DESC')->orderBy('brand_order','ASC')->get();
+        $category_blog=CategoryBlog::all();
+        
         
         $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
        
-    	return view('layouts.home',compact('slider','product_nb','category','meta_desc','meta_keywords','meta_title','url_canonical'));
+    	return view('layouts.home',compact('category_blog','brand','slider','product_nb','category','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
     public function login(){
         
@@ -35,8 +43,10 @@ class HomeController extends Controller
         $meta_title="Trang miêu tả, web bán hàng ";
         $url_canonical=$request->url();
         $category=Category::all();
+        $brand=Brand::where('brand_status',1)->orderBy('brand_parent','DESC')->orderBy('brand_order','ASC')->get();
+        $category_blog=CategoryBlog::all();
        
-        return view('about',compact('category','meta_desc','meta_keywords','meta_title','url_canonical'));
+        return view('about',compact('category_blog','brand','category','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
     public function admin(){
         return view('admin.dashboard');
@@ -52,52 +62,77 @@ class HomeController extends Controller
         $meta_keywords="Cửa hàng lựa chọn mua bán các mặt hàng";
         $meta_title="Trang cửa hàng, web bán hàng ";
         $url_canonical=$request->url();
-        $product=Product::all();
+        $products=Product::orderBy('id','ASC')->paginate(6);
         $category=Category::all();
-        return view('livewire.shop-component',compact('slider','category','product','meta_desc','meta_keywords','meta_title','url_canonical'));
+   
+        $brand=Brand::where('brand_status',1)->orderBy('brand_parent','DESC')->orderBy('brand_order','ASC')->get();
+        $category_blog=CategoryBlog::all();
+        return view('livewire.shop-component',compact('category_blog','brand','slider','category','products','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
    
     public function product_detail(Request $request,$id){
         $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
+
         $meta_desc="Chi tiết sản phẩm trong cửa hàng";
         $meta_keywords="Chi tiết sản phẩm ";
         $meta_title="Trang chi tiết, web bán hàng ";
         $url_canonical=$request->url();
-        $product_detail=Product::all()->where('id',$id);
-        $category=Category::all();
-        foreach($product_detail as $key => $value){
-            $category_id=$value->masp;
-        }
-       
-    
-        $item_recom =Product::all()->where('masp',$category_id)->whereNotIn('masp',$id);
-      
 
-        return view('layouts.product_detail',compact('slider','category','product_detail','item_recom','meta_desc','meta_keywords','meta_title','url_canonical'));
+        $brand=Brand::where('brand_status',1)->orderBy('brand_parent','DESC')->orderBy('brand_order','ASC')->get();
+
+        $category=Category::all();
+
+        $category_blog=CategoryBlog::all();
+
+        $product_detail=Product::all()->where('id',$id);
+
+        foreach($product_detail as $key => $value){
+            $category_name=$value->masp;
+            $product_id=$value->id;
+            $product_cate=$value->masp;
+        }
+        
+        $gallery=Gallery::where('id',$product_id)->get();
+     
+        $item_recom=Product::all()->where('masp',$category_name)->whereNotIn('masp',$id);
+        $rating=Rating::where('product_id',$product_id)->avg('rating');
+        $rating=round($rating);
+
+        return view('layouts.product_detail',compact('rating','product_cate','gallery','category_blog','brand','slider','category','product_detail','item_recom','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
     public function search(Request $request){
         $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
         $keywords=$request->keywords_submit;
         $category=Category::all();
+        $brand=Brand::where('brand_status',1)->orderBy('brand_parent','DESC')->orderBy('brand_order','ASC')->get();
 
         $meta_desc="Tìm kiếm các sản phẩm trong cửa hàng";
         $meta_keywords="Liệt kê sản phẩm cần tìm";
         $meta_title="Trang tìm kiếm, web bán hàng ";
         $url_canonical=$request->url();
+        $category_blog=CategoryBlog::all();
         $product_search=DB::table('sanpham')->where('name','like','%'.$keywords.'%')->get();
         
 
        
-        return view('layouts.search',compact('slider','category','product_search','meta_desc','meta_keywords','meta_title','url_canonical'));
+        return view('layouts.search',compact('category_blog','brand','slider','category','product_search','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
     public function show_category($find,Request $request){
         $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
         $keywords=$request->keywords_submit;
         $category=Category::all();
+        $brand=Brand::where('brand_status',1)->orderBy('brand_parent','DESC')->orderBy('brand_order','ASC')->get();
+        $category_blog=CategoryBlog::all();
         
-        $product=DB::table('sanpham')
+      
+        $products=DB::table('sanpham')
         ->join('theloai','sanpham.masp','=','theloai.theloai')
         ->where('theloai.theloai','=',$find)->get();
+
+        $product=Product::where('masp',$find)->get();
+      
+        
+
       
       
         foreach($product as $key => $value){
@@ -107,7 +142,21 @@ class HomeController extends Controller
             $url_canonical=$request->url();
         }
         
-        return view('layouts.category_detail',compact('slider','product','category','meta_desc','meta_keywords','meta_title','url_canonical'));
+        return view('layouts.category_detail',compact('product','category_blog','brand','slider','products','category','meta_desc','meta_keywords','meta_title','url_canonical'));
+    }
+    public function auto_complete_ajax(Request $request){
+        $data=$request->all();
+        if($data['query']){
+            $product=Product::where('name','LIKE','%'.$data['query'].'%')->get();
+            $output='<ul class="dropdown-menu" style="display:block; position:relative">';
+            foreach($product as $value){
+                $output.='
+                    <li class="li_search_ajax"><a href="#">'.$value->name.'</a></li>
+                ';
+            }
+            $output.='</ul>';
+            echo $output;
+        }
     }
     
 }

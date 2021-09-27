@@ -60,6 +60,7 @@ class CartController extends Controller
             'product_id' => $data['cart_product_id'],
             'product_img' => $data['cart_product_img'],
             'product_qty' => $data['cart_product_qty'],
+            'product_quantity' => $data['cart_product_quantity'],
             'product_price' => $data['cart_product_price'],
             );
             Session::put('cart',$cart);
@@ -71,6 +72,7 @@ class CartController extends Controller
             'product_id' => $data['cart_product_id'],
             'product_img' => $data['cart_product_img'],
             'product_qty' => $data['cart_product_qty'],
+            'product_quantity' => $data['cart_product_quantity'],
             'product_price' => $data['cart_product_price'],
 
         );
@@ -103,17 +105,24 @@ class CartController extends Controller
     $data=$request->all();
     $cart=Session::get('cart');
     if($cart==true){
+      $message="";
       foreach($data['cart_qty'] as $key => $qty){
+        $i=0;
         foreach($cart as $session=>$val){
-          if($val['session_id']==$key){
+          $i++;
+          if($val['session_id']==$key && $qty<$cart[ $session]['product_quantity']){
             $cart[$session]['product_qty']=$qty;
+            $message.='<p style="color:green">'.$i.') Cập nhật số lượng :'.$cart[$session]['product_name'] .' thành công </p>';
+          }
+          elseif($val['session_id']==$key && $qty>$cart[ $session]['product_quantity']){
+            $message.='<p style="color:red">'.$i.') Cập nhật số lượng :'.$cart[$session]['product_name'] .' thất bại </p>';
           }
         }
       }
       Session::put('cart',$cart);
-      return redirect()->back()->with('message','Cập nhật thành công');
+      return redirect()->back()->with('message', $message);
     }else{
-      return redirect()->back()->with('message','Cập nhật thất bại');
+      return redirect()->back()->with('message','Cật nhật bất bại');
     }
     
   }

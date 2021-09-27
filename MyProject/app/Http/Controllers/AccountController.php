@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
 use App\Models\Users;
+
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -43,13 +43,17 @@ class AccountController extends Controller
                 'name'=>'required',
                 'email'=>'required',
                 'password'=>'required',
+                'phone'=>'required',
                 'level'=>'required',
             ]);
-            if(Users::create($request->all())){
-                return redirect()->route('account.index')->with('success','Thêm thành công ');
-            }else{
-                 return redirect()->route('account.index')->with('error','Không thành công ');
-            }
+            $account =new Users();
+            $account->name=$request['name'];
+            $account->email=$request['email'];
+            $account->password=md5($request['password']);
+            $account->phone=$request['phone'];
+            $account->level=$request['level'];
+            $account->save();
+            return redirect('/admin/account')->with('Tạo tài khoản thành công ');
         }catch(Throwable $e){
             report($e);
 
@@ -58,50 +62,30 @@ class AccountController extends Controller
         
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Account $account)
+ 
+    public function show(Users $account)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Users $account)
+    public function edit($id)
     {
+        $account=Users::where('id',$id)->get();
+       
         return view('admin.user.edit',compact('account'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Users $account)
+
+    public function update(Request $request)
     {
+
         if($account->update($request->all())){
-            return redirect()->route('account.index');
+            return redirect('/admin/list_user');
         }else{
-            return redirect()->route('account.index');
+            return redirect('/admin/list_user');
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Account  $account
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Users $account)
     {
         if($account->level == 1){

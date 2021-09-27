@@ -18,6 +18,7 @@
 										<input type="hidden"  value="{{$product->img}}" class="cart_product_img_{{$product->id}}">
 										<input type="hidden"  value="{{$product->price}}" class="cart_product_price_{{$product->id}}">
 										<input type="hidden"  value="1" class="cart_product_qty_{{$product->id}}">
+										<input type="hidden"  value="{{$product->quantity}}" class="cart_product_quantity_{{$product->id}}">
 										<a href="{{url('/product_detail/'.$product->id)}}">
 											<img src="{{url('uploads')}}/home/{{$product->img}}" alt="" />
 											<h2>{{number_format($product->price)}}</h2>

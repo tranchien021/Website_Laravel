@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 07, 2021 lúc 10:26 AM
+-- Thời gian đã tạo: Th9 27, 2021 lúc 05:23 AM
 -- Phiên bản máy phục vụ: 10.4.19-MariaDB
 -- Phiên bản PHP: 8.0.6
 
@@ -28,19 +28,104 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `blog` (
-  `id` int(255) NOT NULL,
-  `name` varchar(900) NOT NULL,
-  `content` varchar(9000) NOT NULL,
-  `img` varchar(900) NOT NULL,
-  `time` date NOT NULL
+  `blog_id` int(11) NOT NULL,
+  `blog_title` varchar(255) NOT NULL,
+  `blog_desc` varchar(255) NOT NULL,
+  `blog_content` text NOT NULL,
+  `blog_meta_desc` varchar(255) NOT NULL,
+  `blog_meta_keywords` varchar(255) NOT NULL,
+  `blog_status` int(10) NOT NULL,
+  `blog_image` varchar(255) NOT NULL,
+  `category_blog_id` int(11) NOT NULL,
+  `blog_slug` varchar(255) NOT NULL,
+  `created_at` date DEFAULT NULL,
+  `time` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `blog`
 --
 
-INSERT INTO `blog` (`id`, `name`, `content`, `img`, `time`) VALUES
-(0, 'Góc bất ngờ, viền benzel trên Note 9 dày hơn Note 8', 'Trong một tweet mới, Ice Universe cho thấy Samsung đã thực sự “cải lùi” thiết kế một bước đáng ngạc nhiên từ Note 8 với Galaxy Note 9: viền benzel.\r\nVâng, Samsung thực sự đi ngược lại xu hướng khi trang bị Galaxy Note 9 với viền bezel bên dày hơn Galaxy Note 8. Nó cũng dày hơn đáng kể so với Galaxy S9 và Galaxy S9 + mà công ty phát hành vào tháng 2.\r\nThật thú vị, sự thay đổi này Samsung đã giấu trong hình ảnh quảng bá Note 9. Với việc sử dụng hình nền tối màu trùng lặp với mặt trước thì Samsung đã khéo léo ẩn đi viền benzel trên chiếc flagship.', 'blog1.jpg', '2021-06-12');
+INSERT INTO `blog` (`blog_id`, `blog_title`, `blog_desc`, `blog_content`, `blog_meta_desc`, `blog_meta_keywords`, `blog_status`, `blog_image`, `category_blog_id`, `blog_slug`, `created_at`, `time`) VALUES
+(1, 'Món ăn thế giới', 'Món ăn ngon nhất thế giới', '<p>Đẹp</p>', 'Top 123', 'Món ăn hoàng gia', 1, 'mm243.jpg', 1, 'mon-an-the-gioi', '2021-09-14', '22:14:30'),
+(2, 'Liên minh', 'LOL', 'Liên minh huyền thoại', 'LOL', 'LOL', 1, 'aaa96.jpg', 2, 'lien-minh', '2021-09-15', '22:07:43');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `brand_product`
+--
+
+CREATE TABLE `brand_product` (
+  `brand_id` int(11) NOT NULL,
+  `brand_name` varchar(255) NOT NULL,
+  `slug_brand` varchar(255) NOT NULL,
+  `meta_keywords` varchar(255) NOT NULL,
+  `brand_desc` varchar(255) NOT NULL,
+  `brand_parent` int(10) NOT NULL,
+  `brand_order` int(11) NOT NULL,
+  `brand_status` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `brand_product`
+--
+
+INSERT INTO `brand_product` (`brand_id`, `brand_name`, `slug_brand`, `meta_keywords`, `brand_desc`, `brand_parent`, `brand_order`, `brand_status`) VALUES
+(1, 'Đồ ăn vặt', 'do-an-vat', 'san pham dep', 'qua dep', 0, 1, 1),
+(4, 'Đồ ăn nhanh', 'do-an-nhanh', 'qua dep', 'qua xinh', 0, 0, 1),
+(7, 'Đồ ăn nước ngoài', 'do-an-nuoc-ngoai', 'qq', 'qqq', 0, 2, 1),
+(8, 'Bún đậu', 'bun-dau', 'a', 'a', 9, 5, 1),
+(9, 'Đồ Việt Nam', 'do-viet-nam', 'a', 'a', 0, 3, 1),
+(10, 'Bún bò', 'bun-bo', 'Bún', 'Quá ngon', 9, 6, 1),
+(11, 'Pizza', 'pizza', 'pizza', 'pizza', 7, 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `category_blog`
+--
+
+CREATE TABLE `category_blog` (
+  `category_blog_id` int(11) NOT NULL,
+  `category_blog_name` varchar(255) NOT NULL,
+  `category_blog_status` int(11) DEFAULT NULL,
+  `category_blog_slug` varchar(255) DEFAULT NULL,
+  `category_blog_desc` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `category_blog`
+--
+
+INSERT INTO `category_blog` (`category_blog_id`, `category_blog_name`, `category_blog_status`, `category_blog_slug`, `category_blog_desc`) VALUES
+(1, 'Công Nghệ', 0, 'cong-nghe', 'Quá đẹp'),
+(2, 'Cách làm đồ ăn', 0, 'cach-lam-do-an', 'qua dep trai'),
+(3, 'Mẹo ăn vặt', 0, 'meo-an-vat', 'minhchien'),
+(4, 'Đồ ăn chiên', 0, 'do-an-chien', 'ddddd');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `comment`
+--
+
+CREATE TABLE `comment` (
+  `comment_id` int(11) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `comment_name` varchar(100) NOT NULL,
+  `comment_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `comment_product_id` varchar(11) NOT NULL,
+  `comment_parent` int(11) DEFAULT NULL,
+  `comment_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `comment`
+--
+
+INSERT INTO `comment` (`comment_id`, `comment`, `comment_name`, `comment_date`, `comment_product_id`, `comment_parent`, `comment_status`) VALUES
+(32, 'Pizza quá ngon', 'Minh Chiến', '2021-09-25 14:16:16', '35', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -86,7 +171,94 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customer_id`, `customer_name`, `customer_email`, `customer_password`, `customer_phone`, `created_at`, `updated_at`) VALUES
-(7, 'Chien', 'tranchien021@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', '0349521656', NULL, NULL);
+(9, 'Chien Minh CHien', 'tranchien021@gmail.com', '1', '0349521656', NULL, NULL),
+(10, 'Tran Minh Chien', 'tranchien021@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', '0349521656', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `gallery`
+--
+
+CREATE TABLE `gallery` (
+  `gallery_id` int(11) NOT NULL,
+  `gallery_name` varchar(255) NOT NULL,
+  `gallery_image` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `gallery`
+--
+
+INSERT INTO `gallery` (`gallery_id`, `gallery_name`, `gallery_image`, `id`) VALUES
+(1, 'Phone 1', '1.jpg', 1),
+(2, 'Phone 2', '2.jpg', 1),
+(3, 'phone 3', '3.jpg', 1),
+(5, 'phone 4', 'product245.jpg', 1),
+(9, 'ip13-pro_296.jpg', 'product257.jpg', 27),
+(10, 'product727.jpg', 'product727.jpg', 27),
+(11, 'product860.jpg', 'product860.jpg', 27),
+(12, 'product941.jpg', 'product941.jpg', 27),
+(13, 'product1562.jpg', 'product1562.jpg', 28),
+(14, 'mm24331.jpg', 'mm24331.jpg', 29),
+(15, 'mm24357.jpg', 'mm24357.jpg', 30),
+(16, 'minhchien55.jpg', 'minhchien55.jpg', 31),
+(17, 'food149.jpg', 'aa29.jpeg', 32),
+(18, 'aaaaa35.jpeg', 'aaaaa35.jpeg', 32),
+(19, 'bunhs67.jpeg', 'bunhs67.jpeg', 32),
+(20, 'bm12.jpeg', 'bm12.jpeg', 33),
+(21, 'bm278.jpeg', 'bm278.jpeg', 33),
+(22, 'bm377.jpeg', 'bm377.jpeg', 33),
+(23, 'ts191.jpg', 'ts191.jpg', 34),
+(24, 'ts244.jpg', 'ts244.jpg', 34),
+(25, 'ts33.jpg', 'ts33.jpg', 34),
+(26, 'pizza50.jpg', 'pizza50.jpg', 35),
+(27, 'pizz213.jpg', 'pizz213.jpg', 35),
+(28, 'pizza138.jpg', 'pizza138.jpg', 35),
+(29, 'com16.jpg', 'com16.jpg', 36),
+(30, 'com_125.jpg', 'com_125.jpg', 36),
+(31, 'com_29.jpg', 'com_29.jpg', 36),
+(32, 'comga79.jpeg', 'comga79.jpeg', 37),
+(33, 'comga140.jpg', 'comga140.jpg', 37),
+(34, 'comga249.jpeg', 'comga249.jpeg', 37),
+(35, 'comga31.jpeg', 'comga31.jpeg', 37),
+(36, 'bundau11.jpeg', 'bundau11.jpeg', 38),
+(37, 'bundau199.jpeg', 'bundau199.jpeg', 38),
+(38, 'bundau286.jpeg', 'bundau286.jpeg', 38),
+(39, 'bundau336.jpg', 'bundau336.jpg', 38),
+(40, 'nom80.jpg', 'nom80.jpg', 39),
+(41, 'nom146.jpg', 'nom146.jpg', 39),
+(42, 'nom255.jpg', 'nom255.jpg', 39),
+(43, 'nom30.jpg', 'nom30.jpg', 39),
+(44, 'trasua34.jpg', 'trasua34.jpg', 40),
+(45, 'trasua187.jpeg', 'trasua187.jpeg', 40),
+(46, 'trasua240.jpeg', 'trasua240.jpeg', 40),
+(47, 'trasua324.jpeg', 'trasua324.jpeg', 40),
+(48, 'banhmi17.jpeg', 'banhmi17.jpeg', 41),
+(49, 'banhmi18.jpeg', 'banhmi18.jpeg', 41),
+(50, 'banhmi222.jpeg', 'banhmi222.jpeg', 41);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `information`
+--
+
+CREATE TABLE `information` (
+  `info_id` int(11) NOT NULL,
+  `info_contact` text DEFAULT NULL,
+  `info_map` text DEFAULT NULL,
+  `info_fanpage` text DEFAULT NULL,
+  `info_logo` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `information`
+--
+
+INSERT INTO `information` (`info_id`, `info_contact`, `info_map`, `info_fanpage`, `info_logo`) VALUES
+(1, '<p>Địa chỉ: University of Information Technology VNU-HCM, khu phố 6, Linh Trung, Thủ Đức, Th&agrave;nh phố Hồ Ch&iacute; Minh</p>\r\n\r\n<p>Địa chỉ: Ng&atilde; ba đồn 8, Quốc lộ 14, Đắk Song, Đăk N&ocirc;ng, Việt Nam</p>\r\n\r\n<p>Số điện thoại: 0349521656</p>\r\n\r\n<p>Fanpage:&nbsp;<a href=\"https://www.facebook.com/L%E1%BA%ADp-tr%C3%ACnh-Anime-Laravel-102502015511970/?ref=pages_you_manage\" target=\"blank\">Fanpage Lập tr&igrave;nh Laravel</a></p>', '  <iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.231240377643!2d106.80086541474985!3d10.87000889225804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527587e9ad5bf%3A0xafa66f9c8be3c91!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgVGjDtG5nIHRpbiDEkEhRRyBUUC5IQ00!5e0!3m2!1svi!2s!4v1632640901193!5m2!1svi!2s\" width=\"100%\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>', ' <div id=\"fb-root\"></div>\r\n                <script async defer crossorigin=\"anonymous\" src=\"https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v12.0&appId=1224905547977530&autoLogAppEvents=1\" nonce=\"fmVNNsVN\"></script>\r\n                <div class=\"fb-page\" data-href=\"https://www.facebook.com/L%E1%BA%ADp-tr%C3%ACnh-Anime-Laravel-102502015511970/?ref=pages_you_manage\" data-tabs=\"small_header\" data-width=\"\" data-height=\"\" data-small-header=\"false\" data-adapt-container-width=\"true\" data-hide-cover=\"false\" data-show-facepile=\"true\">\r\n                    <blockquote cite=\"https://www.facebook.com/L%E1%BA%ADp-tr%C3%ACnh-Anime-Laravel-102502015511970/?ref=pages_you_manage\" class=\"fb-xfbml-parse-ignore\"><a href=\"https://www.facebook.com/L%E1%BA%ADp-tr%C3%ACnh-Anime-Laravel-102502015511970/?ref=pages_you_manage\">Lập trình Anime - Laravel</a></blockquote>\r\n                </div>\r\n              ', 'pizza5098.jpg');
 
 -- --------------------------------------------------------
 
@@ -139,9 +311,9 @@ CREATE TABLE `money_ship` (
 INSERT INTO `money_ship` (`mship_id`, `mship_matp`, `mship_maqh`, `mship_xaid`, `mship_money`) VALUES
 (1, 2, 26, 715, '2000'),
 (2, 8, 74, 2377, '5000'),
-(3, 4, 43, 1324, '150.000'),
-(4, 1, 1, 1, '500000'),
-(5, 79, 762, 26800, '25.000');
+(3, 4, 43, 1324, '150'),
+(4, 1, 1, 1, '50000'),
+(5, 79, 762, 26800, '333333');
 
 -- --------------------------------------------------------
 
@@ -164,7 +336,7 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`order_id`, `customer_id`, `shipping_id`, `order_status`, `order_code`, `created_at`, `updated_at`) VALUES
-(57, 7, 70, 3, 'b0ad0', '2021-09-06 15:29:49', NULL);
+(59, 10, 72, 2, 'c6ff2', '2021-09-13 08:46:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -191,9 +363,78 @@ CREATE TABLE `order_detail` (
 --
 
 INSERT INTO `order_detail` (`order_detail_id`, `order_code`, `product_id`, `id`, `product_name`, `product_price`, `product_sale_quantity`, `created_at`, `updated_at`, `product_coupon`, `product_moneyship`) VALUES
-(26, 'b0ad0', 1, 1, 'IPhone 11 | VN', '29250000', 3, NULL, NULL, 'no', '30000'),
-(27, 'b0ad0', 3, 3, 'Samsunng Galaxy A72', '9850000', 3, NULL, NULL, 'no', '30000'),
-(28, 'b0ad0', 4, 4, 'Samsunng Galaxy A71', '7700000', 3, NULL, NULL, 'no', '30000');
+(30, 'c6ff2', 1, 1, 'IPhone 11 | VN', '29250000', 2, NULL, NULL, 'COVID19', '30000'),
+(31, 'c6ff2', 10, 10, 'Xiaomi Redmi 9 4G', '16750000', 2, NULL, NULL, 'COVID19', '30000'),
+(32, 'c6ff2', 2, 2, 'Iphone 12 ProMax', '30500000', 2, NULL, NULL, 'COVID19', '30000');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `rating`
+--
+
+CREATE TABLE `rating` (
+  `rating_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `rating` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `rating`
+--
+
+INSERT INTO `rating` (`rating_id`, `product_id`, `rating`) VALUES
+(14, 32, 5),
+(15, 35, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `roles`
+--
+
+CREATE TABLE `roles` (
+  `id_roles` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `roles`
+--
+
+INSERT INTO `roles` (`id_roles`, `name`) VALUES
+(1, 'admin'),
+(2, 'author'),
+(3, 'user');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `roles_users`
+--
+
+CREATE TABLE `roles_users` (
+  `roles_users_id` int(11) NOT NULL,
+  `roles_id_roles` int(10) UNSIGNED NOT NULL,
+  `users_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `roles_users`
+--
+
+INSERT INTO `roles_users` (`roles_users_id`, `roles_id_roles`, `users_id`) VALUES
+(45, 1, 1),
+(46, 1, 1),
+(49, 1, 1),
+(64, 3, 7),
+(65, 3, 8),
+(66, 3, 9),
+(67, 3, 11),
+(68, 3, 12),
+(69, 3, 13),
+(93, 2, 2),
+(94, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -208,37 +449,31 @@ CREATE TABLE `sanpham` (
   `name` varchar(900) NOT NULL,
   `address` varchar(900) NOT NULL,
   `date` date NOT NULL,
-  `theloai` varchar(900) NOT NULL,
-  `price` int(255) NOT NULL COMMENT '3000',
+  `theloai` varchar(900) DEFAULT NULL,
+  `price` int(255) NOT NULL,
   `content` varchar(9000) NOT NULL,
   `tinhtrang` varchar(255) DEFAULT NULL,
   `quantity` varchar(50) NOT NULL,
   `product_sold` int(10) DEFAULT NULL,
-  `order_detail_id` int(10) NOT NULL
+  `order_detail_id` int(10) DEFAULT NULL,
+  `product_tag` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `sanpham`
 --
 
-INSERT INTO `sanpham` (`id`, `masp`, `img`, `name`, `address`, `date`, `theloai`, `price`, `content`, `tinhtrang`, `quantity`, `product_sold`, `order_detail_id`) VALUES
-(1, 'IP', 'product1.jpg', 'IPhone 11 | VN ', 'Dak Song   ', '2021-06-09', 'NB', 29250000, 'San Pham chat luong cao  ', NULL, '100', 4, 1),
-(2, 'IP', 'product1.jpg', 'Iphone 12 ProMax', 'Dak Song', '2021-06-24', 'GT', 30500000, 'San Pham Chất Lượng Hàng Đầu', NULL, '5', NULL, 2),
-(3, 'SS', 'product3.jpg', 'Samsunng Galaxy A72', 'TP HO CHi MINH', '2021-06-10', 'NB', 9850000, 'Chat Luong cuc ky cao', NULL, '100', 4, 3),
-(4, 'SS', 'product4.jpg', 'Samsunng Galaxy A71', 'TP Hồ Chí Minh', '2021-06-09', 'NB', 7700000, 'Sản phẩm đẹp', NULL, '100', 4, 4),
-(5, 'NK', 'product5.jpg', 'Nokia 2.4', '1', '0000-00-00', 'NB', 2100000, '1', NULL, '10', NULL, 5),
-(6, 'NK', 'product6.jpg', 'Nokia Xr20', '2', '2021-03-03', 'NB', 9890000, '2', NULL, '10', NULL, 6),
-(7, 'RM', 'product7.jpg', 'Realme 7 Pro', '3', '0000-00-00', 'NB', 7590000, '3', NULL, '10', NULL, 7),
-(8, 'RM', 'product8.jpg', 'Realme X9 5G', '4', '0000-00-00', 'NB', 10590000, '4', NULL, '10', NULL, 8),
-(9, 'XM', 'product9.jpg', 'Xiaomi Mi 11 5G 128GB', '5', '0000-00-00', 'GT', 15790000, '5', NULL, '10', NULL, 9),
-(10, 'XM', 'product10.jpg', 'Xiaomi Redmi 9 4G', '6', '0000-00-00', 'GT', 16750000, '6', NULL, '14', NULL, 10),
-(11, 'VV', 'product11.jpg', 'Vivo X60 Pro 5G', '7', '0000-00-00', 'GT', 14950000, '7', '1', '14', NULL, 11),
-(12, 'VV', 'product12.jpg', 'Vivo X52 Pro 4G', '8', '0000-00-00', 'GT', 7100000, '8', '1', '5', NULL, 12),
-(13, 'VS', 'product13.jpg', 'Vsmart Star 4', '9', '0000-00-00', 'GT', 1740000, '9', '1', '100', NULL, 13),
-(14, 'VS', 'product14.jpg', 'Vsmart Star 5', '12', '0000-00-00', 'GT', 1990000, '12', '1', '2', NULL, 14),
-(15, 'HW', 'product15.jpg', 'Huawei P40', '11', '0000-00-00', 'GT', 8900000, '111', '1', '3', NULL, 15),
-(16, 'HW', 'product16.jpg', 'Huawei Y6p', '2', '0000-00-00', 'GT', 5900000, '3', '1', '4', NULL, 16),
-(17, 'HW', 'product16.jpg', 'Huawei Y6p', '2', '2021-06-24', 'GT', 5900000, '3', '1', '5', NULL, 17);
+INSERT INTO `sanpham` (`id`, `masp`, `img`, `name`, `address`, `date`, `theloai`, `price`, `content`, `tinhtrang`, `quantity`, `product_sold`, `order_detail_id`, `product_tag`) VALUES
+(32, 'BT', 'aa63.jpeg', 'Bún Thái Hải Sản', '129B Nguyễn Ngọc Vũ, Cầu Giấy, Hà Nội', '2021-09-25', 'NB', 55000, '<p>Long Thuỷ - B&uacute;n Hải Sản - Nguyễn Ngọc Vũ</p>', '1', '5', NULL, NULL, 'Bún,Bún hải sản'),
+(33, 'BM', 'bm12.jpeg', 'Bami Sot - Bánh Mì - Lò Đúc', '138 Lò Đúc, Hai Bà Trưng, Hà Nội', '2021-09-25', 'NB', 36000, '<p>B&aacute;nh M&igrave; Đen- Đ&uacute;c L&ograve;&nbsp;</p>', '1', '5', NULL, NULL, 'Bánh mì,banh mi Viet Nam'),
+(34, 'WT', 'ts191.jpg', 'Tiger Sugar', 'Vũ Trọng Phụng 3 Ngõ 98 Vũ Trọng Phụng, Thanh Xuân, Hà Nội', '2021-09-25', 'NB', 22000, '<p>Tr&agrave; Sữa nổi tiếng&nbsp;</p>', '1', '5', NULL, NULL, 'Trà sữa'),
+(35, 'FF', 'pizza50.jpg', 'T-Pizza - Ngọc Lâm', '2 Ngõ 111 Nguyễn Văn Cừ, Long Biên, Hà Nội', '2021-09-25', 'NB', 100000, '<p>Gồm c&aacute;c loại pizza ẩm thực&nbsp;</p>', '1', '5', NULL, NULL, 'Pizza,FastFood,Đồ ăn nhanh'),
+(36, 'CC', 'com16.jpg', 'Đại Nam - Cơm Sườn Nướng Online', '2 Ngõ 111 Nguyễn Văn Cừ, Long Biên, Hà Nội', '2021-09-25', 'NB', 45000, '<p>Cơm sướn&nbsp;</p>', '1', '5', NULL, NULL, 'Cơm Tấm,Cơm Sườn'),
+(37, 'CC', 'comga79.jpeg', 'Cơm Gà Giòn Booby - Trần Đại Nghĩa', '28 Ngõ 183 Trần Đại Nghĩa, P. Bách Khoa,  Quận Hai Bà Trưng, Tp Hồ Chí Minh', '2021-09-25', 'NB', 65000, '<p>Cơm g&agrave; qu&aacute; ngon</p>\r\n\r\n<div style=\"page-break-after:always\"><span style=\"display:none\">&nbsp;</span></div>', '1', '5', NULL, NULL, 'Cơm,Cơm gà'),
+(38, 'BT', 'bundau11.jpeg', 'Lâm Anh - Bún Đậu & Bún Nước', '2 Ngách 44/64 Ngõ 44 Trần Thái Tông, Cầu Giấy, Tp Hồ Chí Minh', '2021-09-25', 'Bún Đậu', 40500, '<p>B&uacute;n Đậu&nbsp;</p>', '1', '5', NULL, NULL, 'Bún Đậu,Bún'),
+(39, 'FF', 'nom80.jpg', 'Nộm Ông Phúc - Nghĩa Tân', '256 Dĩ An ,Thủ Đức, Tp Hồ Chí Minh', '2021-09-25', 'Nộm', 31500, '<p>Nộm&nbsp;</p>', '1', '5', NULL, NULL, 'Nộm,Đồ ăn nhanh'),
+(40, 'WT', 'trasua34.jpg', 'Trà Sữa Maycha - 38 Trịnh Đình Trọng', '38 Trịnh Đình Trọng, P. Phú Trung, Tân Phú, TP. HCM', '2021-09-25', 'Trà sữa', 22000, '<p>Tr&agrave; Sữa</p>', '1', '5', NULL, NULL, 'Trà sữa,Tea,Đồ Uống,Giải Khát'),
+(41, 'BM', 'banhmi17.jpeg', 'Bánh Mì Cona - Lũy Bán Bích', '631 Lũy Bán Bích, P. Phú Thạnh, Tân Phú, TP. HCM', '2021-09-25', 'Bánh mì', 25000, '<p>B&aacute;nh M&igrave;&nbsp;</p>', '1', '5', NULL, NULL, 'Bánh Mì,Đồ ăn nhanh');
 
 -- --------------------------------------------------------
 
@@ -260,7 +495,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('QGPOSlaT48nGQyHT7DaInMXlhnhsHJDKLfrJtTtt', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36', 'YTo0OntzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo1NjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL0xFQVJOX1BIUC9MYXJhdmVsL015UHJvamVjdC9wdWJsaWMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjY6Il90b2tlbiI7czo0MDoiMXJ5U0xlanllSXRMR001ZDdsQlFPU08zQ3drdTNOS2VhbHJzVDJlaSI7czo0OiJjYXJ0IjthOjE6e2k6MTthOjY6e3M6MTA6InNlc3Npb25faWQiO3M6NToiYjhhZTgiO3M6MTI6InByb2R1Y3RfbmFtZSI7czoxOToiU2Ftc3VubmcgR2FsYXh5IEE3MiI7czoxMDoicHJvZHVjdF9pZCI7czoxOiIzIjtzOjExOiJwcm9kdWN0X2ltZyI7czoxMjoicHJvZHVjdDMuanBnIjtzOjExOiJwcm9kdWN0X3F0eSI7czoyOiIxMCI7czoxMzoicHJvZHVjdF9wcmljZSI7czo3OiI5ODUwMDAwIjt9fX0=', 1631000101);
+('W8nwlGFEGaz1ADISymUcsuUgteFjjjQelaI1i6mJ', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoialh2ZzZLcUd6Mm94Z2syNm1VZGpnMUJmeVFZSnIzWmVzSnROeENiTiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTY6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9MRUFSTl9QSFAvTGFyYXZlbC9NeVByb2plY3QvcHVibGljIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czozMjoiYzRjYTQyMzhhMGI5MjM4MjBkY2M1MDlhNmY3NTg0OWIiO30=', 1632666590);
 
 -- --------------------------------------------------------
 
@@ -285,7 +520,7 @@ CREATE TABLE `shipping` (
 --
 
 INSERT INTO `shipping` (`shipping_id`, `shipping_name`, `shipping_address`, `shipping_phone`, `shipping_email`, `created_at`, `updated_at`, `shipping_notes`, `shipping_method`) VALUES
-(70, 'Chien', 'Dak Song Dak Song', '0349521656', 'tranchien021@gmail.com', NULL, NULL, 'wwww', 0);
+(72, 'Phạm Thi Thu Hằng', 'Dak Song Dak Song', '0349521656', 'tranchien021@gmail.com', NULL, NULL, 'Cẩn thận', 1);
 
 -- --------------------------------------------------------
 
@@ -306,9 +541,14 @@ CREATE TABLE `slider` (
 --
 
 INSERT INTO `slider` (`slider_id`, `slider_name`, `slider_image`, `slider_status`, `slider_desc`) VALUES
-(4, 'aaa', '295.jpg', 1, 'aaaa'),
-(5, 'tranminnhchien', '386.jpg', 1, 'dd'),
-(6, 'MinhChien', '457.jpg', 1, 'quá đẹp');
+(5, 'tranminnhchien', '386.jpg', 0, 'dd'),
+(6, 'MinhChien', '457.jpg', 0, 'quá đẹp'),
+(8, 'zed', 'mmmm43.png', 0, 'zed'),
+(9, 'ezeal', 'mm38.jpg', 0, 'ez'),
+(10, 'team', 'aaa40.jpg', 0, 'team'),
+(12, 'Ẩm thực hải sản', 'thiet-ke-website-am-thuc15.png', 1, 'Banner hải sản'),
+(13, 'Ẩm thực', 'banner-am-thuc30.jpg', 1, 'Banner ẩm thực'),
+(14, 'slider', 'HYH_digital_banner_menu-moi97.jpg', 1, 'silder');
 
 -- --------------------------------------------------------
 
@@ -12354,17 +12594,11 @@ CREATE TABLE `theloai` (
 --
 
 INSERT INTO `theloai` (`id`, `Tên`, `theloai`, `meta_desc`, `meta_keywords`) VALUES
-(1, 'IPhone', 'IP', 'Hiện đại ', 'Iphone 13'),
-(2, 'SamSung', 'SS', 'Mới Nhất ', 'Điện thoại Sam Sung'),
-(3, 'Nokia', 'NK', 'Hiện đại và mới nhất ', 'Điện thoại Nokia '),
-(4, 'RealMi', 'RM', 'Hiện đại và mới nhất ', 'Điện thoại RealMi'),
-(5, 'XiaoMe', 'XM', 'Hiện đại và mới nhất ', 'Điện thoại'),
-(6, 'ASUS', 'AS', 'Hiện đại và mới nhất ', 'Điện thoại'),
-(7, 'VSmart', 'VS', 'Hiện đại và mới nhất ', 'Điện thoại'),
-(8, 'Huawei', 'HW', 'Hiện đại và mới nhất ', 'Điện thoại'),
-(9, 'ViVo', 'VV', 'Hiện đại và mới nhất ', 'Điện thoại'),
-(11, 'Phone New', 'PN', 'Hiện đại và mới nhất ', 'Điện thoại'),
-(15, 'Phone New', 'PN', 'Phone new là sản phẩm mới ra mắt của công ty công nghệ Minh Chiến', 'Phone new mới ra mắt , Điện thoại Phone new');
+(16, 'Bún', 'BT', 'Các loại bún như bún thái, bún đậu,bún bò ,bún giò,bún riêu', 'Các loại bún'),
+(17, 'Bánh Mì', 'BM', 'Gồm các loại bình mì khác nhau', 'Bánh Mì Việt Nam'),
+(18, 'Đồ Uống', 'WT', 'Gồm các loại đồ uống thịnh hàng', 'Đồ uống , trà sữa, nước ngọt'),
+(19, 'Đồ ăn nhanh', 'FF', 'Gồm các loại đồ ăn nhanh', 'FastFood,đồ ăn nhanh'),
+(20, 'Cơm', 'CC', 'Gồm các loại cơm Việt Nam, và quốc tê', 'Cơm, Cơm Việt Nam');
 
 -- --------------------------------------------------------
 
@@ -12400,7 +12634,8 @@ CREATE TABLE `users` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `level` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` int(20) DEFAULT NULL,
+  `level` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -12409,15 +12644,63 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `level`, `created_at`, `updated_at`) VALUES
-(1, 'Chien', 'tranchien022@gmail.com', '1', '1', '2021-08-18 06:34:07', '2021-08-28 01:14:47'),
-(22, 'Chiến Trần', 'tranchien021@gmail.com', '', '0', '2021-08-28 07:26:30', '2021-08-28 07:26:30'),
-(23, 'admin admin', 'projectdoan21@gmail.com', '', '0', '2021-08-28 07:26:51', '2021-08-28 07:26:51'),
-(24, 'Chiến Trần', 'tranchien2105@gmail.com', '', '0', '2021-08-30 08:48:15', '2021-08-30 08:48:15');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `level`, `created_at`, `updated_at`) VALUES
+(1, 'chienadmin', 'chienadmin2105@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 123456789, NULL, NULL, NULL),
+(2, 'chienauthor', 'chienauthor@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 1234567891, NULL, NULL, NULL),
+(3, 'chienuser', 'chienuser@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 123456789, NULL, NULL, NULL),
+(8, 'Tran Minh Chien', 'phamthithuhang70@gmail.com', '1', 349521656, NULL, NULL, NULL),
+(12, 'Pham Thị Thu Hằng', 'phamthithuhang70@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 349521656, NULL, NULL, NULL),
+(13, 'Pham Thị Thu Hằng', 'phamthithuhang70@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 349521656, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `video`
+--
+
+CREATE TABLE `video` (
+  `video_id` int(11) NOT NULL,
+  `video_title` varchar(200) NOT NULL,
+  `video_slug` varchar(255) NOT NULL,
+  `video_link` varchar(100) NOT NULL,
+  `video_desc` varchar(255) NOT NULL,
+  `video_image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `video`
+--
+
+INSERT INTO `video` (`video_id`, `video_title`, `video_slug`, `video_link`, `video_desc`, `video_image`) VALUES
+(1, 'On My Way -', 'Nấu đồ ăn ', 'LKMtOmmdF9E', 'Video', 'product341.jpg');
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
+
+--
+-- Chỉ mục cho bảng `blog`
+--
+ALTER TABLE `blog`
+  ADD PRIMARY KEY (`blog_id`);
+
+--
+-- Chỉ mục cho bảng `brand_product`
+--
+ALTER TABLE `brand_product`
+  ADD PRIMARY KEY (`brand_id`);
+
+--
+-- Chỉ mục cho bảng `category_blog`
+--
+ALTER TABLE `category_blog`
+  ADD PRIMARY KEY (`category_blog_id`);
+
+--
+-- Chỉ mục cho bảng `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`comment_id`);
 
 --
 -- Chỉ mục cho bảng `coupon`
@@ -12430,6 +12713,18 @@ ALTER TABLE `coupon`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`customer_id`);
+
+--
+-- Chỉ mục cho bảng `gallery`
+--
+ALTER TABLE `gallery`
+  ADD PRIMARY KEY (`gallery_id`);
+
+--
+-- Chỉ mục cho bảng `information`
+--
+ALTER TABLE `information`
+  ADD PRIMARY KEY (`info_id`);
 
 --
 -- Chỉ mục cho bảng `migrations`
@@ -12454,6 +12749,24 @@ ALTER TABLE `order`
 --
 ALTER TABLE `order_detail`
   ADD PRIMARY KEY (`order_detail_id`);
+
+--
+-- Chỉ mục cho bảng `rating`
+--
+ALTER TABLE `rating`
+  ADD PRIMARY KEY (`rating_id`);
+
+--
+-- Chỉ mục cho bảng `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id_roles`);
+
+--
+-- Chỉ mục cho bảng `roles_users`
+--
+ALTER TABLE `roles_users`
+  ADD PRIMARY KEY (`roles_users_id`);
 
 --
 -- Chỉ mục cho bảng `sanpham`
@@ -12509,7 +12822,8 @@ ALTER TABLE `table_xaphuongthitran`
 -- Chỉ mục cho bảng `theloai`
 --
 ALTER TABLE `theloai`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `theloai` (`theloai`(768));
 
 --
 -- Chỉ mục cho bảng `user`
@@ -12524,8 +12838,38 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `video`
+--
+ALTER TABLE `video`
+  ADD PRIMARY KEY (`video_id`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
+
+--
+-- AUTO_INCREMENT cho bảng `blog`
+--
+ALTER TABLE `blog`
+  MODIFY `blog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `brand_product`
+--
+ALTER TABLE `brand_product`
+  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT cho bảng `category_blog`
+--
+ALTER TABLE `category_blog`
+  MODIFY `category_blog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT cho bảng `coupon`
@@ -12537,7 +12881,19 @@ ALTER TABLE `coupon`
 -- AUTO_INCREMENT cho bảng `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `customer_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT cho bảng `gallery`
+--
+ALTER TABLE `gallery`
+  MODIFY `gallery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT cho bảng `information`
+--
+ALTER TABLE `information`
+  MODIFY `info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
@@ -12555,31 +12911,49 @@ ALTER TABLE `money_ship`
 -- AUTO_INCREMENT cho bảng `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT cho bảng `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `order_detail_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `order_detail_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT cho bảng `rating`
+--
+ALTER TABLE `rating`
+  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT cho bảng `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id_roles` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `roles_users`
+--
+ALTER TABLE `roles_users`
+  MODIFY `roles_users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT cho bảng `shipping`
 --
 ALTER TABLE `shipping`
-  MODIFY `shipping_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `shipping_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT cho bảng `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `slider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `slider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `table_social`
@@ -12591,7 +12965,7 @@ ALTER TABLE `table_social`
 -- AUTO_INCREMENT cho bảng `theloai`
 --
 ALTER TABLE `theloai`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
@@ -12603,7 +12977,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT cho bảng `video`
+--
+ALTER TABLE `video`
+  MODIFY `video_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

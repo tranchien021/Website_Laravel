@@ -16,7 +16,7 @@
                         </header>
                         <div class="panel-body">
                             <div class=" form">
-                            <form  id="commentForm" novalidate="novalidate" class="cmxform form-horizontal " action="{{route('product.store')}}" method="POST" enctype='multipart/form-data'>
+                            <form  id="commentForm" novalidate="novalidate" class="cmxform form-horizontal " action="{{url('/admin/insert_product')}}" method="POST" enctype='multipart/form-data'>
                               @csrf
                               <div class="form-group ">
                                         <label for="cname" class="control-label col-lg-3">Tên sản phẩm </label>
@@ -27,7 +27,7 @@
                                     <div class="form-group ">
                                         <label for="cemail" class="control-label col-lg-3">Hình ảnh </label>
                                         <div class="col-lg-6">
-                                           <input type="file" name="file_img">
+                                           <input type="file" name="file_image" id="file_image">
                                         </div>
                                     </div>
                                     <div class="form-group ">
@@ -48,6 +48,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group ">
+                                        <label for="curl" class="control-label col-lg-3"> Tag sản phẩm  </label>
+                                        <div class="col-lg-6">
+                                           <input data-role="tagsinput"  class="form-control" type="text" name="product_tag" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
                                         <label for="curl" class="control-label col-lg-3"> Số lượng </label>
                                         <div class="col-lg-6">
                                            <input  class="form-control" type="text" name="quantity" placeholder="Số lượng">
@@ -62,7 +68,7 @@
                                     <div class="form-group ">
                                         <label for="curl" class="control-label col-lg-3"> Miêu tả sản phẩm </label>
                                         <div class="col-lg-6">
-                                          <textarea  class="form-control" type="text" name="content" placeholder="Miêu tả sản phẩm ..." id="summernote"></textarea>
+                                          <textarea id="ckeditor_product_content"  class="form-control" type="text" name="content" placeholder="Miêu tả sản phẩm ..." id="summernote"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group ">

@@ -24,6 +24,7 @@
 											<img src="{{url('uploads')}}/home/{{$product->img}}" alt="" />
 											<h2>{{number_format($product->price)}}</h2>
 											<p>{{$product->name}}</p>
+											<p>{{$product->id}}</p>
 										</a>
 										<button type="button" data-id_product="{{$product->id}}"  class="btn btn-default add-to-cart">Thêm vào giỏ hàng</button>
 										</form>

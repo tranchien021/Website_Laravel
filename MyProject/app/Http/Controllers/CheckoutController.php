@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Mymodel;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\CategoryBlog;
 use App\Models\Customer;
 use App\Models\Shipping;
 use App\Models\Payment;
@@ -16,7 +17,8 @@ use App\Models\Province;
 use App\Models\Wards;
 use App\Models\Moneyship;
 use App\Models\Slider;
-
+use App\Models\Brand;
+use App\Models\Gallery;
 use App\Rules\Captcha; 
 
 use Cart;
@@ -33,7 +35,10 @@ class CheckoutController extends Controller
         $meta_title="Đăng nhập và Đăng Ký ";
         $url_canonical=$request->url();
         $category=Category::all();
-        return view('layouts.login_checkout',compact('category','meta_desc','meta_keywords','meta_title','url_canonical','slider'));
+        $brand=Brand::where('brand_status',1)->orderBy('brand_parent','DESC')->orderBy('brand_order','ASC')->get();
+        $category_blog=CategoryBlog::all();
+
+        return view('layouts.login_checkout',compact('category_blog','brand','category','meta_desc','meta_keywords','meta_title','url_canonical','slider'));
     }
     //Đăng ký 
     public function add_customer(Request $request){

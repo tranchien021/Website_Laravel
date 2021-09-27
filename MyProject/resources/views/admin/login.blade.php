@@ -52,7 +52,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     	</a>
 		<a class="btn btn-danger btn-social btn-google" href="{{url('/admin/login_google')}}">
     	<i class="fa fa-google"></i> Bằng Google
+    	</a><br>
+		<p></p>
+		<a class="btn btn-success" href="{{url('/admin/login_auth')}}">
+    	<i class="fa fa-sign-in"></i> Đăng nhập Auth
     	</a>
+		<a class="btn btn-danger" href="{{url('/admin/register_auth')}}">
+    	<i class="fa fa-registered"></i> Đăng ký Auth
+    	</a>
+		
 		
 </div>
 </div>

@@ -5,10 +5,10 @@
 		<div class="table-agile-info">
  <div class="panel panel-default">
     <div class="panel-heading">
-     Basic table
+     Bảng thể loại 
     </div>
     <div>
-      <table class="table" ui-jq="footable" ui-options='{
+      <table  id="myTable" class="table" ui-jq="footable" ui-options='{
         "paging": {
           "enabled": true
         },

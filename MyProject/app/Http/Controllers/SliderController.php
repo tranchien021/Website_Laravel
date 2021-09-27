@@ -81,8 +81,8 @@ class SliderController extends Controller
         return view('admin.slider.edit',compact('slider'));
     }
     public function update_banner(Request $request,$slider_id){
-        $minhchien=$request->all();
-       
+      
+        
         $data=array();
         $data['slider_name']=$request->slider_name;
         $data['slider_image']=$request->slider_image;

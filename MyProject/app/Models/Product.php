@@ -23,10 +23,16 @@ class Product extends Model
     	'tinhtrang',
 		'quantity',
 		'product_id',
+		'product_sold',
+		'order_detail_id',
+		'product_tag',
 	
 
     ];
     public function cat(){
     	return $this->hasOne(Category::class,'theloai','masp');
     }
+	public function comment(){
+		return $this->belongsToMany('App\Models\Comment');
+	}
 }

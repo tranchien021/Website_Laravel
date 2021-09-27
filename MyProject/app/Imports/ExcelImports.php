@@ -24,6 +24,8 @@ class ExcelImports implements ToModel
            'price'=>$row[6],
            'content'=>$row[7],
            'tinhtrang'=>$row[8],
+           'quantity'=>$row[9],
+           'product_sold'=>$row[10],
         ]);
     }
 }

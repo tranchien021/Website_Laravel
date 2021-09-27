@@ -11,11 +11,11 @@
 			</div>
 			@if(session()->has('message'))
 				<div class="alert alert-success">
-					{{session()->get('message')}}
+					{!!session()->get('message')!!}
 				</div>
 			@elseif(session()->has('error'))
 				<div class="alert alert-warning">
-					{{session()->get('error')}}
+					{!!session()->get('error')!!}
 				</div>
 			@endif
 			<div class="table-responsive cart_info">
@@ -27,6 +27,7 @@
 							<td class="image">Hình Ảnh </td>
 							<td class="description">Tên sản phẩm </td>
 							<td class="price">Giá sản phẩm</td>
+							<td>Số lượng trong kho </td>
 							<td class="quantity">Số lượng </td>
 							<td class="total">Thành tiền </td>
 							<td></td>
@@ -52,6 +53,9 @@
 							</td>
 							<td class="cart_price">
 								<p>{{number_format($cart['product_price'],0,',','.')}}đ</p>
+							</td>
+							<td>
+								<p>{{$cart['product_quantity']}}</p>
 							</td>
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
