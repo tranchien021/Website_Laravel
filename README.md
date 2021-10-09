@@ -22,3 +22,9 @@ Các công đoạn hoàn thành:
 +  Xuất Đơn hàng bằng pdf
 +  Đâng Nhập bằng authentication 
 +  Phẩn quyền roles
++ Gửi Email coupon cho khách vip
++ Gửi email coupon cho khách thường
++ Gửi email xác thực khi đặt hàng
++ Đăng nhập customer Google 
++ Quên mật khẩu 
++ Statictical 
