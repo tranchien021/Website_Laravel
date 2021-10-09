@@ -195,7 +195,7 @@
              <option value="">------- Chọn hình thức đơn hàng -----</option>
               <option id="{{$order->order_id}}" selected value="1">Chưa xử lý đơn hàng</option>
               <option id="{{$order->order_id}}" value="2">Đã xử lý đơn hàng</option>
-              <option id="{{$order->order_id}}" value="3">Huỷ đơn hoặc tạm giữa </option>
+              
             </select>
             </form>
             @elseif($order->order_status==2)
@@ -205,7 +205,7 @@
               <option value="">------- Chọn hình thức đơn hàng -----</option>
               <option id="{{$order->order_id}}" value="1">Chưa xử lý đơn hàng</option>
               <option id="{{$order->order_id}}" selected value="2">Đã xử lý đơn hàng</option>
-              <option id="{{$order->order_id}}" value="3">Huỷ đơn hoặc tạm giữa </option>
+             
             </select>
             </form>
             @else
@@ -215,7 +215,7 @@
               <option value="">------- Chọn hình thức đơn hàng -----</option>
               <option id="{{$order->order_id}}" value="1">Chưa xử lý đơn hàng</option>
               <option id="{{$order->order_id}}" selected value="2">Đã xử lý đơn hàng</option>
-              <option id="{{$order->order_id}}" selected value="3">Huỷ đơn hoặc tạm giữa </option>
+             
             </select>
             </form>
 

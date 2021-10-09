@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Cart;
 use App\Models\Product;
 use Session;
+use App\Models\CategoryBlog;
 
 class CartController extends Controller
 {
@@ -83,7 +84,9 @@ class CartController extends Controller
   }
 
   public function giohang(){
-    return view('livewire.cart_ajax');
+    $category_blog=CategoryBlog::all();
+    return view('livewire.cart_ajax',compact('category_blog'));
+
   }
   public function delete_cart_ajax($session_id){
     $cart=Session::get('cart');

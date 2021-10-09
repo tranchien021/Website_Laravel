@@ -52,7 +52,7 @@
 								<p>Web ID: {{$cart['product_id']}}</p>
 							</td>
 							<td class="cart_price">
-								<p>{{number_format($cart['product_price'],0,',','.')}}đ</p>
+								<p>{{number_format($cart['product_price'],0,',','.')}} đ</p>
 							</td>
 							<td>
 								<p>{{$cart['product_quantity']}}</p>

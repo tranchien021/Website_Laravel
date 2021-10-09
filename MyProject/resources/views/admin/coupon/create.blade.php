@@ -31,6 +31,18 @@
                                         </div>
                                     </div>
                                     <div class="form-group ">
+                                        <label for="cname" class="control-label col-lg-3">Ngày bắt đầu giảm giá </label>
+                                        <div class="col-lg-6">
+                                            <input class=" form-control" id="date_start" name="coupon_date_start"  type="text" required="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="cname" class="control-label col-lg-3">Ngày kết thúc giảm giá </label>
+                                        <div class="col-lg-6">
+                                            <input class=" form-control" id="date_end" name="coupon_date_end" type="text" required="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
                                         <label for="cemail" class="control-label col-lg-3">Mã giảm giá </label>
                                         <div class="col-lg-6">
                                             <input class="form-control " id="cemail" type="text" name="coupon_code" required="">

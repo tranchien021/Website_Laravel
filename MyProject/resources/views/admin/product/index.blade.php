@@ -23,10 +23,12 @@
                      <th>Tên  </th>
                      <th>Hình ảnh  </th>
                      <th>Thư viện ảnh </th>
+                     <th>Tài liệu</th>
                      <th>Mã sản phẩm </th>
                      <th>Số lượng</th>
                      <th>Thể loại</th>
                      <th>Giá sản phẩm</th>
+                     <th>Giá nhập </th>
                     
                      <th>Địa chỉ</th>
                   
@@ -51,11 +53,18 @@
                          <img width="80" src="{{url('/uploads/home')}}/{{$data->img}}" alt="Chưa có ảnh ">
                      </td>
                      <td><a href="{{url('/admin/insert_gallery/'.$data->id)}}">Thêm ảnh thư viện</a></td>
+                     
+                       @if($data->file)
+                       <td><a target="_blank" href="{{asset('/uploads/document/'.$data->file)}}"> Có File</a> </td>
+                       @else
+                       <td>Không có file </td>
+                       @endif
+                      
                      <td>{{$data->masp}}</td>
                      <td>{{$data->quantity}}</td>
                      <td>{{$data->theloai}}</td>
-                     <td>{{$data->price}}</td>
-                    
+                     <td>{{number_format($data->price,'0','.',',')}}</td>
+                      <td>{{number_format($data->import_price,'0','.',',')}}</td>
                      <td>{{$data->address}}</td>
 
                      <td>

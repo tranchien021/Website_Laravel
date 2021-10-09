@@ -14,7 +14,10 @@ class Customer extends Model
         'customer_name',
         'customer_email',
         'customer_password',
-        'customer_phone'
+        'customer_phone',
+        'customer_vip',
+        'customer_token',
+        'customer_picture'
        
     ];
     public $timestamps=false;

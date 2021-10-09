@@ -57,7 +57,14 @@ class BlogController extends Controller
             $meta_title=$p->blog_title;
             $cate_id=$p->category_blog_id;
             $url_canonical=$request->url();
+            $post_id=$p->blog_id;
+
         }
+        $post=Blog::where('blog_id',$post_id)->first();
+        $post->blog_view=$post->blog_view+1;
+        $post->save();
+
+
       
        
         $related=Blog::where('blog_status',1)->where('category_blog_id',$cate_id)->whereNotIn('blog_slug',[$blog_slug])->take(5)->get();

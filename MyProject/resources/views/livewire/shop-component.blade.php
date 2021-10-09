@@ -5,6 +5,39 @@
 	<div class="features_items">
 		<!--features_items-->
 		<h2 class="title text-center">Tất cả sản phẩm</h2>
+		<div class='row' style="margin:20px 0">
+			<div class="col-md-4">
+				<label for="amount">Sắp xếp theo</label>
+				<form action="">
+					@csrf
+					<select name="sort" id="sort" class="form-control">
+						<option value=""> --- Lọc ---- </option>
+						<option value="{{Request::url()}}?sort_by=tang_dan">Giá tăng dần</option>
+						<option value="{{Request::url()}}?sort_by=giam_dan">Giá giảm dần</option>
+						<option value="{{Request::url()}}?sort_by=kytu_az">A đến Z</option>
+						<option value="{{Request::url()}}?sort_by=kytu_za">Z đến A</option>
+
+					</select>
+				</form>
+			</div>
+			<div class='col-md-4'>
+
+				<label for="amount">Lọc giá :</label>
+				<form action="">
+					<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+					<input type="hidden" name="start_price" id="start_price">
+					<input type="hidden" name="end_price" id="end_price">
+					<input type="submit" name="filter_price" value="Lọc giá ">
+					
+					<div id="slider-range"></div>
+				</form>
+
+
+			</div>
+
+		</div>
+
+
 		@foreach($products as $product)
 		<div class="col-sm-4">
 			<div class="product-image-wrapper">
@@ -14,14 +47,14 @@
 						<form>
 							@csrf
 							<input type="hidden" value="{{$product->id}}" class="cart_product_id_{{$product->id}}">
-							<input type="hidden" value="{{$product->name}}" class="cart_product_name_{{$product->id}}">
+							<input type="hidden" id="wishlist_productname{{$product->id}}" value="{{$product->name}}" class="cart_product_name_{{$product->id}}">
 							<input type="hidden" value="{{$product->img}}" class="cart_product_img_{{$product->id}}">
-							<input type="hidden" value="{{$product->price}}" class="cart_product_price_{{$product->id}}">
+							<input type="hidden" id="wishlist_productprice{{$product->id}}" value="{{number_format($product->price,0,',','.') }}" class="cart_product_price_{{$product->id}}">
 							<input type="hidden" value="1" class="cart_product_qty_{{$product->id}}">
 							<input type="hidden" value="{{$product->quantity}}" class="cart_product_quantity_{{$product->id}}">
-							<a href="{{url('/product_detail/'.$product->id)}}">
-								<img src="{{url('uploads/')}}/home/{{$product->img}}" alt="" />
-								<h2>{{number_format($product->price)}}</h2>
+							<a id="wishlist_producturl{{$product->id}}" href="{{url('/product_detail/'.$product->id)}}">
+								<img id="wishlist_productimage{{$product->id}}" src="{{url('uploads/')}}/home/{{$product->img}}" alt="" />
+								<h2>{{number_format($product->price)}} đ</h2>
 								<p>{{$product->name}}</p>
 							</a>
 							<style>
@@ -119,9 +152,44 @@
 					</div>
 				</div>
 				<div class="choose">
+					<style>
+						ul.nav.nav-pills.nav-justified li {
+							text-align: center;
+							font-size: 13px;
+						}
+
+						.button_wishlist {
+							border: none;
+							background: #ffff;
+							color: #B3AFAB;
+						}
+
+						.button_wishlist span:hover {
+							color: red;
+						}
+
+						.button_wishlist:focus {
+							border: none;
+							outline: none;
+						}
+
+						.delete_withlist:hover {
+							color: purple;
+						}
+
+						.thumb {
+							color: black;
+						}
+					</style>
 					<ul class="nav nav-pills nav-justified">
-						<li><a href=""><i class="fa fa-plus-square"></i>Yêu thích</a></li>
-						<li><a href=""><i class="fa fa-plus-square"></i>So sánh</a></li>
+						<li>
+							<i class="fa fa-heart" style="color:red"></i>
+
+							<button class="button_wishlist" id="{{$product->id}}" onclick="add_wistlist(this.id);"><span>Yêu thích</span></button>
+
+						</li>
+						<li><a href=""><i class="fa fa-plus-square" style="color:#FE980F;"></i>So sánh</a></li>
+						<li><i class="fa fa-thumbs-down thumb"></i><button class="delete_withlist button_wishlist" data-id="{{$product->id}}" id="{{$product->id}}">Bỏ thích</button></li>
 					</ul>
 				</div>
 			</div>

@@ -16,7 +16,7 @@
     </div>
    
     <div>
-      <table id="myTable" class="table" ui-jq="footable" ui-options='{
+      <table  class="table" ui-jq="footable" ui-options='{
         "paging": {
           "enabled": true
         },
@@ -45,6 +45,7 @@
         @foreach($admin as $data)
         <form action="{{url('/admin/assign_roles')}}" method="POST">
         @csrf
+       
             <tr data-expanded="true">
                         <td>{{$data->id}}</td>
                         <td>{{$data->name}}</td>
@@ -62,7 +63,8 @@
                         <td><input type="checkbox" name="user_role" {{$data->hasRole('user') ? 'checked' : ''}}></td>
 
                         <td>
-                            <input type="submit" value="Phân quyền " class="btn btn-success btn-default">
+                          
+                            <input type="submit" value="Phân quyền" class="btn btn-primary">
                             <a style="margin:5px 0px;" class="btn btn-danger" href="{{url('/admin/delete_user_auth/'.$data->id)}}">Xoá User</a>
                             <a style="margin:5px 0px;" class="btn btn-success" href="{{url('/admin/change_login/'.$data->id)}}">Đăng nhập</a>
                         </td>
@@ -72,6 +74,7 @@
           @endforeach
          
         </tbody>
+       
       </table>
       
     

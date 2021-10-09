@@ -13,6 +13,7 @@ use App\Models\Gallery;
 use App\Models\Rating;
 
 use Cart;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -23,15 +24,18 @@ class HomeController extends Controller
         $meta_title="Trang chủ, web bán hàng ";
         $url_canonical=$request->url();
         
-    	$product_nb=Product::orderBy('price','DESC')->take(6)->get();
         $category=Category::all();
         $brand=Brand::where('brand_status',1)->orderBy('brand_parent','DESC')->orderBy('brand_order','ASC')->get();
+        $cate_pro_tab=Category::orderBy('id','ASC')->get();
+       
         $category_blog=CategoryBlog::all();
+
+        $product_nb=Product::orderBy('price','DESC')->take(6)->get();
         
         
         $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
        
-    	return view('layouts.home',compact('category_blog','brand','slider','product_nb','category','meta_desc','meta_keywords','meta_title','url_canonical'));
+    	return view('layouts.home',compact('cate_pro_tab','category_blog','brand','slider','product_nb','category','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
     public function login(){
         
@@ -57,17 +61,40 @@ class HomeController extends Controller
         return redirect()->route('home.cart');
     }
     public function shop(Request $request){
-        $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
+      
         $meta_desc="Cửa hàng, nơi chứa thông tin toàn bộ sản phẩm";
         $meta_keywords="Cửa hàng lựa chọn mua bán các mặt hàng";
         $meta_title="Trang cửa hàng, web bán hàng ";
         $url_canonical=$request->url();
-        $products=Product::orderBy('id','ASC')->paginate(6);
+      
         $category=Category::all();
-   
+        $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
         $brand=Brand::where('brand_status',1)->orderBy('brand_parent','DESC')->orderBy('brand_order','ASC')->get();
         $category_blog=CategoryBlog::all();
-        return view('livewire.shop-component',compact('category_blog','brand','slider','category','products','meta_desc','meta_keywords','meta_title','url_canonical'));
+        $max_price_product=Product::max('price');
+        $min_price_product=Product::min('price');
+
+        if(isset($_GET['sort_by'])){
+            $sort_by=$_GET['sort_by'];
+            if($sort_by=='giam_dan'){
+                $products=Product::orderBy('price','DESC')->paginate(9)->appends(request()->query());
+            }elseif($sort_by=='tang_dan'){
+                $products=Product::orderBy('price','ASC')->paginate(9)->appends(request()->query());
+            }elseif($sort_by=='kytu_za'){
+                $products=Product::orderBy('name','DESC')->paginate(9)->appends(request()->query());
+            }elseif($sort_by=='kytu_az'){
+                $products=Product::orderBy('price','DESC')->paginate(9)->appends(request()->query());
+            }
+        }elseif(isset($_GET['start_price']) && $_GET['end_price']){
+            $min_price=$_GET['start_price'];
+            $max_price=$_GET['end_price'];
+            $products=Product::whereBetween('price',[$min_price,$max_price])->orderBy('id','ASC')->paginate(9);
+        }else{
+            $products=Product::orderBy('id','ASC')->paginate(9)->appends(request()->query());
+        }
+        
+
+        return view('livewire.shop-component',compact('max_price_product','min_price_product','category_blog','brand','slider','category','products','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
    
     public function product_detail(Request $request,$id){
@@ -91,6 +118,10 @@ class HomeController extends Controller
             $product_id=$value->id;
             $product_cate=$value->masp;
         }
+        
+        $product=Product::where('id',$product_id)->first();
+        $product->product_view=$product->product_view+1;
+        $product->save();
         
         $gallery=Gallery::where('id',$product_id)->get();
      

@@ -241,7 +241,7 @@
 											<li>
 												<a class="cart_quantity_delete" href="{{url('delete_moneyship')}}"><i class="fa fa-times"></i></a>
 												Phí vận chuyển : <span>{{number_format(Session::get('money'),0,',','.')}} đ </span>
-												<?php $total_after_free=$total-Session::get('money') ?>
+												<?php $total_after_free=$total+Session::get('money') ?>
 											</li>
 											@endif
 											<li>Tổng còn :
@@ -255,7 +255,7 @@
 
 												}elseif(Session::get('money') && Session::get('coupon')){
 													$total_after=$total_after_coupon;
-													$total_after=$total_after- Session::get('money');
+													$total_after=$total_after+ Session::get('money');
 													echo number_format($total_after,0,',','.') .'đ'; 
 
 												}elseif(!Session::get('money') && !Session::get('coupon')){

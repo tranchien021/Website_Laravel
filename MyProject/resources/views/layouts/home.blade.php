@@ -16,23 +16,23 @@
 						<form>
 							@csrf
 							<input type="hidden" value="{{$product->id}}" class="cart_product_id_{{$product->id}}">
-							<input type="hidden" value="{{$product->name}}" class="cart_product_name_{{$product->id}}">
+							<input type="hidden" id="wishlist_productname{{$product->id}}" value="{{$product->name}}" class="cart_product_name_{{$product->id}}">
 							<input type="hidden" value="{{$product->img}}" class="cart_product_img_{{$product->id}}">
-							<input type="hidden" value="{{$product->price}}" class="cart_product_price_{{$product->id}}">
+							<input type="hidden" id="wishlist_productprice{{$product->id}}" value="{{$product->price }}" class="cart_product_price_{{$product->id}}">
 							<input type="hidden" value="1" class="cart_product_qty_{{$product->id}}">
 							<input type="hidden" value="{{$product->quantity}}" class="cart_product_quantity_{{$product->id}}">
-							<a href="{{url('/product_detail/'.$product->id)}}">
-								<img src="{{url('uploads/')}}/home/{{$product->img}}" alt="" />
+							<a id="wishlist_producturl{{$product->id}}" href="{{url('/product_detail/'.$product->id)}}">
+								<img id="wishlist_productimage{{$product->id}}" src="{{url('uploads/')}}/home/{{$product->img}}" alt="" />
 								<h2>{{number_format($product->price)}} đ</h2>
 								<p>{{$product->name}}</p>
 							</a>
 							<style>
-								.xemnhanh{
-									background:#F5F5ED;
-									border:0 none;
+								.xemnhanh {
+									background: #F5F5ED;
+									border: 0 none;
 									border-radius: 0;
-									color:696763;
-									font-family: 'Roboto',sans-serif;
+									color: 696763;
+									font-family: 'Roboto', sans-serif;
 									font-size: 15px;
 									margin-bottom: 25px;
 								}
@@ -65,61 +65,96 @@
 									</div>
 									<form>
 										@csrf
-									<div id="product_quickview_value"></div>
-									<div class="col-md-7">
-										<style>
-											h5.modal-title.product_quickview_title{
-												text-align: center;
-												font-size: 25px;
-												color:brown;
-											}
-											p.quickview{
-												font-size: 14px;
-												color:brown;
-											}
-											span#product_quickview_content img{
-												width: 100%;
-											}
-											@media screen and(min-width:768px){
-												.modal-dialog{
-													width: 700px;
+										<div id="product_quickview_value"></div>
+										<div class="col-md-7">
+											<style>
+												h5.modal-title.product_quickview_title {
+													text-align: center;
+													font-size: 25px;
+													color: brown;
 												}
-												.modal-sm{
-													width:350px;
-												}
-											}
-											@media screen and (min-width:992px){
-												.modal-lg{
-													width: 950px;
-												}
-											}
-										
-										</style>
-										<h2 class="quickview"><span id="product_quickview_title"></span></h2>
-										<p>Mã ID : <span id="product_quickview_id"></span></p>
-										<p>Giá sản phẩm : <span id="product_quickview_price"></span> </p>
-										<label for="">Số lượng </label>
-										<input type="number" name="qty" min=1 class="cart_product_qty_" value="1"/>
-										<p><span id="product_quickview_content"></span></p>
-										<div id="product_quickview_button"></div>
-										<div id="beforesend_quickview"></div>
 
-									</div>
+												p.quickview {
+													font-size: 14px;
+													color: brown;
+												}
+
+												span#product_quickview_content img {
+													width: 100%;
+												}
+
+												@media screen and(min-width:768px) {
+													.modal-dialog {
+														width: 700px;
+													}
+
+													.modal-sm {
+														width: 350px;
+													}
+												}
+
+												@media screen and (min-width:992px) {
+													.modal-lg {
+														width: 950px;
+													}
+												}
+											</style>
+											<h2 class="quickview"><span id="product_quickview_title"></span></h2>
+											<p>Mã ID : <span id="product_quickview_id"></span></p>
+											<p>Giá sản phẩm : <span id="product_quickview_price"></span> </p>
+											<label for="">Số lượng </label>
+											<input type="number" name="qty" min=1 class="cart_product_qty_" value="1" />
+											<p><span id="product_quickview_content"></span></p>
+											<div id="product_quickview_button"></div>
+											<div id="beforesend_quickview"></div>
+
+										</div>
 									</form>
 								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-								<button type="button" class="btn btn-default redirect_cart" >Đi tới sản phẩm</button>
+								<button type="button" class="btn btn-default redirect_cart">Đi tới sản phẩm</button>
 
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="choose">
+					<style>
+						ul.nav.nav-pills.nav-justified li{
+							text-align: center;
+							font-size:13px;
+						}
+						.button_wishlist{
+							border:none;
+							background: #ffff;
+							color:#B3AFAB;
+						}
+						
+						.button_wishlist span:hover{
+							color: red;
+						}
+						.button_wishlist:focus{
+							border:none;
+							outline: none;
+						}
+						.delete_withlist:hover{
+							color: purple;
+						}
+						.thumb{
+							color:black;
+						}
+					</style>
 					<ul class="nav nav-pills nav-justified">
-						<li><a href=""><i class="fa fa-plus-square"></i>Yêu thích</a></li>
-						<li><a href=""><i class="fa fa-plus-square"></i>So sánh</a></li>
+						<li>
+							<i class="fa fa-heart" style="color:red"></i>
+							
+							<button class="button_wishlist" id="{{$product->id}}" onclick="add_wistlist(this.id);"><span>Yêu thích</span></button>
+							
+						</li>
+						<li><a href=""><i class="fa fa-plus-square" style="color:#FE980F;"></i>So sánh</a></li>
+						<li><i class="fa fa-thumbs-down thumb"></i><button class="delete_withlist button_wishlist" data-id="{{$product->id}}" id="{{$product->id}}">Bỏ thích</button></li>
 					</ul>
 				</div>
 			</div>
@@ -133,253 +168,20 @@
 		<!--category-tab-->
 		<div class="col-sm-12">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
-				<li><a href="#blazers" data-toggle="tab">Blazers</a></li>
-				<li><a href="#sunglass" data-toggle="tab">Sunglass</a></li>
-				<li><a href="#kids" data-toggle="tab">Kids</a></li>
-				<li><a href="#poloshirt" data-toggle="tab">Polo shirt</a></li>
+				@php 
+					$i=0;
+				@endphp
+				@foreach($cate_pro_tab as $cate_tag)
+					@php
+						$i++;
+					@endphp 
+				<li data-masp="{{$cate_tag->theloai}}" class="tabs_pro {{$i==1 ? 'active':''}}"><a href="#tshirt" data-toggle="tab">{{$cate_tag->Tên}}</a></li>
+				@endforeach
+
 			</ul>
 		</div>
-		<div class="tab-content">
-			<div class="tab-pane fade active in" id="tshirt">
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery1.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-
-
-			</div>
-
-			<div class="tab-pane fade" id="blazers">
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery4.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery3.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery2.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery1.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="tab-pane fade" id="sunglass">
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery3.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery4.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery1.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery2.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="tab-pane fade" id="kids">
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery1.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery2.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery3.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery4.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="tab-pane fade" id="poloshirt">
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery2.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery4.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery3.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="product-image-wrapper">
-						<div class="single-products">
-							<div class="productinfo text-center">
-								<img src="{{url('home')}}/images/home/gallery1.jpg" alt="" />
-								<h2>$56</h2>
-								<p>Easy Polo Black Edition</p>
-								<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<div id="tabs_product"></div>
+		
 	</div>
 	<!--/category-tab-->
 

@@ -26,10 +26,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- //font-awesome icons -->
 <script src="{{url('admin')}}/js/jquery2.0.3.min.js"></script>
 </head>
+<style>
+
+	html, body {
+    
+		background: linear-gradient(135deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px), linear-gradient(225deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px)0 64px; background-color: #708090;  background-size: 64px 128px
+   
+}
+</style>
 <body>
 <div class="log-w3">
 <div class="w3layouts-main">
-	<h2>Đăng Ký Authentication </h2>
+	<h2 style="color:#fff">Đăng Ký Authentication </h2>
     <?php 
 		$message=Session::get('message');
 		if($message){

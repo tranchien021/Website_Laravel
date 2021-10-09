@@ -26,6 +26,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- //font-awesome icons -->
 <script src="{{url('admin')}}/js/jquery2.0.3.min.js"></script>
 </head>
+<style>
+	html, body {
+    
+		background-color:#def;background-image: radial-gradient(closest-side, transparent 98%, rgba(0,0,0,.3) 99%),radial-gradient(closest-side, transparent 98%, rgba(0,0,0,.3) 99%);background-size:80px 80px;background-position:0 0, 40px 40px;
+   
+}
+</style>
 <body>
 <div class="log-w3">
 <div class="w3layouts-main">

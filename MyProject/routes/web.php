@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MyController;
 
 use App\Http\Livewire\ShopComponent;
@@ -27,6 +29,7 @@ Route::get('/product_detail/{id}','HomeController@product_detail');
 Route::get('/about','HomeController@about');
 Route::get('/show_category/{find}','HomeController@show_category');
 Route::get('/shop',"HomeController@shop");
+
 
 
 //ContactController 
@@ -97,6 +100,30 @@ Route::post('/insert_rating','ProductController@insert_rating');
 
 // Arrange Brand 
 Route::post('/arrange_brand','BrandController@arrange_brand');
+// Tabs Brand
+Route::post('/product_tabs','BrandController@product_tabs');
+
+
+// Send Mail 
+Route::get('/send_email','EmailController@index');
+Route::get('/send_coupon_vip/{coupon_condition}/{coupon_time}/{coupon_number}/{coupon_code}','EmailController@send_coupon_vip');
+Route::get('/send_coupon/{coupon_condition}/{coupon_time}/{coupon_number}/{coupon_code}','EmailController@send_coupon');
+Route::get('/layout','EmailController@layout');
+Route::get('/forgot_password','EmailController@forgot_password');
+Route::get('/update_new_password','EmailController@update_new_password');
+Route::post('/get_password','EmailController@get_password');
+Route::post('/change_password','EmailController@change_password');
+
+// Login Customer Google 
+Route::get('/login_customer_google','LoginController@login_customer_google');
+Route::get('/login_checkout/callback','LoginController@callback_customer_google');
+
+
+// Login Customer Facebook
+Route::get('/login_customer_facebook','LoginController@login_customer_facebook');
+Route::get('/customer_facebook/callback','LoginController@callback_customer_facebook');
+
+
 
 
 
@@ -115,6 +142,10 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::get('/logout','AdminController@logout');
 	Route::get('/register','AdminController@register');
 	Route::post('/register_account','AdminController@register_account');
+	// Morris Admin 
+	Route::post('/filter_by_date','AdminController@filter_by_date');
+	Route::post('/dashboard_filter','AdminController@dashboard_filter');
+	Route::post('/days_order','AdminController@days_order');
 	//Login Admin Facebook
 	Route::get('/login_facebook','LoginController@facebook');
 	Route::get('/callback','LoginController@callback_facebook');
@@ -188,6 +219,9 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::get('/comment','ProductController@list_comment');
 	Route::post('/allow_comment','ProductController@allow_comment');
 	Route::post('/reply_comment','ProductController@reply_comment');
+	Route::post('/delete_document','ProductController@delete_document');
+	
+
 	
 
 	
@@ -257,13 +291,7 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::post('/save_infor','ContactController@save_infor');
 	Route::get('/edit_contact','ContactController@edit_contact');
 	Route::post('/update_contact/{info_id}','ContactController@update_contact');
-	
-	
 
-	
-
-
-	
 
 	Route::resources([
 		'category'=>'CategoryController',
@@ -284,8 +312,11 @@ Route::group(['prefix'=>'admin'],function(){
 	
 });
 
-// Send Mail 
-Route::get('/send_email','EmailController@index');
+
+
+
+
+
 
 
 

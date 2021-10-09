@@ -26,6 +26,9 @@ class Product extends Model
 		'product_sold',
 		'order_detail_id',
 		'product_tag',
+		'product_view',
+		'import_price',
+		'file',
 	
 
     ];

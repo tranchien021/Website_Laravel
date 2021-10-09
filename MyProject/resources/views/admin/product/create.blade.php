@@ -22,12 +22,19 @@
                                         <label for="cname" class="control-label col-lg-3">Tên sản phẩm </label>
                                         <div class="col-lg-6">
                                           <input  class="form-control" type="text" name="name" placeholder="Name"><br>
+                                          
                                         </div>
                                     </div>
                                     <div class="form-group ">
                                         <label for="cemail" class="control-label col-lg-3">Hình ảnh </label>
                                         <div class="col-lg-6">
                                            <input type="file" name="file_image" id="file_image">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="cemail" class="control-label col-lg-3">Tài liệu </label>
+                                        <div class="col-lg-6">
+                                           <input class="form-control" type="file" name="document" id="file_document">
                                         </div>
                                     </div>
                                     <div class="form-group ">
@@ -62,7 +69,13 @@
                                     <div class="form-group ">
                                         <label for="curl" class="control-label col-lg-3">Giá sản phẩm </label>
                                         <div class="col-lg-6">
-                                          <input  class="form-control" type="number" name="price" placeholder="Price ">
+                                          <input   class="form-control money"  type="text" name="price" placeholder="Price ">
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="curl" class="control-label col-lg-3">Giá nhập nguyên liệu </label>
+                                        <div class="col-lg-6">
+                                          <input  class="form-control money" type="text" name="import_price" placeholder="Giá nhập hàng ">
                                         </div>
                                     </div>
                                     <div class="form-group ">
