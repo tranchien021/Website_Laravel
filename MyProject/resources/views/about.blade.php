@@ -30,6 +30,10 @@
 	<link href="{{url('home')}}/css/lightslider.css" rel="stylesheet">
 	<link href="{{url('home')}}/css/prettify.css" rel="stylesheet">
 
+	<link href="{{url('home')}}/css/owl.carousel.min.css" rel="stylesheet">
+	<link href="{{url('home')}}/css/owl.theme.default.min.css" rel="stylesheet">
+	
+
 
 
 
@@ -84,11 +88,15 @@
 					<div class="col-sm-6">
 						<div class="social-icons pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i></a></li>
-								<li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+								@foreach($icon as $icons)
+
+								<li>
+									<a title="{{$icons->icon_name}}" href="{{$icons->icon_link}}" target="_blank">
+										<img style="padding: 5px" width="35px" height="35px" src="{{asset('uploads/icon/'.$icons->icon_image)}}" alt="Hình ảnh social network">
+									</a>
+								</li>
+								@endforeach
+
 							</ul>
 						</div>
 					</div>
@@ -101,11 +109,11 @@
 			<!--header-middle-->
 			<div class="container">
 				<div class="row">
-				<div class="col-sm-4">
+					<div class="col-sm-4">
 						<form action="{{url('/search')}}" autocomplete="off" method="POST" style="padding-top:45px;">
 							@csrf
 							<div class="search_box" style="background-image:none">
-								
+
 								<input style="width:70%" type="text" id="keywords" name="keywords_submit" placeholder="Tìm kiếm" />
 								<button class="btn" style="background:#FE980F; color:#fff;" type="submit" name="search_items">Tìm Kiếm </button>
 								<div id="search_ajax"></div>
@@ -114,20 +122,20 @@
 						</form>
 
 					</div>
-				
+
 					<div class="col-sm-4">
 						<div class="logo pull-left" style="padding-left:50px;">
-							<a  href="{{url('/')}}"><img width="45%" src="{{url('/uploads/home/logo.png')}}" alt=""></a>
+							<a href="{{url('/')}}"><img width="45%" src="{{url('/uploads/home/logo.png')}}" alt=""></a>
 							<span style="font-size:40px;color:#FE980F;">𝕎𝕚𝕥𝕙 𝕌𝕤</span>
 						</div>
-						
+
 
 					</div>
 					<div class="col-sm-4">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 
-							
+
 
 								<?php
 								$customer_id = Session::get('customer_id');
@@ -147,14 +155,24 @@
 
 								<li><a href="{{url('/giohang')}}"><i class="fa fa-shopping-cart"></i> Giỏ Hàng</a></li>
 
+								@php
+								$customer_id = Session::get('customer_id');
+								if ($customer_id != NULL) {
+								@endphp
+								<li><a href="{{url('/history_order')}}"><i class="fa fa-bell"></i> Lịch sử đơn hàng </a></li>
+
+								@php
+								}
+								@endphp
+
 								<?php
 								$customer_id = Session::get('customer_id');
 								if ($customer_id != NULL) {
 								?>
 									<li><a href="{{url('/logout_checkout')}}"><i class="fa fa-lock"></i> Đăng Xuất </a></li>
 									<li><img width="10%" src="{{Session::get('customer_picture')}}" alt=""> {{Session::get('customer_name')}}</li>
-									
-									
+
+
 
 								<?php
 
@@ -201,15 +219,15 @@
 									</ul>
 								</li>
 								<li class="dropdown"><a href="{{url('/shop')}}">Cửa Hàng</a>
-									
+
 								</li>
-								
+
 								<li><a href="{{url('/video_shop')}}">Video</a></li>
 								<li><a href="{{url('/lienhe')}}">Liên Hệ</a></li>
 							</ul>
 						</div>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
@@ -324,7 +342,16 @@
 								</ul>
 							</div>
 						</div>
-						<!--/brands_products-->
+						<!-- Sản phẩm đã xem  -->
+						<div class="brands_products">
+
+							<h2>Lịch sử xem </h2>
+							<div class="brands-name">
+								<div id="row_watched" class="row">
+
+								</div>
+							</div>
+						</div>
 
 						<div class="brands_products">
 							<!--brands_products-->
@@ -335,6 +362,7 @@
 								</div>
 							</div>
 						</div>
+
 						<!--/brands_products-->
 
 						<div style="background:none; padding:0px 0px;" class="shipping text-center">
@@ -360,70 +388,14 @@
 				<div class="row">
 					<div class="col-sm-2">
 						<div class="companyinfo">
-							<a  href="{{url('/')}}"><img width="100%" src="{{url('/uploads/home/logo.png')}}" alt=""></a>
+							<a href="{{url('/')}}"><img width="100%" src="{{url('/uploads/home/logo.png')}}" alt=""></a>
 							<p style="font-size:13px;color:black">With you when you hungry</p>
 						</div>
 					</div>
-					<div class="col-sm-7">
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="{{url('home')}}/images/home/iframe1.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
+					<div class="col-sm-7" style="padding:20px">
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15591.791842481583!2d107.56794322687152!3d12.319289610577886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3172495484126c29%3A0x8b2d3f6b36a2a018!2zRGFrIFNvbmcsIFRodeG6rW4gSOG6oW5oLCDEkOG6r2sgU29uZywgxJDEg2sgTsO0bmcsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1634119797950!5m2!1svi!2s" width="600" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="{{url('home')}}/images/home/iframe2.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
-
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="{{url('home')}}/images/home/iframe3.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
-
-						<div class="col-sm-3">
-							<div class="video-gallery text-center">
-								<a href="#">
-									<div class="iframe-img">
-										<img src="{{url('home')}}/images/home/iframe4.png" alt="" />
-									</div>
-									<div class="overlay-icon">
-										<i class="fa fa-play-circle-o"></i>
-									</div>
-								</a>
-								<p>Circle of Hands</p>
-								<h2>24 DEC 2014</h2>
-							</div>
-						</div>
+					
 					</div>
 					<div class="col-sm-3">
 						<div class="address">
@@ -517,7 +489,7 @@
 
 
 
-
+	
 	<script src="{{url('home')}}/js/jquery.js"></script>
 	<script src="{{url('home')}}/js/bootstrap.min.js"></script>
 	<script src="{{url('home')}}/js/jquery.scrollUp.min.js"></script>
@@ -533,25 +505,90 @@
 	<script src="{{url('home')}}/js/lightslider.js"></script>
 	<script src="{{url('home')}}/js/prettify.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	
+	<script src="https://sp.zalo.me/plugins/sdk.js"></script>
+
+	<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+	<script src="{{url('home')}}/js/owl.carousel.js"></script>
+	<script>
+		$('.owl-carousel').owlCarousel({
+			loop: true,
+			margin: 15,
+			nav: true,
+			dots:false,
+			responsive: {
+				0: {
+					items: 1
+				},
+				600: {
+					items: 3
+				},
+				1000: {
+					items: 5
+				}
+			}
+		})
+	</script>
+	<script>
+		var total = document.getElementById('money_usd').value;
+
+		paypal.Button.render({
+
+			// Configure environment
+			env: 'sandbox',
+			client: {
+				sandbox: 'AZOytF9O09T6jNy9RfxdcFXorGecbV-WK8XzAQ7zkcvIybUGBIQeCJChG3ho8_cwaGCnZ_7n0KZNS9x3',
+				production: 'demo_production_client_id'
+			},
+			// Customize button (optional)
+			locale: 'en_US',
+			style: {
+				size: 'medium',
+				color: 'gold',
+				shape: 'pill',
+			},
+
+			// Enable Pay Now checkout flow (optional)
+			commit: true,
+
+			// Set up a payment
+			payment: function(data, actions) {
+				return actions.payment.create({
+					transactions: [{
+						amount: {
+							total: `${total}`,
+							currency: 'USD'
+						}
+					}]
+				});
+			},
+			// Execute the payment
+			onAuthorize: function(data, actions) {
+				return actions.payment.execute().then(function() {
+					// Show a confirmation message to the buyer
+					window.alert('Cảm ơn bạn đã mua sản phẩm của chúng tôi !');
+				});
+			}
+		}, '#paypal-button');
+	</script>
+
 
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script>
 		$(function() {
 			$("#slider-range").slider({
 				range: true,
-				step:1000,
+				step: 1000,
 				min: 10000,
 				max: 200000,
 				values: [50000, 150000],
 				slide: function(event, ui) {
-					$("#amount").val(ui.values[0]+ " đ - " + ui.values[1] + " đ ");
+					$("#amount").val(ui.values[0] + " đ - " + ui.values[1] + " đ ");
 					$("#start_price").val(ui.values[0]);
 					$("#end_price").val(ui.values[1]);
 				}
 			});
-			$("#amount").val($("#slider-range").slider("values", 0)+ " đ " +
-				" - " + $("#slider-range").slider("values", 1) + " đ" );
+			$("#amount").val($("#slider-range").slider("values", 0) + " đ " +
+				" - " + $("#slider-range").slider("values", 1) + " đ");
 		});
 	</script>
 	<script>
@@ -606,13 +643,15 @@
 			}
 
 		});
-
+	</script>
+	<script>
 		function view() {
+
 			if (localStorage.getItem('data') != null) {
 				var data = JSON.parse(localStorage.getItem('data'));
 				data.reverse();
 				document.getElementById('row_wishlist').style.overflow = 'scroll';
-				document.getElementById('row_wishlist').style.height = "450px";
+				document.getElementById('row_wishlist').style.height = "350px";
 				for (i = 0; i < data.length; i++) {
 					var name = data[i].name;
 					var price = data[i].price;
@@ -659,10 +698,71 @@
 			}
 			localStorage.setItem('data', JSON.stringify(old_data));
 
+		}
+
+		function viewed() {
+			if (localStorage.getItem('watched') != null) {
+				var data = JSON.parse(localStorage.getItem('watched'));
+				data.reverse();
+				document.getElementById('row_watched').style.overflow = 'scroll';
+				document.getElementById('row_watched').style.height = "250px";
+				for (i = 0; i < data.length; i++) {
+					var name = data[i].name;
+					var price = data[i].price;
+					var image = data[i].image;
+					var url = data[i].url;
+					$('#row_watched').append('<div class="row" style="margin:10px 0"><div class="col-md-4"><img src=" ' + image + '" width="100%" ></div><div class="col-md-8 info_wishlist"><p>' + name + '</p><p style="color:#FE980F">' + price + ' VNĐ </p><a href="' + url + '">Đặt hàng</a> </div></div>');
+				}
+
+
+			}
+		}
+		viewed();
+		add_watchedlist();
+
+
+
+		function add_watchedlist() {
+			var id = $('#product_watched_id').val();
+
+			var name = document.getElementById('watched_productname' + id).value;
+			var price = document.getElementById('watched_productprice' + id).value;
+			var image = document.getElementById('watched_productimage' + id).value;
+			var url = document.getElementById('watched_producturl' + id).value;
+
+
+
+			var newItem = {
+				'url': url,
+				'id': id,
+				'name': name,
+				'price': price,
+				'image': image
+			}
+			if (localStorage.getItem('watched') == null) {
+				localStorage.setItem('watched', '[]');
+			}
+			var old_data = JSON.parse(localStorage.getItem('watched'));
+
+
+			var matches = $.grep(old_data, function(obj) {
+				return obj.id == id;
+
+			})
+			if (matches.length) {
+
+			} else {
+				old_data.push(newItem);
+				$('#row_watched').append('<div class="row" style="margin:10px 0"><div class="col-md-4"><img src="' + newItem.image + '" width="100%" ></div><div class="col-md-8 info_wishlist"><p>' + newItem.name + '</p><p style="color:#FE980F">' + newItem.price + ' VNĐ </p><a href="' + newItem.url + '">Đặt hàng</a></div></div>');
+
+			}
+			localStorage.setItem('watched', JSON.stringify(old_data));
+
 
 
 
 		}
+		// Sản phẩm yêu thích
 	</script>
 	<script>
 		$(document).ready(function() {
@@ -940,7 +1040,53 @@
 					});
 				}
 			});
+
 		});
+	</script>
+	<script>
+		function Add_to_cart($product_id) {
+			var id = $product_id;
+
+			var cart_product_id = $('.cart_product_id_' + id).val()
+			var cart_product_name = $('.cart_product_name_' + id).val();
+			var cart_product_img = $('.cart_product_img_' + id).val();
+			var cart_product_price = $('.cart_product_price_' + id).val();
+			var cart_product_qty = $('.cart_product_qty_' + id).val();
+			var cart_product_quantity = $('.cart_product_quantity_' + id).val();
+			var _token = $('input[name="_token"]').val();
+
+
+
+			if (parseInt(cart_product_qty) > parseInt(cart_product_quantity)) {
+				alert("Làm ơn đặt nhỏ hơn " + cart_product_quantity);
+			} else {
+				$.ajax({
+					url: "{{url('/add-cart-ajax')}}",
+					method: 'POST',
+					data: {
+						cart_product_quantity: cart_product_quantity,
+						cart_product_id: cart_product_id,
+						cart_product_name: cart_product_name,
+						cart_product_img: cart_product_img,
+						cart_product_price: cart_product_price,
+						cart_product_qty: cart_product_qty,
+						_token: _token
+					},
+
+					success: function(data) {
+						swal({
+							title: "Thành Công!",
+							text: "Click vào button để tiếp tục!",
+							icon: "success",
+							button: "Tiếp tục!",
+
+						});
+
+					}
+
+				});
+			}
+		}
 	</script>
 	<script>
 		$(document).on('click', '.add-to-cart-quickview', function() {
@@ -1011,6 +1157,220 @@
 			window.location.href = "{{url('/giohang')}}";
 		});
 	</script>
+	<script>
+		$(document).ready(function() {
+			$('.send_order').click(function() {
+
+				swal({
+						title: "Xác nhận đơn hàng ?",
+						text: "Đơn hàng sẽ không hoàn trả khi đặt, xác nhận đơn hàng ? ",
+						icon: "warning",
+						buttons: true,
+						dangerMode: true,
+					})
+					.then((willDelete) => {
+						if (willDelete) {
+
+
+							var shipping_email = $('.shipping_email').val()
+							var shipping_name = $('.shipping_name').val();
+							var shipping_address = $('.shipping_address').val();
+							var shipping_phone = $('.shipping_phone').val();
+							var shipping_notes = $('.shipping_notes').val();
+							var shipping_method = $('.select_payment').val();
+							var order_money = $('.order_money').val();
+							var order_coupon = $('.order_coupon').val();
+							var _token = $('input[name="_token"]').val();
+
+
+							$.ajax({
+								url: "{{url('/confirm_order')}}",
+								method: 'POST',
+								data: {
+									shipping_email: shipping_email,
+									shipping_name: shipping_name,
+									shipping_address: shipping_address,
+									shipping_method: shipping_method,
+									shipping_phone: shipping_phone,
+									shipping_notes: shipping_notes,
+									order_money: order_money,
+									order_coupon: order_coupon,
+									_token: _token
+								},
+
+								success: function(data) {
+									swal({
+										title: "Thành Công !",
+										text: "Đơn hàng đã được gửi !",
+										icon: "success",
+										button: "Thoát ",
+									});
+								}
+
+							});
+							window.setTimeout(function() {
+								location.reload();
+							}, 3000);
+
+						} else {
+							swal("Tiếp tục mua hàng !");
+						}
+					});
+
+
+			});
+		});
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$('.calculate_delivery').click(function() {
+				var matp = $('.city').val();
+				var maqh = $('.province').val();
+				var xaid = $('.wards').val();
+				var _token = $('input[name="_token"]').val();
+
+				if (maqh == '' || xaid == '') {
+					alert('Làm ơn chọn để tính phí vận chuyển ');
+				} else {
+
+					$.ajax({
+						url: "{{url('/calculate_money')}}",
+						method: 'POST',
+						data: {
+							matp: matp,
+							maqh: maqh,
+							xaid: xaid,
+							_token: _token
+						},
+						success: function() {
+							location.reload();
+						}
+					});
+				}
+
+			});
+		});
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$('.choose').on('change', function() {
+
+				var action = $(this).attr('id');
+				var ma_id = $(this).val();
+				var _token = $('input[name="_token"]').val();
+				var result = "";
+
+
+				if (action == 'city') {
+					result = 'province';
+
+				} else {
+					result = 'wards';
+				}
+				$.ajax({
+					url: "{{url('/delivery_home')}}",
+					method: 'POST',
+					data: {
+						action: action,
+						ma_id: ma_id,
+						_token: _token
+					},
+					success: function(data) {
+						$('#' + result).html(data);
+					}
+				});
+			});
+		});
+	</script>
+	<script>
+		function delete_compare(id) {
+			if (localStorage.getItem('compare') != null) {
+				var data = JSON.parse(localStorage.getItem('compare'));
+				var index = data.findIndex(item => item.id === id);
+				data.splice(index, 1);
+				localStorage.setItem('compare', JSON.stringify(data));
+				document.getElementById("row_compare" + id).remove();
+			}
+		}
+		viewed_compare();
+
+		function viewed_compare() {
+			if (localStorage.getItem('compare') != null) {
+				var data = JSON.parse(localStorage.getItem('compare'));
+			}
+
+			for (i = 0; i < data.length; i++) {
+
+				var id = data[i].id;
+				var name = data[i].name;
+				var price = data[i].price;
+				var image = data[i].image;
+				var url = data[i].url;
+
+				$('#row_compare').find('tbody').append(`<tr id="row_compare` + id + `">
+													<th>` + name + `</th>
+													<td>` + price + `</td>
+													<td><img width="150px" src="` + image + `" alt=""></td>
+													<td>Minh Chiến</td>
+													<td><a target="_blank" href="` + url + `">Chi tiết </a></td>
+													<td><a style="cursor:pointer" onclick="delete_compare(` + id + `)">Xoá</a></td>
+												</tr>`);
+
+			}
+		}
+
+		function add_compare(product_id) {
+			document.getElementById('title_compare').innerHTML = "So sánh tối đa 3 sản phẩm";
+			var id = product_id;
+
+			var name = document.getElementById('wishlist_productname' + id).value;
+			var price = document.getElementById('wishlist_productprice' + id).value;
+			var image = document.getElementById('wishlist_productimage' + id).src;
+			var url = document.getElementById('wishlist_producturl' + id).href;
+
+			var newItem = {
+				'url': url,
+				'id': id,
+				'name': name,
+				'price': price,
+				'image': image
+			}
+			if (localStorage.getItem('compare') == null) {
+				localStorage.setItem('compare', '[]');
+			}
+			var old_data = JSON.parse(localStorage.getItem('compare'));
+
+
+			var matches = $.grep(old_data, function(obj) {
+				return obj.id == id;
+
+			})
+			if (matches.length) {
+
+			} else {
+
+				if (old_data.length <= 3) {
+					old_data.push(newItem);
+					$('#row_compare').find('tbody').append(`<tr id="row_compare` + id + `">
+													<th>` + newItem.name + `</th>
+													<td>` + newItem.price + `</td>
+													<td><img width="150px" src="` + newItem.image + `" alt=""></td>
+													<td>Minh Chiến</td>
+													<td><a target="_blank" href="` + url + `">Chi tiết </a></td>
+													<td><a style="cursor:pointer" onclick="delete_compare(` + id + `)">Xoá</a></td>
+												</tr>`);
+
+				}
+
+			}
+			localStorage.setItem('compare', JSON.stringify(old_data));
+
+			$('#compare').modal();
+		}
+	</script>
+
 
 
 

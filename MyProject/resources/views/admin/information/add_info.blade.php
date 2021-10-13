@@ -59,6 +59,52 @@
 
             </div>
         </section>
+        <section class="panel">
+            <header class="panel-heading">
+                Thêm thông tin network social 
+                <span class="tools pull-right">
+                    <a class="fa fa-chevron-down" href="javascript:;"></a>
+                    <a class="fa fa-cog" href="javascript:;"></a>
+                    <a class="fa fa-times" href="javascript:;"></a>
+                </span>
+            </header>
+            <div class="panel-body">
+                <div class=" form">
+                    <form enctype='multipart/form-data'>
+                        @csrf
+                        <div class="form-group ">
+                            <label  class="control-label col-lg-3">Tên icon  </label>
+                            <div class="col-lg-6">
+                                <input type="text" name="icon_name " id="icon_name " class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-lg-3">Hình ảnh icon </label>
+                            <div class="col-lg-6">
+                                <input type="text" name="icon_image " id="icon_image " class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-lg-3">Link icon  </label>
+                            <div class="col-lg-6">
+                                <input type="text" name="icon_link " id="icon_link " class="form-control">
+                            </div>
+                        </div>
+                       
+
+                        <div class="form-group">
+                            <div class="col-lg-offset-3 col-lg-6">
+                                <button class="btn btn-primary" type="submit">Thêm thông tin </button>
+                                <a href="" class="btn btn-default" type="button">Trở về </a>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </section>
     </div>
 </div>
 

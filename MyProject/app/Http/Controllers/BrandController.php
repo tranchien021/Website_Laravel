@@ -86,11 +86,23 @@ class BrandController extends Controller
         $product = Product::where('masp', $data['category_masp'])->orderBy('id', 'ASC')->take(4)->get();
         $product_count = $product->count();
         if ($product_count > 0) {
-            $output = '<div class="tab-content">';
+
+            $output = '<div class="tab-content">
+            ';
             foreach ($product as $key => $pro) {
                 $output .= '
-     
-			<div class="tab-pane fade active in" id="tshirt">
+                <input type="hidden" value="' . $pro->id . '" class="cart_product_id_' . $pro->id . '">
+                <input type="hidden" id="wishlist_productname' . $pro->id . '" value="' . $pro->name . '" class="cart_product_name_' . $pro->id . '">
+                <input type="hidden" value="' . $pro->img . '" class="cart_product_img_' . $pro->id . '">
+                <input type="hidden" id="wishlist_productprice' . $pro->id . '" value="' . $pro->price . '" class="cart_product_price_' . $pro->id . '">
+                <input type="hidden" value="1" class="cart_product_qty_' . $pro->id . '">
+                <input type="hidden" value="' . $pro->quantity . '" class="cart_product_quantity_' . $pro->id . '">
+                <a id="wishlist_producturl' . $pro->id . '" href="' . url('/product_detail/' . $pro->id) . '">
+                   
+                </a>
+            
+
+			<a href="' . url('/product_detail/' . $pro->id) . '"><div class="tab-pane fade active in" id="tshirt">
 
 				<div class="col-sm-3">
 					<div class="product-image-wrapper">
@@ -99,7 +111,9 @@ class BrandController extends Controller
 								<img src="' . url('uploads/home/' . $pro->img) . '" alt="' . $pro->name . '" />
 								<h2>' . number_format($pro->price, 0, ',', '.') . '  VND </h2>
 								<p>' . $pro->name . '</p>
-								<a href="' . url('/product_detail/'.$pro->id) . '" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Chi tiết</a>
+            </a>
+								
+                                <button  id="' . $pro->id . '" class="btn btn-default " onclick="Add_to_cart(this.id)" >Thêm giỏ hàng </button >
 							</div>
 
 						</div>

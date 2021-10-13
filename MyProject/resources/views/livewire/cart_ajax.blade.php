@@ -27,7 +27,7 @@
 							<td class="image">Hình Ảnh </td>
 							<td class="description">Tên sản phẩm </td>
 							<td class="price">Giá sản phẩm</td>
-							<td>Số lượng trong kho </td>
+							<td> Số lượng trong kho </td>
 							<td class="quantity">Số lượng </td>
 							<td class="total">Thành tiền </td>
 							<td></td>

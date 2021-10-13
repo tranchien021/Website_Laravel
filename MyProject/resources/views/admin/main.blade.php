@@ -130,9 +130,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <img alt="" src="{{url('admin')}}/images/minhchien.jpg">
                             <span class="username">
                                 <?php
-                                if(Session::get('login_normal')){
-                                    $name=Session::get('Account_Name');
-                                }else{
+                                if (Session::get('login_normal')) {
+                                    $name = Session::get('Account_Name');
+                                } else {
                                     $name = Auth::user()->name;
                                 }
                                 if ($name) {
@@ -356,6 +356,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         <!--main content end-->
     </section>
+
     <script>
         $('.btn_delete_document').click(function() {
             var product_id = $(this).data('document_id');
@@ -363,9 +364,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             $.ajax({
                 url: "{{url('admin/delete_document')}}",
                 method: 'POST',
-               
+
                 data: {
-                    product_id:product_id,_token:_token
+                    product_id: product_id,
+                    _token: _token
                 },
                 success: function(data) {
                     alert(data);
@@ -1114,6 +1116,125 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         });
     </script>
+    <script>
+        list_icon();
+
+        function delete_icon(id) {
+            $.ajax({
+                url: "{{url('admin/delete_icon')}}",
+                method: 'GET',
+                data: {
+                    id: id
+                },
+                success: function(data) {
+                    list_icon();
+                    list_partner();
+                }
+            });
+        }
+
+        function list_icon() {
+            $.ajax({
+                url: "{{url('admin/list_icon')}}",
+                method: 'GET',
+
+                success: function(data) {
+                    $('#list_icon').html(data);
+                }
+            });
+        }
+        $('.add_icon').click(function() {
+            
+            var name = $('#icon_name').val();
+            var link = $('#icon_link').val();
+            var image = $('#icon_image')[0].files[0];
+          
+           
+           
+            
+
+            var form_data = new FormData();
+            form_data.append('file', image);
+            form_data.append('name', name);
+            form_data.append('link', link);
+            
+
+
+
+            $.ajax({
+                url: "{{url('admin/add_icon')}}",
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: form_data,
+
+                success: function(data) {
+                    alert('Thêm icon thành công ');
+                    list_icon();
+                }
+            });
+
+        });
+    </script>
+
+<script>
+        list_partner();
+
+       
+
+        function list_partner() {
+            $.ajax({
+                url: "{{url('admin/list_partner')}}",
+                method: 'GET',
+
+                success: function(data) {
+                    $('#list_partner').html(data);
+                }
+            });
+        }
+        $('.add_partner').click(function() {
+            
+            var name = $('#partner_name').val();
+            var link = $('#partner_link').val();
+            var image = $('#partner_image')[0].files[0];
+          
+           
+           
+            
+
+            var form_data = new FormData();
+            form_data.append('file', image);
+            form_data.append('name', name);
+            form_data.append('link', link);
+            
+
+
+
+            $.ajax({
+                url: "{{url('admin/add_partner')}}",
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: form_data,
+
+                success: function(data) {
+                    alert('Thêm đối tác thành công ');
+                    list_partner();
+                    
+                }
+            });
+
+        });
+    </script>
+
 
 
 

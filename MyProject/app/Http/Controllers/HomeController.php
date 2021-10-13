@@ -10,6 +10,7 @@ use App\Models\Slider;
 use App\Models\Brand;
 use App\Models\CategoryBlog;
 use App\Models\Gallery;
+use App\Models\Icons;
 use App\Models\Rating;
 
 use Cart;
@@ -23,7 +24,12 @@ class HomeController extends Controller
         $meta_keywords="Trang web bán hàng, web bán hàng";
         $meta_title="Trang chủ, web bán hàng ";
         $url_canonical=$request->url();
+        $icon=Icons::orderBy('icon_id','ASC')->where('category','icons')->get();
+        $partner=Icons::orderBy('icon_id','ASC')->where('category','partner')->get();
         
+        
+       
+
         $category=Category::all();
         $brand=Brand::where('brand_status',1)->orderBy('brand_parent','DESC')->orderBy('brand_order','ASC')->get();
         $cate_pro_tab=Category::orderBy('id','ASC')->get();
@@ -35,7 +41,7 @@ class HomeController extends Controller
         
         $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
        
-    	return view('layouts.home',compact('cate_pro_tab','category_blog','brand','slider','product_nb','category','meta_desc','meta_keywords','meta_title','url_canonical'));
+    	return view('layouts.home',compact('partner','icon','cate_pro_tab','category_blog','brand','slider','product_nb','category','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
     public function login(){
         
@@ -46,11 +52,13 @@ class HomeController extends Controller
         $meta_keywords="Trang web bán hàng, web bán hàng";
         $meta_title="Trang miêu tả, web bán hàng ";
         $url_canonical=$request->url();
+        $icon=Icons::orderBy('icon_id','ASC')->get();
+       
         $category=Category::all();
         $brand=Brand::where('brand_status',1)->orderBy('brand_parent','DESC')->orderBy('brand_order','ASC')->get();
         $category_blog=CategoryBlog::all();
        
-        return view('about',compact('category_blog','brand','category','meta_desc','meta_keywords','meta_title','url_canonical'));
+        return view('about',compact('icon','category_blog','brand','category','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
     public function admin(){
         return view('admin.dashboard');

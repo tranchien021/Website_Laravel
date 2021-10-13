@@ -70,12 +70,27 @@ class CheckoutController extends Controller
         Session::put('customer_name', $request->customer_name);
         return redirect('/checkout');
     }
-    public function checkout()
+    public function checkout(Request $request)
     {
-        $category_blog = CategoryBlog::all();
+        $meta_desc="Trang web hỗ trợ bán đồ ăn , tiện lợi , nhanh chóng , dành cho mọi thể loại mặt hàng buôn bán";
+        $meta_keywords="Trang web bán hàng, web bán hàng";
+        $meta_title="Trang đơn hàng , web food";
+        $url_canonical=$request->url();
+    
         $city = City::orderBy('matp', 'ASC')->get();
+        $category=Category::all();
+        $brand=Brand::where('brand_status',1)->orderBy('brand_parent','DESC')->orderBy('brand_order','ASC')->get();
+        $category_blog=CategoryBlog::all();
+        $slider=Slider::orderBy('slider_id','DESC')->where('slider_status','1')->get();
+        
+       
+       
+        return view('layouts.checkout',compact('city','category_blog','brand','slider','category','meta_desc','meta_keywords','meta_title','url_canonical'));
 
-        return view('layouts.checkout', compact('city', 'category_blog'));
+      
+        
+
+        
     }
     public function save_checkout(Request $request)
     {

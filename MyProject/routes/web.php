@@ -123,6 +123,11 @@ Route::get('/login_checkout/callback','LoginController@callback_customer_google'
 Route::get('/login_customer_facebook','LoginController@login_customer_facebook');
 Route::get('/customer_facebook/callback','LoginController@callback_customer_facebook');
 
+// History Order Controller 
+Route::get('/history_order','OrderController@history_order');
+Route::get('/view_detail_history/{order_code}','OrderController@view_detail_history');
+
+
 
 
 
@@ -292,6 +297,15 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::get('/edit_contact','ContactController@edit_contact');
 	Route::post('/update_contact/{info_id}','ContactController@update_contact');
 
+	Route::get('/list_icon','ContactController@list_icon');
+	Route::get('/delete_icon','ContactController@delete_icon');
+	Route::post('/add_icon','ContactController@add_icon');
+
+	Route::post('/add_partner','ContactController@add_partner');
+	Route::get('/list_partner','ContactController@list_partner');
+
+	
+	
 
 	Route::resources([
 		'category'=>'CategoryController',

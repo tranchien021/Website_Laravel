@@ -174,12 +174,12 @@
               <?php
                 $total_after_coupon=($total*$coupon_number)/100;
                 echo "Tổng giảm :  ". number_format($total_after_coupon,0,',','.') . " đ </br>";
-                $total_coupon=$total- $total_after_coupon-$details->product_moneyship;
+                $total_coupon=$total- $total_after_coupon+$details->product_moneyship;
               ?>
           @else
              <?php
                 echo "Tổng giảm :  ". number_format($coupon_number,0,',','.') . " đ </br>";
-                $total_coupon=$total - $coupon_number-$details->product_moneyship;
+                $total_coupon=$total - $coupon_number+$details->product_moneyship;
               ?>
           @endif
           Phí vận chuyển :  {{number_format($details->product_moneyship,0,',','.')}} đ <br>

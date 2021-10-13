@@ -6,6 +6,13 @@
 
 <div class="col-sm-9 padding-right">
 	@foreach($product_detail as $product_detail)
+		<input type="hidden" id='product_watched_id' value="{{$product_detail->id}}">
+		
+		<input type="hidden" id='watched_productname{{$product_detail->id}}' value="{{$product_detail->name}}">
+		<input type="hidden" id='watched_producturl{{$product_detail->id}}' value="{{url('product_detail/'.$product_detail->id)}}">
+		<input type="hidden" id='watched_productimage{{$product_detail->id}}' value="{{url('uploads/home/'.$product_detail->img)}}">
+		<input type="hidden" id='watched_productprice{{$product_detail->id}}' value="{{number_format($product_detail->price,0,',','.')}}">
+
 	<div class="product-details">
 		<!--product-details-->
 		<style>

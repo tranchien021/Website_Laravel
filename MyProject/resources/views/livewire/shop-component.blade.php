@@ -39,6 +39,7 @@
 
 
 		@foreach($products as $product)
+		
 		<div class="col-sm-4">
 			<div class="product-image-wrapper">
 
@@ -49,7 +50,7 @@
 							<input type="hidden" value="{{$product->id}}" class="cart_product_id_{{$product->id}}">
 							<input type="hidden" id="wishlist_productname{{$product->id}}" value="{{$product->name}}" class="cart_product_name_{{$product->id}}">
 							<input type="hidden" value="{{$product->img}}" class="cart_product_img_{{$product->id}}">
-							<input type="hidden" id="wishlist_productprice{{$product->id}}" value="{{number_format($product->price,0,',','.') }}" class="cart_product_price_{{$product->id}}">
+							<input type="hidden" id="wishlist_productprice{{$product->id}}" value="{{$product->price }}" class="cart_product_price_{{$product->id}}">
 							<input type="hidden" value="1" class="cart_product_qty_{{$product->id}}">
 							<input type="hidden" value="{{$product->quantity}}" class="cart_product_quantity_{{$product->id}}">
 							<a id="wishlist_producturl{{$product->id}}" href="{{url('/product_detail/'.$product->id)}}">
@@ -188,9 +189,44 @@
 							<button class="button_wishlist" id="{{$product->id}}" onclick="add_wistlist(this.id);"><span>Yêu thích</span></button>
 
 						</li>
-						<li><a href=""><i class="fa fa-plus-square" style="color:#FE980F;"></i>So sánh</a></li>
+						<li><a type="button" style="cursor:pointer" onclick="add_compare({{$product->id}})"><i class="fa fa-plus-square" style="color:#FE980F;"></i>So sánh</a></li>
 						<li><i class="fa fa-thumbs-down thumb"></i><button class="delete_withlist button_wishlist" data-id="{{$product->id}}" id="{{$product->id}}">Bỏ thích</button></li>
 					</ul>
+					<div class="modal fade" id="compare" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="title_compare"></h5>
+
+								</div>
+								<div class="modal-body">
+									<div id="row_compare">
+										<table class="table">
+											<thead>
+												<tr>
+													<th scope="col">Tên sản phẩm </th>
+													<th scope="col">Giá</th>
+													<th scope="col">Hình ảnh </th>
+													<th scope="col">Thông số </th>
+													<th scope="col">Chi tiết  </th>
+													<th scope="col">Xoá </th>
+													
+												</tr>
+											</thead>
+											<tbody>
+											
+											
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

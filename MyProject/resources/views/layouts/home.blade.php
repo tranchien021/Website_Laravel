@@ -5,7 +5,8 @@
 	<div class="features_items">
 		<!--features_items-->
 		<div class="fb-like" data-href="{{$url_canonical}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="false"></div>
-		<div class="fb-share-button" data-href="http://localhost:8080/LEARN_PHP/Laravel/MyProject/public/" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$url_canonical}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+		<div class="fb-share-button" data-href="{{$url_canonical}}" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$url_canonical}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+		<div class="zalo-share-button" data-href="{{$url_canonical}}" data-oaid="579745863508352884" data-layout="1" data-color="blue" data-customize="false"></div>
 		<h2 class="title text-center">Sản phẩm nổi bật</h2>
 		@foreach($product_nb as $product)
 		<div class="col-sm-4">
@@ -122,40 +123,79 @@
 				</div>
 				<div class="choose">
 					<style>
-						ul.nav.nav-pills.nav-justified li{
+						ul.nav.nav-pills.nav-justified li {
 							text-align: center;
-							font-size:13px;
+							font-size: 13px;
 						}
-						.button_wishlist{
-							border:none;
+
+						.button_wishlist {
+							border: none;
 							background: #ffff;
-							color:#B3AFAB;
+							color: #B3AFAB;
 						}
-						
-						.button_wishlist span:hover{
+
+						.button_wishlist span:hover {
 							color: red;
 						}
-						.button_wishlist:focus{
-							border:none;
+
+						.button_wishlist:focus {
+							border: none;
 							outline: none;
 						}
-						.delete_withlist:hover{
+
+						.delete_withlist:hover {
 							color: purple;
 						}
-						.thumb{
-							color:black;
+
+						.thumb {
+							color: black;
 						}
 					</style>
 					<ul class="nav nav-pills nav-justified">
 						<li>
 							<i class="fa fa-heart" style="color:red"></i>
-							
+
 							<button class="button_wishlist" id="{{$product->id}}" onclick="add_wistlist(this.id);"><span>Yêu thích</span></button>
-							
+
 						</li>
-						<li><a href=""><i class="fa fa-plus-square" style="color:#FE980F;"></i>So sánh</a></li>
+						<li><a type="button" style="cursor:pointer" onclick="add_compare({{$product->id}})"><i class="fa fa-plus-square" style="color:#FE980F;"></i>So sánh</a></li>
 						<li><i class="fa fa-thumbs-down thumb"></i><button class="delete_withlist button_wishlist" data-id="{{$product->id}}" id="{{$product->id}}">Bỏ thích</button></li>
 					</ul>
+					<div class="modal fade" id="compare" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="title_compare"></h5>
+
+								</div>
+								<div class="modal-body">
+									<div id="row_compare">
+										<table class="table">
+											<thead>
+												<tr>
+													<th scope="col">Tên sản phẩm </th>
+													<th scope="col">Giá</th>
+													<th scope="col">Hình ảnh </th>
+													<th scope="col">Thông số </th>
+													<th scope="col">Chi tiết </th>
+													<th scope="col">Xoá </th>
+
+												</tr>
+											</thead>
+											<tbody>
+
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -168,120 +208,67 @@
 		<!--category-tab-->
 		<div class="col-sm-12">
 			<ul class="nav nav-tabs">
-				@php 
-					$i=0;
+				@php
+				$i=0;
 				@endphp
 				@foreach($cate_pro_tab as $cate_tag)
-					@php
-						$i++;
-					@endphp 
+				@php
+				$i++;
+				@endphp
 				<li data-masp="{{$cate_tag->theloai}}" class="tabs_pro {{$i==1 ? 'active':''}}"><a href="#tshirt" data-toggle="tab">{{$cate_tag->Tên}}</a></li>
 				@endforeach
 
 			</ul>
 		</div>
 		<div id="tabs_product"></div>
-		
+
 	</div>
 	<!--/category-tab-->
+	<style>
+		.item {
+			padding: 0px !important;
+		}
+
+		.part_name {
+			text-align: center;
+		
+
+		}
+
+		button.owl-prev {
+			font-size: 30px !important;
+		}
+
+		button.owl-next {
+			font-size: 30px !important;
+		}
+
+		.owl-theme .owl-nav {
+			margin-top: 0px;
+		}
+	</style>
 
 	<div class="recommended_items">
 		<!--recommended_items-->
-		<h2 class="title text-center">recommended items</h2>
+		<h2 class="title text-center">Đối tác của chúng tồi </h2>
 
-		<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-			<div class="carousel-inner">
-				<div class="item active">
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="{{url('home')}}/images/home/recommend1.jpg" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-									<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-								</div>
+		<div style="padding:20px 0px 0px 0px" class="owl-carousel owl-theme col-md-12">
+			@foreach($partner as $partners)
+			<div class="item">
+				<a href="{{$partners->icon_link}}">
+					<p><img width="150px" height="150px" src="{{url('uploads/icon/'.$partners->icon_image)}}" alt="">
+					</p>
+					<h5 style="text-transform: uppercase;" class="part_name">{{$partners->icon_name}}</h5>
+				</a>
 
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="{{url('home')}}/images/home/recommend2.jpg" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-									<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-								</div>
 
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="{{url('home')}}/images/home/recommend3.jpg" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-									<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="item">
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="{{url('home')}}/images/home/recommend1.jpg" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-									<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-								</div>
-
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="{{url('home')}}/images/home/recommend2.jpg" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-									<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-								</div>
-
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="{{url('home')}}/images/home/recommend3.jpg" alt="" />
-									<h2>$56</h2>
-									<p>Easy Polo Black Edition</p>
-									<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
-			<a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-				<i class="fa fa-angle-left"></i>
-			</a>
-			<a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-				<i class="fa fa-angle-right"></i>
-			</a>
+			@endforeach
+
 		</div>
+
 	</div>
+	<hr>
 	<!--/recommended_items-->
 
 </div>
