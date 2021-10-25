@@ -3,13 +3,14 @@
 @section('main')
 <div class="col-sm-9 padding-right">
 
-	<div class="fb-like" data-href="{{$url_canonical}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="false"></div>
-	<div class="fb-share-button" data-href="http://localhost:8080/LEARN_PHP/Laravel/MyProject/public/" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{$url_canonical}}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+	
 	<div class="features_items">
 		<!--features_items-->
 		<h2 class="title text-center">Sản phẩm thể loại</h2>
+		
+		
 		@foreach($product as $product)
-		<div class="col-sm-4">
+		<div class="col-sm-4" style="margin-top:20px">
 			<div class="product-image-wrapper">
 
 				<div class="single-products">
@@ -19,7 +20,7 @@
 							<input type="hidden" value="{{$product->id}}" class="cart_product_id_{{$product->id}}">
 							<input type="hidden" id="wishlist_productname{{$product->id}}" value="{{$product->name}}" class="cart_product_name_{{$product->id}}">
 							<input type="hidden" value="{{$product->img}}" class="cart_product_img_{{$product->id}}">
-							<input type="hidden" id="wishlist_productprice{{$product->id}}" value="{{number_format($product->price,0,',','.') }}" class="cart_product_price_{{$product->id}}">
+							<input type="hidden" id="wishlist_productprice{{$product->id}}" value="{{$product->price }}" class="cart_product_price_{{$product->id}}">
 							<input type="hidden" value="1" class="cart_product_qty_{{$product->id}}">
 							<input type="hidden" value="{{$product->quantity}}" class="cart_product_quantity_{{$product->id}}">
 							<a id="wishlist_producturl{{$product->id}}" href="{{url('/product_detail/'.$product->id)}}">
@@ -36,9 +37,13 @@
 									font-family: 'Roboto', sans-serif;
 									font-size: 15px;
 									margin-bottom: 25px;
+
 								}
 							</style>
-							<input value="Thêm giỏ hàng" type="button" data-id_product="{{$product->id}}" class="btn btn-default add-to-cart">
+
+							<button type="button" data-id_product="{{$product->id}}" class="btn btn-default add-to-cart add_cart_{{$product->id}}">Thêm giỏ hàng</button>
+							<button style="display:none;margin-bottom: 20px;" type="button" id="{{$product->id}}" class="btn btn-danger remove_cart_{{$product->id}} " onclick="delete_cart(this.id)">Xoá giỏ hàng</button>
+
 							<input type="button" class="btn btn-default xemnhanh" data-toggle="modal" data-target="#xemnhanh" value="Xem nhanh" data-id_product="{{$product->id}}">
 
 
@@ -46,9 +51,80 @@
 						</form>
 
 
-
 					</div>
 
+				</div>
+				<div class="modal fade" id="xemnhanh" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">
+									<span id="product_quickview_title"></span>
+								</h5>
+
+							</div>
+							<div class="modal-body">
+								<div class='row'>
+									<div class="col-md-5">
+										<span id="product_quickview_image"></span>
+										<span id="product_quickview_gallery"></span>
+									</div>
+									<form>
+										@csrf
+										<div id="product_quickview_value"></div>
+										<div class="col-md-7">
+											<style>
+												h5.modal-title.product_quickview_title {
+													text-align: center;
+													font-size: 25px;
+													color: brown;
+												}
+
+												p.quickview {
+													font-size: 14px;
+													color: brown;
+												}
+
+												span#product_quickview_content img {
+													width: 100%;
+												}
+
+												@media screen and(min-width:768px) {
+													.modal-dialog {
+														width: 700px;
+													}
+
+													.modal-sm {
+														width: 350px;
+													}
+												}
+
+												@media screen and (min-width:992px) {
+													.modal-lg {
+														width: 950px;
+													}
+												}
+											</style>
+											<h2 class="quickview"><span id="product_quickview_title"></span></h2>
+											<p>Mã ID : <span id="product_quickview_id"></span></p>
+											<p>Giá sản phẩm : <span id="product_quickview_price"></span> </p>
+											<label for="">Số lượng </label>
+											<input type="number" name="qty" min=1 class="cart_product_qty_" value="1" />
+											<p><span id="product_quickview_content"></span></p>
+											<div id="product_quickview_button"></div>
+											<div id="beforesend_quickview"></div>
+
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+								<button type="button" class="btn btn-default redirect_cart">Đi tới sản phẩm</button>
+
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="choose">
 					<style>
@@ -87,18 +163,53 @@
 							<button class="button_wishlist" id="{{$product->id}}" onclick="add_wistlist(this.id);"><span>Yêu thích</span></button>
 
 						</li>
-						<li><a href=""><i class="fa fa-plus-square" style="color:#FE980F;"></i>So sánh</a></li>
+						<li><a type="button" style="cursor:pointer" onclick="add_compare({{$product->id}})"><i class="fa fa-plus-square" style="color:#FE980F;"></i>So sánh</a></li>
 						<li><i class="fa fa-thumbs-down thumb"></i><button class="delete_withlist button_wishlist" data-id="{{$product->id}}" id="{{$product->id}}">Bỏ thích</button></li>
 					</ul>
+					<div class="modal fade" id="compare" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="title_compare"></h5>
+
+								</div>
+								<div class="modal-body">
+									<div id="row_compare">
+										<table class="table">
+											<thead>
+												<tr>
+													<th scope="col">Tên sản phẩm </th>
+													<th scope="col">Giá</th>
+													<th scope="col">Hình ảnh </th>
+													<th scope="col">Thông số </th>
+													<th scope="col">Chi tiết </th>
+													<th scope="col">Xoá </th>
+
+												</tr>
+											</thead>
+											<tbody>
+
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		@endforeach
+		<div id="cart_session"></div>
 
 
 	</div>
-	<div class="fb-comments" data-href="{{$url_canonical}}" data-width="" data-numposts="20"></div>
-
+	
 </div>
 
 

@@ -41,6 +41,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <link rel="icon" type="image/gif" href="{{asset('uploads/icon/laravel.png')}}" sizes="50x50" />
+
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
+   
 
 
     <script src="{{url('admin')}}/js/jquery2.0.3.min.js"></script>
@@ -69,10 +74,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- Format auto_number -->
     <script src="{{url('admin')}}/js/simple.money.format.js"></script>
 
-
-
+   
 
     @yield('js')
+   
+
 </head>
 <style>
     html,
@@ -127,7 +133,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <!-- user login dropdown start-->
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" src="{{url('admin')}}/images/minhchien.jpg">
+                            <img alt="" src="{{url('admin')}}/images/chien.jpg">
                             <span class="username">
                                 <?php
                                 if (Session::get('login_normal')) {
@@ -137,7 +143,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 }
                                 if ($name) {
                                     echo $name;
-                                }
+                                } 
 
 
                                 ?>
@@ -288,43 +294,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </li>
                         @endimpersonate
 
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class=" fa fa-bar-chart-o"></i>
-                                <span>Charts</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="chartjs.html">Chart js</a></li>
-                                <li><a href="flot_chart.html">Flot Charts</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class=" fa fa-bar-chart-o"></i>
-                                <span>Maps</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="google_map.html">Google Map</a></li>
-                                <li><a href="vector_map.html">Vector Map</a></li>
-                            </ul>
-                        </li>
-                        <li class="sub-menu">
-                            <a href="javascript:;">
-                                <i class="fa fa-glass"></i>
-                                <span>Extra</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="gallery.html">Gallery</a></li>
-                                <li><a href="404.html">404 Error</a></li>
-                                <li><a href="registration.html">Registration</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="login.html">
-                                <i class="fa fa-user"></i>
-                                <span>Login Page</span>
-                            </a>
-                        </li>
+                       
                     </ul>
                 </div>
                 <!-- sidebar menu end-->
@@ -1234,6 +1204,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         });
     </script>
+    <script>
+        function previewFile(input){
+            var file=$('.image_preview').get(0).files[0];
+           
+            if(file){
+                var render=new FileReader();
+                render.onload=function(){
+                    $('#preview_img').attr('src',render.result);
+                }
+                render.readAsDataURL(file);
+            }
+
+        }
+    </script>
+     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
 
 
 

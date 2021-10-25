@@ -5,6 +5,35 @@
 	<div class="features_items">
 		<!--features_items-->
 		<h2 class="title text-center">Tất cả sản phẩm</h2>
+
+		@foreach($category as $name_category)
+			
+		@endforeach
+		<div class="col-sm-12">
+			<label for="">Lọc sản phẩm </label>
+
+			@php
+				$category_cate=[];
+				$category_arrary=[];
+				if(isset($_GET['cate'])){
+					$category_cate=$_GET['cate'];
+				}else{
+					$category_cate=$name_category->theloai.",";
+				}
+				$category_arrary=explode(",",$category_cate);
+			@endphp
+
+			@foreach($category as $keys => $values)
+				<label class="checkbox-inline" for="">
+						<input type="checkbox" 
+						{{in_array($values->theloai,$category_arrary) ? 'checked': ''}}
+						class="form-control-checkbox category_filter" data-filters="category" value="{{$values->theloai}}" name="category_filter">
+						{{$values->Tên}}
+				</label>
+			@endforeach
+		</div>
+
+
 		<div class='row' style="margin:20px 0">
 			<div class="col-md-4">
 				<label for="amount">Sắp xếp theo</label>
@@ -28,7 +57,7 @@
 					<input type="hidden" name="start_price" id="start_price">
 					<input type="hidden" name="end_price" id="end_price">
 					<input type="submit" name="filter_price" value="Lọc giá ">
-					
+
 					<div id="slider-range"></div>
 				</form>
 
@@ -39,7 +68,7 @@
 
 
 		@foreach($products as $product)
-		
+
 		<div class="col-sm-4">
 			<div class="product-image-wrapper">
 
@@ -69,7 +98,9 @@
 									margin-bottom: 25px;
 								}
 							</style>
-							<input value="Thêm giỏ hàng" type="button" data-id_product="{{$product->id}}" class="btn btn-default add-to-cart">
+							<button type="button" data-id_product="{{$product->id}}" class="btn btn-default add-to-cart add_cart_{{$product->id}}">Thêm giỏ hàng</button>
+							<button style="display:none;margin-bottom: 20px;" type="button" id="{{$product->id}}" class="btn btn-danger remove_cart_{{$product->id}} " onclick="delete_cart(this.id)">Xoá giỏ hàng</button>
+
 							<input type="button" class="btn btn-default xemnhanh" data-toggle="modal" data-target="#xemnhanh" value="Xem nhanh" data-id_product="{{$product->id}}">
 
 
@@ -208,14 +239,14 @@
 													<th scope="col">Giá</th>
 													<th scope="col">Hình ảnh </th>
 													<th scope="col">Thông số </th>
-													<th scope="col">Chi tiết  </th>
+													<th scope="col">Chi tiết </th>
 													<th scope="col">Xoá </th>
-													
+
 												</tr>
 											</thead>
 											<tbody>
-											
-											
+
+
 											</tbody>
 										</table>
 									</div>
@@ -231,6 +262,7 @@
 			</div>
 		</div>
 		@endforeach
+		<div id="cart_session"></div>
 
 
 	</div>

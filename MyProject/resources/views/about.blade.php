@@ -7,6 +7,7 @@
 	<meta name="description" content="{{$meta_desc}}">
 	<meta name="keywords" content="{{$meta_keywords}}">
 	<link rel="canonical" href="{{$url_canonical}}">
+	<link rel="icon" type="image/gif" href="{{asset('uploads/icon/logo.png')}}" />
 	<meta name="robots" content="INDEX,FOLLOW">
 	<meta name="author" content="">
 	<title>{{$meta_title}}</title>
@@ -32,7 +33,7 @@
 
 	<link href="{{url('home')}}/css/owl.carousel.min.css" rel="stylesheet">
 	<link href="{{url('home')}}/css/owl.theme.default.min.css" rel="stylesheet">
-	
+
 
 
 
@@ -131,8 +132,10 @@
 
 
 					</div>
+
 					<div class="col-sm-4">
 						<div class="shop-menu pull-right">
+
 							<ul class="nav navbar-nav">
 
 
@@ -153,7 +156,58 @@
 								}
 								?>
 
-								<li><a href="{{url('/giohang')}}"><i class="fa fa-shopping-cart"></i> Giỏ Hàng</a></li>
+								<style>
+									.count_product {
+										background: yellow;
+										padding: 5px;
+										font-size: 12px;
+										border-radius: 50px;
+
+										color: red;
+									}
+
+									.hover_cart {
+										display: none;
+										position: absolute;
+										z-index: 9999;
+										background-color: #ffff99;
+
+										padding: 2px;
+										margin: 0px;
+									}
+
+									ul.hover_cart li {
+										padding: 10px;
+										border-bottom: 1px solid #000;
+
+									}
+
+
+
+									ul.hover_cart li a img {
+										padding: 0px;
+										width: 60px;
+										height: 60px;
+									}
+
+									li.hover_cart_li {
+										position: relative;
+									}
+
+									li.hover_cart_li:hover .hover_cart {
+										display: inline-grid;
+									}
+								</style>
+								<li class="hover_cart_li"><a href="{{url('/giohang')}}"><i class="fa fa-shopping-cart"></i> Giỏ Hàng
+
+										<span class="show_cart"></span>
+										<div class="clearfix"></div>
+										<span class="menu_show_cart">
+
+										</span>
+
+
+									</a></li>
 
 								@php
 								$customer_id = Session::get('customer_id');
@@ -170,7 +224,8 @@
 								if ($customer_id != NULL) {
 								?>
 									<li><a href="{{url('/logout_checkout')}}"><i class="fa fa-lock"></i> Đăng Xuất </a></li>
-									<li><img width="10%" src="{{Session::get('customer_picture')}}" alt=""> {{Session::get('customer_name')}}</li>
+									<li><a href="#"><i class="fa fa-user"></i> {{Session::get('customer_name')}} </a></li>
+
 
 
 
@@ -209,8 +264,8 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="{{url('/')}}" class="active">Trang Chủ</a></li>
-								<li class="dropdown"><a href="">Bài viết <i class="fa fa-angle-down"></i></a>
+								<li><a href="{{url('/')}}" class="active">@lang('lang.home')</a></li>
+								<li class="dropdown"><a href="">{{__('lang.blog')}} <i class="fa fa-angle-down"></i></a>
 									<ul role="menu" class="sub-menu">
 										@foreach($category_blog as $blog)
 										<li><a href="{{url('/danh_muc_bai_viet/'.$blog->category_blog_slug)}}">{{$blog->category_blog_name}}</a></li>
@@ -218,13 +273,32 @@
 										@endforeach
 									</ul>
 								</li>
-								<li class="dropdown"><a href="{{url('/shop')}}">Cửa Hàng</a>
+								<li class="dropdown"><a href="{{url('/shop')}}">{{__('lang.product')}}</a></li>
+								<li class="dropdown"><a href="{{url('/giohang')}}">{{__('lang.cart')}}
 
+										<span class="show_cart"></span>
+
+									</a>
 								</li>
 
-								<li><a href="{{url('/video_shop')}}">Video</a></li>
-								<li><a href="{{url('/lienhe')}}">Liên Hệ</a></li>
+								<li><a href="{{url('/video_shop')}}">{{__('lang.video')}}</a></li>
+								<li><a href="{{url('/lienhe')}}">{{__('lang.contact')}}</a></li>
 							</ul>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="btn-group pull-right">
+							<div class="btn-group">
+								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
+									Ngôn ngữ
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a href="{{url('lang/vi')}}">Tiếng Việt</a></li>
+									<li><a href="{{url('lang/en')}}">Tiếng Anh </a></li>
+									<li><a href="{{url('lang/cn')}}">Tiếng Trung</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 
@@ -393,9 +467,9 @@
 						</div>
 					</div>
 					<div class="col-sm-7" style="padding:20px">
-					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15591.791842481583!2d107.56794322687152!3d12.319289610577886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3172495484126c29%3A0x8b2d3f6b36a2a018!2zRGFrIFNvbmcsIFRodeG6rW4gSOG6oW5oLCDEkOG6r2sgU29uZywgxJDEg2sgTsO0bmcsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1634119797950!5m2!1svi!2s" width="600" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15591.791842481583!2d107.56794322687152!3d12.319289610577886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3172495484126c29%3A0x8b2d3f6b36a2a018!2zRGFrIFNvbmcsIFRodeG6rW4gSOG6oW5oLCDEkOG6r2sgU29uZywgxJDEg2sgTsO0bmcsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1634119797950!5m2!1svi!2s" width="600" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-					
+
 					</div>
 					<div class="col-sm-3">
 						<div class="address">
@@ -489,7 +563,7 @@
 
 
 
-	
+
 	<script src="{{url('home')}}/js/jquery.js"></script>
 	<script src="{{url('home')}}/js/bootstrap.min.js"></script>
 	<script src="{{url('home')}}/js/jquery.scrollUp.min.js"></script>
@@ -509,12 +583,13 @@
 
 	<script src="https://www.paypalobjects.com/api/checkout.js"></script>
 	<script src="{{url('home')}}/js/owl.carousel.js"></script>
+
 	<script>
 		$('.owl-carousel').owlCarousel({
 			loop: true,
 			margin: 15,
 			nav: true,
-			dots:false,
+			dots: false,
 			responsive: {
 				0: {
 					items: 1
@@ -998,6 +1073,32 @@
 
 
 	<script>
+		hover_cart();
+		show_cart_quantity();
+
+		function hover_cart() {
+			$.ajax({
+				url: "{{url('/hover_cart')}}",
+				method: 'GET',
+
+				success: function(data) {
+					$('.menu_show_cart').html(data);
+				}
+
+			});
+		}
+
+		function show_cart_quantity() {
+			$.ajax({
+				url: "{{url('/show_cart_quantity')}}",
+				method: 'GET',
+
+				success: function(data) {
+					$('.show_cart').html(data);
+				}
+
+			});
+		}
 		$(document).ready(function() {
 			$('.add-to-cart').click(function() {
 				var id = $(this).data('id_product');
@@ -1027,23 +1128,79 @@
 						},
 
 						success: function(data) {
-							swal({
-								title: "Thành Công!",
-								text: "Click vào button để tiếp tục!",
-								icon: "success",
-								button: "Tiếp tục!",
-
-							});
+							show_quick_cart();
 
 						}
 
 					});
+
 				}
 			});
 
 		});
 	</script>
 	<script>
+		function show_quick_cart() {
+			$.ajax({
+				url: "{{url('/show_quick_cart')}}",
+				method: 'GET',
+
+				success: function(data) {
+					$('#show_quick_cart').html(data);
+					$('#show_quick').modal();
+				}
+
+
+			});
+		}
+
+		function delete_quick_cart($session_id) {
+			var session_id = $session_id;
+			var _token = $('input[name="_token"]').val();
+			$.ajax({
+				url: "{{url('/delete_cart_ajax')}}" + "/" + session_id,
+				method: 'GET',
+				data: {
+
+					_token: _token
+				},
+
+				success: function(data) {
+					$('#alert_cart').html('<p class="text text-success"> Xoá thành công </p>');
+					$('#alert_cart').fadeOut(1000);
+					show_quick_cart();
+
+				}
+
+
+			});
+
+		}
+		$(document).on('input', '.cart_quantity', function() {
+			var quantity = $(this).val();
+			var session_id = $(this).data('session_id');
+			var _token = $('input[name="_token"]').val();
+		
+			$.ajax({
+				url: "{{url('/update_quick_cart')}}",
+				method: 'POST',
+				data: {
+					quantity: quantity,
+					session_id: session_id,
+					_token: _token
+				},
+
+				success: function() {
+					show_quick_cart();
+
+				}
+
+
+			});
+
+
+		});
+
 		function Add_to_cart($product_id) {
 			var id = $product_id;
 
@@ -1074,17 +1231,13 @@
 					},
 
 					success: function(data) {
-						swal({
-							title: "Thành Công!",
-							text: "Click vào button để tiếp tục!",
-							icon: "success",
-							button: "Tiếp tục!",
-
-						});
+						show_quick_cart();
 
 					}
 
+
 				});
+
 			}
 		}
 	</script>
@@ -1122,6 +1275,8 @@
 					success: function(data) {
 						$('#beforesend_quickview').html('<p class="text text-success">Đã thêm sản phẩm vào giỏ hàng</p> ');
 						$('#buy_quickview').attr('disabled', true);
+						show_cart_quantity();
+
 					}
 
 				});
@@ -1209,7 +1364,7 @@
 
 							});
 							window.setTimeout(function() {
-								location.reload();
+								window.location.href = "{{url('/history_order')}}";
 							}, 3000);
 
 						} else {
@@ -1369,6 +1524,102 @@
 
 			$('#compare').modal();
 		}
+	</script>
+	<script>
+		function Destroy_order(id) {
+			var order_code = id;
+			var reason = $('.reason').val();
+			var order_status = 3;
+			var _token = $('input[name="_token"]').val();
+
+			$.ajax({
+				url: "{{url('/destroy_order')}}",
+				method: 'POST',
+				data: {
+					order_code: order_code,
+					reason: reason,
+					order_status: order_status,
+					_token: _token
+				},
+
+				success: function(data) {
+					alert('Huỷ đơn hàng thành công ');
+				}
+			});
+		}
+	</script>
+	<script>
+		function delete_cart(id) {
+			var id = id;
+
+			$.ajax({
+				url: "{{url('/remove_cart')}}",
+				method: 'GET',
+				data: {
+					id: id
+				},
+
+				success: function(data) {
+					swal({
+						title: 'Xoá thành công ',
+						icon: "success",
+						button: "Quay lại",
+					}).then(ok => {
+						window.location.reload();
+					});
+					document.getElementsByClassName('add_cart_' + id)[0].style.display = "inline";
+					document.getElementsByClassName('remove_cart_' + id)[0].style.display = "none";
+					show_cart_quantity();
+					hover_cart();
+
+
+				}
+			});
+		}
+	</script>
+	<script>
+		cart_session()
+
+		function cart_session() {
+			$.ajax({
+				url: "{{url('/cart_session')}}",
+				method: 'GET',
+
+				success: function(data) {
+					$('#cart_session').html(data);
+
+				}
+			});
+		}
+		htmlLoaded();
+
+		function htmlLoaded() {
+			$(window).load(function() {
+				var id = [];
+				$(".cart_id").each(function() {
+					id.push($(this).val());
+
+				});
+				for (var i = 0; i < id.length; i++) {
+					$('.add_cart_' + id[i]).hide();
+					$('.remove_cart_' + id[i]).show();
+				}
+			});
+		}
+	</script>
+	<script>
+		$('.category_filter').click(function(){
+			var category=[], tempArray=[];
+			$.each($("[data-filters='category']:checked"),function(){
+				tempArray.push($(this).val());
+			});
+			
+			
+			if(tempArray.length!==0){
+				category+='?cate='+tempArray.toString();
+			}
+			window.location.href=category;
+		});
 	</script>
 
 

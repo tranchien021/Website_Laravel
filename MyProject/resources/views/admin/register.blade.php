@@ -32,15 +32,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <h2>Đăng Ký </h2>
 		<form action="{{url('admin/register_account')}}" method="POST">
 			@csrf
-			<input type="text" class="ggg" name="name" placeholder="NAME" required="">
-			<input type="email" class="ggg" name="email" placeholder="E-MAIL" required="">
+			<input type="text" class="ggg" name="name" placeholder="Tên tài khoản" required="">
+			<input type="email" class="ggg" name="email" placeholder="Email " required="">
 			
-			<input type="password" class="ggg" name="password" placeholder="PASSWORD" required="">
-			<input type="text" class="ggg" name="level" placeholder="LEVEL" required="">
+			<input type="password" class="ggg" name="password" placeholder="Mật Khẩu" required="">
+			<input type="text" class="ggg" name="level" placeholder="Phân quyền (Cho có không sài )" required="">
 			<h4><input type="checkbox" />Tôi đồng ý với các điều khoản</h4>
 			
 				<div class="clearfix"></div>
-				<input type="submit" value="submit" name="register">
+				<input type="submit" value="Đăng Ký " name="register">
 		</form>
 		<p> Nếu có tài khoản .<a href="{{url('admin/login')}}"> Đăng Nhập</a></p>
 </div>

@@ -16,7 +16,8 @@ class Order extends Model
         'order_status',
         'order_code',
         'order_date',
-        'created_at'
+        'created_at',
+        'order_destroy'
        
     ];
     public $timestamps=false;

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\Roles;
 use Session;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -25,7 +25,7 @@ class AuthController extends Controller
        
         $account->password=md5($data['password']);
         $account->save();
-        return redirect('/admin/register_auth')->with('message','Đăng ký Auth thành công');
+        return redirect('/admin/login_auth')->with('message','Đăng ký Auth thành công');
     }
     public function validation($request){
         return $this->validate($request,[
@@ -47,9 +47,6 @@ class AuthController extends Controller
             'email'=>'required',
             'password'=>'required'
         ]);
-      
-       
-        
         
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
             return redirect('/admin/index');
@@ -60,6 +57,9 @@ class AuthController extends Controller
     }
     public function logout_auth(){
         Auth::logout();
+        Session::put('Account_Name', null);
+        Session::put('Account_Id', null);
+        Session::put('login_normal',null);
         return redirect('/admin/login_auth')->with('message','Đăng xuất Auth thành công');
     }
 }

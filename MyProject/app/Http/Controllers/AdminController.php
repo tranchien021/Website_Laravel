@@ -40,6 +40,7 @@ class AdminController extends Controller
       } else {
          $admin_id = Auth::id();
       }
+      
       if ($admin_id) {
          return redirect('/admin/index');
       } else {
@@ -140,6 +141,7 @@ class AdminController extends Controller
       if ($result) {
          Session::put('Account_Name', $result->name);
          Session::put('Account_Id', $result->id);
+         Session::put('login_normal',$result->id);
          return redirect()->route('admin.dashboard');
       } else {
          Session::put('message', "Mật khẩu hoặc tài khoản không đúng ");
@@ -150,6 +152,7 @@ class AdminController extends Controller
    {
       Session::put('Account_Name', null);
       Session::put('Account_Id', null);
+      Session::put('login_normal',null);
       return redirect('/admin/login');
    }
    public function filter_by_date(Request $request)

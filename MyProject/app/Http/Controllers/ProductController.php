@@ -19,7 +19,7 @@ use App\Exports\ExcelExports;
 use Excel;
 use File;
 use DB;
-
+use Toastr;
 
 
 class ProductController extends Controller
@@ -48,7 +48,45 @@ class ProductController extends Controller
     }
     public function insert_product(Request $request)
     {
-        $data = array();
+        $data = $request->validate([
+            'name'=>'required|unique:sanpham|max:255',
+            'file_image'=>'
+                require|image|mimes:jpg,svg|max:2048,  
+            ',
+            'theloai'=>'required',
+            'masp'=>'required',
+            'product_tag'=>'required',
+            'quantity'=>'required|numberic',
+            'price'=>'required|numberic',
+            'import_price'=>'required|numberic',
+            'content'=>'required',
+            'address'=>'required',
+            'date'=>'required',
+            'tinhtrang'=>'required',
+            
+
+        ],
+        [
+            'name.required'=>'Nhập tên sản phẩm ',
+            'file_image.required'=>'Chưa chọn hình ảnh ',
+            'theloai.required'=>'Chưa nhập thể loại',
+            'masp.required'=>'Chưa chọn thể loại',
+            'product_tag.required'=>'Chưa có tag sản phẩm ',
+            'quantity.required'=>'Số lượng không hợp lệ ',
+            'price.required'=>'Giá không hợp lệ ',
+            'import_price.required'=>'Giá không hợp lệ ',
+            'content.required'=>'Nhập nội dung sản phẩm  ',
+            'address.required'=>'Nhập địa chỉ xuất sứ',
+            'date.required'=>'Nhập ngày làm',
+            'tinhtrang.required'=>'Xem lại tình trạng',
+           
+            
+
+        ]
+        
+    
+    );
+
         $price_format = filter_var($request->price, FILTER_SANITIZE_NUMBER_INT);
         $import_price_format = filter_var($request->import_price, FILTER_SANITIZE_NUMBER_INT);
 
@@ -184,7 +222,7 @@ class ProductController extends Controller
 
         Product::where('id',$id)->update($data);
         
-     
+        Toastr::success('Cập nhật thành công ','Success');
 
         return redirect('/admin/list_product');
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 13, 2021 lúc 04:51 PM
+-- Thời gian đã tạo: Th10 25, 2021 lúc 08:34 AM
 -- Phiên bản máy phục vụ: 10.4.19-MariaDB
 -- Phiên bản PHP: 8.0.6
 
@@ -48,8 +48,8 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`blog_id`, `blog_title`, `blog_desc`, `blog_content`, `blog_meta_desc`, `blog_meta_keywords`, `blog_status`, `blog_image`, `blog_view`, `category_blog_id`, `blog_slug`, `created_at`, `time`) VALUES
-(1, 'Món ăn thế giới', 'Món ăn ngon nhất thế giới', '<p>Đẹp</p>', 'Top 123', 'Món ăn hoàng gia', 1, 'mm243.jpg', '5', 1, 'mon-an-the-gioi', '2021-09-14', '22:14:30'),
-(2, 'Liên minh', 'LOL', 'Liên minh huyền thoại', 'LOL', 'LOL', 1, 'aaa96.jpg', '12', 2, 'lien-minh', '2021-09-15', '22:07:43');
+(1, 'Món ăn thế giới', 'Món ăn ngon nhất thế giới', '<p>Đẹp</p>', 'Top 123', 'Món ăn hoàng gia', 1, 'mm243.jpg', '11', 1, 'mon-an-the-gioi', '2021-09-14', '22:14:30'),
+(2, 'Liên minh', 'LOL', 'Liên minh huyền thoại', 'LOL', 'LOL', 1, 'aaa96.jpg', '33', 2, 'lien-minh', '2021-09-15', '22:07:43');
 
 -- --------------------------------------------------------
 
@@ -73,8 +73,8 @@ CREATE TABLE `brand_product` (
 --
 
 INSERT INTO `brand_product` (`brand_id`, `brand_name`, `slug_brand`, `meta_keywords`, `brand_desc`, `brand_parent`, `brand_order`, `brand_status`) VALUES
-(1, 'Đồ ăn vặt', 'do-an-vat', 'san pham dep', 'qua dep', 0, 1, 1),
-(4, 'Đồ ăn nhanh', 'do-an-nhanh', 'qua dep', 'qua xinh', 0, 0, 1),
+(1, 'Đồ ăn vặt', 'do-an-vat', 'san pham dep', 'qua dep', 0, 0, 1),
+(4, 'Đồ ăn nhanh', 'do-an-nhanh', 'qua dep', 'qua xinh', 0, 1, 1),
 (7, 'Đồ ăn nước ngoài', 'do-an-nuoc-ngoai', 'qq', 'qqq', 0, 2, 1),
 (8, 'Bún đậu', 'bun-dau', 'a', 'a', 9, 5, 1),
 (9, 'Đồ Việt Nam', 'do-viet-nam', 'a', 'a', 0, 3, 1),
@@ -286,7 +286,10 @@ INSERT INTO `gallery` (`gallery_id`, `gallery_name`, `gallery_image`, `id`) VALU
 (83, 'food1495992.jpg', 'food1495992.jpg', 55),
 (84, 'food1495968.jpg', 'food1495968.jpg', 56),
 (85, 'aa6352.jpeg', 'aa6352.jpeg', 57),
-(86, 'food1495922.jpg', 'food1495922.jpg', 58);
+(86, 'food1495922.jpg', 'food1495922.jpg', 58),
+(87, 'kfc66.png', 'kfc66.png', 59),
+(88, 'kfc060.png', 'kfc060.png', 60),
+(89, 'chien41.jpg', 'chien41.jpg', 61);
 
 -- --------------------------------------------------------
 
@@ -406,6 +409,7 @@ CREATE TABLE `order` (
   `order_code` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `order_date` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_destroy` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -413,10 +417,11 @@ CREATE TABLE `order` (
 -- Đang đổ dữ liệu cho bảng `order`
 --
 
-INSERT INTO `order` (`order_id`, `customer_id`, `shipping_id`, `order_status`, `order_code`, `created_at`, `order_date`, `updated_at`) VALUES
-(113, 10, 131, 1, '39195', '2021-10-08 20:15:51', '2021-10-08', NULL),
-(114, 10, 132, 1, '4faac', '2021-10-08 22:01:55', '2021-10-08', NULL),
-(115, 10, 133, 2, '89425', '2021-10-09 13:42:56', '2021-10-09', NULL);
+INSERT INTO `order` (`order_id`, `customer_id`, `shipping_id`, `order_status`, `order_code`, `created_at`, `order_date`, `order_destroy`, `updated_at`) VALUES
+(113, 10, 131, 3, '39195', '2021-10-08 20:15:51', '2021-10-08', 'Thích thì huỷ', NULL),
+(114, 10, 132, 1, '4faac', '2021-10-08 22:01:55', '2021-10-08', NULL, NULL),
+(115, 10, 133, 2, '89425', '2021-10-09 13:42:56', '2021-10-09', NULL, NULL),
+(116, 10, 134, 1, 'bf872', '2021-10-14 19:48:59', '2021-10-14', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -446,7 +451,8 @@ INSERT INTO `order_detail` (`order_detail_id`, `order_code`, `product_id`, `id`,
 (110, '39195', 35, 35, 'T-Pizza - Ngọc Lâm', '100000', 2, NULL, NULL, 'MINHCHIEN', '30000'),
 (111, '4faac', 35, 35, 'T-Pizza - Ngọc Lâm', '100000', 1, NULL, NULL, 'no', '30000'),
 (112, '4faac', 49, 49, 'Khô Gà Cô Năm', '67000', 1, NULL, NULL, 'no', '30000'),
-(113, '89425', 35, 35, 'T-Pizza - Ngọc Lâm', '100000', 2, NULL, NULL, 'COVID19', '30000');
+(113, '89425', 35, 35, 'T-Pizza - Ngọc Lâm', '100000', 2, NULL, NULL, 'COVID19', '30000'),
+(114, 'bf872', 40, 40, 'Trà Sữa Maycha - 38 Trịnh Đình Trọng', '22000', 1, NULL, NULL, 'no', '30000');
 
 -- --------------------------------------------------------
 
@@ -465,7 +471,8 @@ CREATE TABLE `rating` (
 --
 
 INSERT INTO `rating` (`rating_id`, `product_id`, `rating`) VALUES
-(22, 35, 5);
+(22, 35, 5),
+(23, 45, 5);
 
 -- --------------------------------------------------------
 
@@ -504,16 +511,11 @@ CREATE TABLE `roles_users` (
 --
 
 INSERT INTO `roles_users` (`roles_users_id`, `roles_id_roles`, `users_id`) VALUES
-(45, 1, 1),
-(46, 1, 1),
-(49, 1, 1),
-(64, 3, 7),
-(65, 3, 8),
-(66, 3, 9),
-(67, 3, 11),
-(69, 3, 13),
-(94, 3, 3),
-(100, 2, 2);
+(101, 1, 1),
+(103, 3, 3),
+(104, 2, 2),
+(105, 3, 2),
+(106, 3, 4);
 
 -- --------------------------------------------------------
 
@@ -546,11 +548,11 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`id`, `masp`, `img`, `file`, `name`, `address`, `date`, `theloai`, `price`, `import_price`, `content`, `tinhtrang`, `quantity`, `product_sold`, `order_detail_id`, `product_tag`, `product_view`) VALUES
-(32, 'BT', 'aa637.jpeg', NULL, 'Bún Thái Hải Sản', '129B Nguyễn Ngọc Vũ, Cầu Giấy, Hà Nội', '2021-09-25', 'NB', 55000, '35000', '<p>Long Thuỷ - B&uacute;n Hải Sản - Nguyễn Ngọc Vũ</p>', '1', '1', 4, NULL, 'Bún,Bún hải sản', '3'),
+(32, 'BT', 'aa637.jpeg', NULL, 'Bún Thái Hải Sản', '129B Nguyễn Ngọc Vũ, Cầu Giấy, Hà Nội', '2021-09-25', 'NB', 55000, '35000', '<p>Long Thuỷ - B&uacute;n Hải Sản - Nguyễn Ngọc Vũ</p>', '1', '1', 4, NULL, 'Bún,Bún hải sản', '5'),
 (33, 'BM', 'bm127.jpeg', NULL, 'Bami Sot - Bánh Mì - Lò Đúc', '138 Lò Đúc, Hai Bà Trưng, Hà Nội', '2021-09-25', 'NB', 36000, '20000', '<p>B&aacute;nh M&igrave; Đen- Đ&uacute;c L&ograve;&nbsp;</p>', '1', '5', NULL, NULL, 'Bánh mì,banh mi Viet Nam', '1'),
 (34, 'WT', 'ts191.jpg', NULL, 'Tiger Sugar', 'Vũ Trọng Phụng 3 Ngõ 98 Vũ Trọng Phụng, Thanh Xuân, Hà Nội', '2021-09-25', 'NB', 22000, '10000', '<p>Tr&agrave; Sữa nổi tiếng&nbsp;</p>', '1', '5', NULL, NULL, 'Trà sữa', '0'),
-(35, 'FF', 'pizza50.jpg', NULL, 'T-Pizza - Ngọc Lâm', '2 Ngõ 111 Nguyễn Văn Cừ, Long Biên, Hà Nội', '2021-09-25', 'NB', 100000, '50000', '<p>Gồm c&aacute;c loại pizza ẩm thực&nbsp;</p>', '1', '92', 12, NULL, 'Pizza,FastFood,Đồ ăn nhanh', '3'),
-(36, 'CC', 'com16.jpg', NULL, 'Đại Nam - Cơm Sườn Nướng Online', '2 Ngõ 111 Nguyễn Văn Cừ, Long Biên, Hà Nội', '2021-09-25', 'NB', 45000, '20000', '<p>Cơm sướn&nbsp;</p>', '1', '2', 3, NULL, 'Cơm Tấm,Cơm Sườn', '0'),
+(35, 'FF', 'pizza50.jpg', NULL, 'T-Pizza - Ngọc Lâm', '2 Ngõ 111 Nguyễn Văn Cừ, Long Biên, Hà Nội', '2021-09-25', 'NB', 100000, '50000', '<p>Gồm c&aacute;c loại pizza ẩm thực&nbsp;</p>', '1', '90', 14, NULL, 'Pizza,FastFood,Đồ ăn nhanh', '12'),
+(36, 'CC', 'com16.jpg', NULL, 'Đại Nam - Cơm Sườn Nướng Online', '2 Ngõ 111 Nguyễn Văn Cừ, Long Biên, Hà Nội', '2021-09-25', 'NB', 45000, '20000', '<p>Cơm sướn&nbsp;</p>', '1', '2', 3, NULL, 'Cơm Tấm,Cơm Sườn', '2'),
 (37, 'CC', 'comga79.jpeg', NULL, 'Cơm Gà Giòn Booby - Trần Đại Nghĩa', '28 Ngõ 183 Trần Đại Nghĩa, P. Bách Khoa,  Quận Hai Bà Trưng, Tp Hồ Chí Minh', '2021-09-25', 'NB', 65000, '40000', '<p>Cơm g&agrave; qu&aacute; ngon</p>\r\n\r\n<div style=\"page-break-after:always\"><span style=\"display:none\">&nbsp;</span></div>', '1', '3', 2, NULL, 'Cơm,Cơm gà', '2'),
 (38, 'BT', 'bundau11.jpeg', NULL, 'Lâm Anh - Bún Đậu & Bún Nước', '2 Ngách 44/64 Ngõ 44 Trần Thái Tông, Cầu Giấy, Tp Hồ Chí Minh', '2021-09-25', 'Bún Đậu', 40500, '20000', '<p>B&uacute;n Đậu&nbsp;</p>', '1', '5', NULL, NULL, 'Bún Đậu,Bún', '1'),
 (39, 'FF', 'nom80.jpg', NULL, 'Nộm Ông Phúc - Nghĩa Tân', '256 Dĩ An ,Thủ Đức, Tp Hồ Chí Minh', '2021-09-25', 'Nộm', 31500, '25000', '<p>Nộm&nbsp;</p>', '1', '5', NULL, NULL, 'Nộm,Đồ ăn nhanh', '0'),
@@ -559,8 +561,8 @@ INSERT INTO `sanpham` (`id`, `masp`, `img`, `file`, `name`, `address`, `date`, `
 (42, 'WT', 'toco47.jpg', NULL, 'Trà Sữa Tocotoco - Thượng Đình', '256 Thượng Đình, Thanh Xuân, Hà Nội', '2021-09-27', 'Trà Sữa', 23000, '15000', '<p>Tra sua</p>', '1', '5', NULL, NULL, 'Toco,tocotoco,tra sua', '0'),
 (43, 'WT', 'phuclong16.jpeg', NULL, 'Phúc Long IPH - Cầu Giấy', 'IPH Xuân Thủy, 239 Xuân Thủy, Cầu Giấy, Hà Nội', '2021-09-27', 'Trà sữa', 40000, '20000', '<p>Tr&agrave; Sửa Ph&uacute;c Long</p>', '1', '5', NULL, NULL, 'Phúc Long,Trà sữa,Đồ Uống', '0'),
 (44, 'BT', 'bunquay88.jpg', NULL, 'Bún Quậy', 'Hẻm 972 Trường Sa, P. 12,  Quận 3, TP. HCM', '2021-09-27', 'Bún', 35000, '20000', '<p>B&uacute;n Quậy&nbsp;</p>', '1', '5', NULL, NULL, 'Bún Quậy,Bún ,Đồ Ăn', '0'),
-(45, 'BT', 'bunrieu65.jpg', NULL, 'Bún Riêu Yến', '1346 Trường Sa, P. 3, Tân Bình, TP. HCM', '2021-09-27', 'Buns', 32000, '21000', '<p>B&uacute;n Ri&ecirc;u&nbsp;</p>', '1', '5', NULL, NULL, 'Bún riêu,Bún ,Đồ ăn', '0'),
-(46, 'BM', 'banhmihh76.jpeg', NULL, 'Bánh Mì Huynh Hoa - Bánh Mì Pate', '26 Lê Thị Riêng, P. Bến Thành, Quận 1, TP. HCM', '2021-09-27', 'Bánh Mì', 58000, '40000', '<p>B&aacute;n Mi Ngon</p>', '1', '4', 1, NULL, 'Bánh Mì,Huynh Hoa,Đồ ăn', '4'),
+(45, 'BT', 'bunrieu65.jpg', NULL, 'Bún Riêu Yến', '1346 Trường Sa, P. 3, Tân Bình, TP. HCM', '2021-09-27', 'Buns', 32000, '21000', '<p>B&uacute;n Ri&ecirc;u&nbsp;</p>', '1', '5', NULL, NULL, 'Bún riêu,Bún ,Đồ ăn', '2'),
+(46, 'BM', 'banhmihh76.jpeg', NULL, 'Bánh Mì Huynh Hoa - Bánh Mì Pate', '26 Lê Thị Riêng, P. Bến Thành, Quận 1, TP. HCM', '2021-09-27', 'Bánh Mì', 58000, '40000', '<p>B&aacute;n Mi Ngon</p>', '1', '4', 1, NULL, 'Bánh Mì,Huynh Hoa,Đồ ăn', '8'),
 (47, 'BM', 'bmc32.jpg', NULL, 'Bánh Mì Hòa Mã - Bánh Mì Chảo', '53 Cao Thắng,  Quận 3, TP. HCM', '2021-09-27', 'Bánh Mì', 38000, '20000', '<p>B&aacute;nh M&igrave;&nbsp;</p>', '1', '5', NULL, NULL, 'Bánh Mì Chảo,Bánh Mì', '0'),
 (48, 'FF', 'btt23.jpeg', NULL, 'Bánh Tráng Trộn Chú Viên', '38 Nguyễn Thượng Hiền, P. 5, Quận 3, TP. HCM', '2021-09-27', 'Bánh Tráng', 25000, '15000', '<p>B&aacute;nh Tr&aacute;ng&nbsp;</p>', '1', '5', NULL, NULL, 'Bánh Tráng ,Đồ ăn nhanh', '0'),
 (49, 'FF', 'khoga57.jpeg', NULL, 'Khô Gà Cô Năm', '145 Lý Thái Tổ ,Quận 5 , Tp Hồ Chí Minh', '2021-09-22', 'Khô gà', 67000, '40000', '<p>Kh&ocirc; G&agrave;</p>', '1', '5', NULL, NULL, 'Khô gà,đồ ăn', '3'),
@@ -587,8 +589,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('6VHwjLajKUCElq7lb0QzfUIjkx0aqmHSRQO3BAYJ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWDVRSnZYbFFWVHRSVXAyd3NnbXR5bXh0cUtUSXR5RWF1dmkxRXhEUyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NjA6Imh0dHA6Ly9taW5oY2hpZW4uY29tOjgwODAvTEVBUk5fUEhQL0xhcmF2ZWwvTXlQcm9qZWN0L3B1YmxpYyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTE6ImN1c3RvbWVyX2lkIjtpOjEwO30=', 1634134606),
-('T8pZPY16NMuCnEIYxLbCPV2x4TnLI1AsOQElEvdl', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiWUpXMmJ2anJIRnV6dmQyMFhUbTBMNGRNWGxDUGJQOXRtcFBzazVHbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzU6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9MRUFSTl9QSFAvTGFyYXZlbC9NeVByb2plY3QvcHVibGljL2FkbWluL21hbmFnZV9vcmRlciI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NToic3RhdGUiO3M6NDA6IjRSVzRtNU51bHJiOXZ4V2hIOFNZSWc5YnNjaUVib2dnMDNUS1ltRzIiO3M6MTI6ImxvZ2luX25vcm1hbCI7YjoxO3M6MTI6IkFjY291bnRfTmFtZSI7czoxNDoiQ2hp4bq/biBUcuG6p24iO3M6MTA6IkFjY291bnRfSWQiO2k6MTY7fQ==', 1634135382);
+('107I3hOZC0mqk6M1itt4i7vO3zocqR3zv31lXyvU', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiaVd0cVd4Sm9WQjI0bHd2QzI4WVBJRkNOOFRFZGRMTVN6dWxwMDRsTSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1635143517),
+('rmepjt530PvexR5py31lewZbpXFgOciCfzkazi46', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidzF2TUtuQjl6UHNZQ0F1NGFVZm5nSnVncDhxTHZLb2FOZDJZSWdnZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NjA6Imh0dHA6Ly9taW5oY2hpZW4uY29tOjgwODAvTEVBUk5fUEhQL0xhcmF2ZWwvTXlQcm9qZWN0L3B1YmxpYyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NDoiY2FydCI7YTozOntpOjA7YTo3OntzOjEwOiJzZXNzaW9uX2lkIjtzOjU6Ijc1ZTU0IjtzOjEyOiJwcm9kdWN0X25hbWUiO3M6MzY6IkLDoW5oIE3DrCBIdXluaCBIb2EgLSBCw6FuaCBNw6wgUGF0ZSI7czoxMDoicHJvZHVjdF9pZCI7czoyOiI0NiI7czoxMToicHJvZHVjdF9pbWciO3M6MTU6ImJhbmhtaWhoNzYuanBlZyI7czoxMToicHJvZHVjdF9xdHkiO3M6MToiMSI7czoxNjoicHJvZHVjdF9xdWFudGl0eSI7czoxOiI0IjtzOjEzOiJwcm9kdWN0X3ByaWNlIjtzOjU6IjU4MDAwIjt9aToxO2E6Nzp7czoxMDoic2Vzc2lvbl9pZCI7czo1OiI5ZDE1ZSI7czoxMjoicHJvZHVjdF9uYW1lIjtzOjE3OiJLaMO0IEfDoCBDw7QgTsSDbSI7czoxMDoicHJvZHVjdF9pZCI7czoyOiI0OSI7czoxMToicHJvZHVjdF9pbWciO3M6MTI6Imtob2dhNTcuanBlZyI7czoxMToicHJvZHVjdF9xdHkiO3M6MToiMSI7czoxNjoicHJvZHVjdF9xdWFudGl0eSI7czoxOiI1IjtzOjEzOiJwcm9kdWN0X3ByaWNlIjtzOjU6IjY3MDAwIjt9aToyO2E6Nzp7czoxMDoic2Vzc2lvbl9pZCI7czo1OiIyNDkwOCI7czoxMjoicHJvZHVjdF9uYW1lIjtzOjQzOiJDxqFtIEfDoCBHacOybiBCb29ieSAtIFRy4bqnbiDEkOG6oWkgTmdoxKlhIjtzOjEwOiJwcm9kdWN0X2lkIjtzOjI6IjM3IjtzOjExOiJwcm9kdWN0X2ltZyI7czoxMjoiY29tZ2E3OS5qcGVnIjtzOjExOiJwcm9kdWN0X3F0eSI7czoxOiIxIjtzOjE2OiJwcm9kdWN0X3F1YW50aXR5IjtzOjE6IjMiO3M6MTM6InByb2R1Y3RfcHJpY2UiO3M6NToiNjUwMDAiO319czoxMToiY3VzdG9tZXJfaWQiO2k6MTA7fQ==', 1635143586);
 
 -- --------------------------------------------------------
 
@@ -615,7 +617,8 @@ CREATE TABLE `shipping` (
 INSERT INTO `shipping` (`shipping_id`, `shipping_name`, `shipping_address`, `shipping_phone`, `shipping_email`, `created_at`, `updated_at`, `shipping_notes`, `shipping_method`) VALUES
 (131, 'Chien', 'Dak Song Dak Song', '0349521656', 'tranchien021@gmail.com', NULL, NULL, 'Cẩn thận', 1),
 (132, 'Chien', 'Dak Song Dak Song', '0349521656', 'tranchien021@gmail.com', NULL, NULL, 'Cẩn thận vào', 1),
-(133, 'Chien', 'Thuan Thanh Dak Song Dak Nong', '0349521656', 'tranchien021@gmail.com', NULL, NULL, 'Tui muốn ăn khi còn nóng', 1);
+(133, 'Chien', 'Thuan Thanh Dak Song Dak Nong', '0349521656', 'tranchien021@gmail.com', NULL, NULL, 'Tui muốn ăn khi còn nóng', 1),
+(134, 'Chien', 'Dak Song Dak Song', '0349521656', 'tranchien021@gmail.com', NULL, NULL, 'can than gium cai', 0);
 
 -- --------------------------------------------------------
 
@@ -1390,10 +1393,8 @@ CREATE TABLE `table_social` (
 --
 
 INSERT INTO `table_social` (`user_id`, `provider_user_id`, `provider`, `user`) VALUES
-(27, '113638728203321687628', 'GOOGLE', 16),
-(28, '3106374602928594', 'facebook', 16),
-(29, '106549812776318699768', 'GOOGLE', 17),
-(30, '117114239934416921315', 'GOOGLE', 18);
+(31, '113638728203321687628', 'GOOGLE', 25),
+(32, '106549812776318699768', 'GOOGLE', 26);
 
 -- --------------------------------------------------------
 
@@ -12739,7 +12740,7 @@ INSERT INTO `tbl_statistical` (`id_statistical`, `order_date`, `sales`, `profit`
 (29, '2021-10-11', '74000000', '20000000', 10, 20),
 (30, '2021-10-10', '63000000', '19000000', 14, 5),
 (31, '2021-10-09', '67000000', '18500000', 33, 17),
-(32, '2021-10-08', '74200000', '20100000', 17, 21),
+(32, '2021-10-08', '74400000', '20200000', 19, 22),
 (33, '2021-10-07', '66000000', '18000000', 23, 12),
 (34, '2021-10-06', '74000000', '20000000', 30, 22),
 (35, '2021-10-05', '66000000', '18000000', 23, 12),
@@ -12851,11 +12852,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `level`, `creat
 (1, 'chienadmin', 'chienadmin2105@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 123456789, NULL, NULL, NULL),
 (2, 'chienauthor', 'chienauthor@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 1234567891, NULL, NULL, NULL),
 (3, 'chienuser', 'chienuser@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 123456789, NULL, NULL, NULL),
-(8, 'Tran Minh Chien', 'phamthithuhang70@gmail.com', '1', 349521656, NULL, NULL, NULL),
-(13, 'Pham Thị Thu Hằng', 'phamthithuhang70@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 349521656, NULL, NULL, NULL),
-(16, 'Chiến Trần', 'tranchien021@gmail.com', '', NULL, '0', NULL, NULL),
-(17, 'admin admin', 'projectdoan21@gmail.com', '', NULL, '0', NULL, NULL),
-(18, 'Chiến Trần', 'tranchien2105@gmail.com', '', NULL, '0', NULL, NULL);
+(4, 'Chiến', 'tranchien021@gmail.com', '1', NULL, '0', NULL, NULL),
+(5, 'Tran Minh Chien', 'tranchien021@gmail.com', '1', NULL, '0', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -13136,7 +13134,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT cho bảng `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `gallery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `gallery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT cho bảng `icons`
@@ -13166,19 +13164,19 @@ ALTER TABLE `money_ship`
 -- AUTO_INCREMENT cho bảng `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT cho bảng `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `order_detail_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `order_detail_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT cho bảng `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
@@ -13190,19 +13188,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT cho bảng `roles_users`
 --
 ALTER TABLE `roles_users`
-  MODIFY `roles_users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `roles_users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT cho bảng `shipping`
 --
 ALTER TABLE `shipping`
-  MODIFY `shipping_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `shipping_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 
 --
 -- AUTO_INCREMENT cho bảng `slider`
@@ -13214,7 +13212,7 @@ ALTER TABLE `slider`
 -- AUTO_INCREMENT cho bảng `table_social`
 --
 ALTER TABLE `table_social`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT cho bảng `table_social_customer`
@@ -13238,7 +13236,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `video`

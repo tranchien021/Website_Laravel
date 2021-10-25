@@ -19,7 +19,7 @@
 						</div>
                         @endforeach
 						
-						<h2 style="margin: 20px;0px;" class="title text-center">Bài viết liên quan </h2>
+						<h2 style="margin: 20px 0px;" class="title text-center">Bài viết liên quan </h2>
 						<style>
 							ul.post_relate li {
 								list-style-type: disc;

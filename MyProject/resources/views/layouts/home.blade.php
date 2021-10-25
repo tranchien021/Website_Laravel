@@ -36,11 +36,36 @@
 									font-family: 'Roboto', sans-serif;
 									font-size: 15px;
 									margin-bottom: 25px;
+
 								}
 							</style>
-							<input value="Thêm giỏ hàng" type="button" data-id_product="{{$product->id}}" class="btn btn-default add-to-cart">
+
+							<button type="button" data-id_product="{{$product->id}}" class="btn btn-default add-to-cart add_cart_{{$product->id}}">Thêm giỏ hàng</button>
+							<button style="display:none;margin-bottom: 20px;" type="button" id="{{$product->id}}" class="btn btn-danger remove_cart_{{$product->id}} " onclick="delete_cart(this.id)">Xoá giỏ hàng</button>
+
 							<input type="button" class="btn btn-default xemnhanh" data-toggle="modal" data-target="#xemnhanh" value="Xem nhanh" data-id_product="{{$product->id}}">
 
+							<div class="modal fade" id="show_quick" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="staticBackdropLabel"> Xem nhanh giỏ hàng </h5>
+
+										</div>
+										<div class="modal-body">
+											
+											<div id="alert_cart"></div>
+
+											<div id="show_quick_cart"></div>
+											
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng </button>
+
+										</div>
+									</div>
+								</div>
+							</div>
 
 
 						</form>
@@ -169,6 +194,7 @@
 
 								</div>
 								<div class="modal-body">
+								
 									<div id="row_compare">
 										<table class="table">
 											<thead>
@@ -200,6 +226,7 @@
 			</div>
 		</div>
 		@endforeach
+		<div id="cart_session"></div>
 
 	</div>
 	<!--features_items-->
@@ -231,7 +258,7 @@
 
 		.part_name {
 			text-align: center;
-		
+
 
 		}
 

@@ -51,6 +51,10 @@ class BlogController extends Controller
 
         
         $post=Blog::where('blog_status',1)->where('blog_slug',$blog_slug)->take(1)->get();
+        
+        
+        
+        
         foreach($post as $p){
             $meta_desc=$p->blog_meta_desc;
             $meta_keywords=$p->blog_meta_keywords;
@@ -60,23 +64,23 @@ class BlogController extends Controller
             $post_id=$p->blog_id;
 
         }
-        $post=Blog::where('blog_id',$post_id)->first();
-        $post->blog_view=$post->blog_view+1;
-        $post->save();
-
-
-      
-       
-        $related=Blog::where('blog_status',1)->where('category_blog_id',$cate_id)->whereNotIn('blog_slug',[$blog_slug])->take(5)->get();
         
- 
-    
-    
+        
+
+        $posts=Blog::where('blog_id',$post_id)->first();
        
+        
+        
+        $posts->blog_view=$posts->blog_view+1;
        
+        $posts->save();
+        
+
        
-       
-       
+        
+
+        $related=Blog::where('blog_status',1)->where('category_blog_id',$cate_id)->whereNotIn('blog_slug',[$blog_slug])->take(5)->get();
+      
         return view('layouts.blog.baiviet',compact('related','post','category_blog','brand','slider','category','meta_desc','meta_keywords','meta_title','url_canonical'));
     }
 

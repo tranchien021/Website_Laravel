@@ -438,4 +438,14 @@ class OrderController extends Controller
         
         return view('layouts.history.detail_history_order', compact('order_status', 'order', 'order_detail', 'customer', 'shipping', 'order_detail_product', 'coupon_condition', 'coupon_number','category_blog', 'brand', 'slider', 'category', 'meta_desc', 'meta_keywords', 'meta_title', 'url_canonical'));
     }
+    public function destroy_order(Request $request){
+        $data=$request->all();
+        $order=Order::where('order_code',$data['order_code'])->first();
+
+        $order->order_destroy=$data['reason'];
+        $order->order_status=3;
+        $order->save();
+
+
+    }
 }

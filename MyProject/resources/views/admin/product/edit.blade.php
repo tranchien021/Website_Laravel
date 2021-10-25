@@ -15,7 +15,7 @@
             </div>
             @endif
             <header class="panel-heading">
-                Cập nhật thể loại
+                Cập nhật sản phẩm 
                 <span class="tools pull-right">
                     <a class="fa fa-chevron-down" href="javascript:;"></a>
                     <a class="fa fa-cog" href="javascript:;"></a>
@@ -36,29 +36,12 @@
                         <div class="form-group ">
                             <label for="curl" class="control-label col-lg-3"> Hình ảnh </label>
                             <div class="col-lg-6">
-                                <input class="form-control " id="file_img" type="file" name="file_img" required="">
+                                <input onchange="previewFile(this);" class="form-control image_preview" id="file_img" type="file" name="file_img" required="">
+                                <img width="30%" id="preview_img" src="{{url('uploads/home/'.$product->img)}}" alt="">
                             </div>
 
                         </div>
-                        <div class="form-group ">
-                            <label for="curl" class="control-label col-lg-3"> Hình ảnh </label>
-                            <div class="col-lg-6">
-                                <img src="{{url('uploads/home/'.$product->img)}}" width="15%" alt="">
-                            </div>
-
-                        </div>
-                        <div class="form-group ">
-                            <label for="curl" class="control-label col-lg-3"> Hình ảnh </label>
-                            <input type="file" name="document" id="file_document">
-                            @if($product->file)
-                            <p class="exist_file"><a target="_blank" href="{{asset('/uploads/document/'.$product->file)}}"> {{$product->file}} </a> 
-                            <button type="button" data-document_id="{{$product->id}}" class="btn btn-warning btn_delete_document"><i class="fa fa-times"> Xoá file </i></button>
-                            </p>
-                            @else
-                            <p>Không có file </p>
-                            @endif
-
-                        </div>
+                        
 
 
                         <div class="form-group ">

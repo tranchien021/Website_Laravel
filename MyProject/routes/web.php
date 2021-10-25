@@ -20,6 +20,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Change language
+Route::get('lang/{locale}',function($locale){
+	if(! in_array($locale,['en','vi','cn'])){
+		abort(404);
+	}
+	session()->put('locale',$locale);
+	return redirect()->back();
+});
 
 //HomController 
 Route::post('/search','HomeController@search');
@@ -45,6 +53,12 @@ Route::post('/update_cart','CartController@update_cart');
 Route::get('/cart','CartController@index');
 Route::get('/addcart/{id}','CartController@AddCart');
 Route::get('/delete_cart/{rowId}','CartController@delete_cart');
+Route::get('/remove_cart','CartController@remove_cart');
+
+
+
+
+
 
 
 Route::post('/update_cart_ajax','CartController@update_cart_ajax');
@@ -52,6 +66,14 @@ Route::post('/add-cart-ajax','CartController@AddCart_Ajax');
 Route::get('/giohang','CartController@giohang');
 Route::get('/delete_cart_ajax/{session_id}','CartController@delete_cart_ajax');
 Route::get('/delete_all_cart','CartController@delete_all_cart');
+Route::get('/show_cart_quantity','CartController@show_cart_quantity');
+Route::get('/hover_cart','CartController@hover_cart');
+Route::get('/cart_session','CartController@cart_session');
+Route::get('/show_quick_cart','CartController@show_quick_cart');
+Route::post('/update_quick_cart','CartController@update_quick_cart');
+
+
+
 
 
 // Coupon 
@@ -126,6 +148,8 @@ Route::get('/customer_facebook/callback','LoginController@callback_customer_face
 // History Order Controller 
 Route::get('/history_order','OrderController@history_order');
 Route::get('/view_detail_history/{order_code}','OrderController@view_detail_history');
+Route::post('/destroy_order','OrderController@destroy_order');
+
 
 
 
